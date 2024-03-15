@@ -1,0 +1,20 @@
+#back-to-top {
+    position: fixed;
+    bottom: 84px;
+    right: 6px;
+    display: none;
+    background: $primary;
+    color: $white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    padding: 0;
+    box-shadow: 0 4px 9px -4px $primary;
+    z-index: 100;
+    i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

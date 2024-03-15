@@ -1,0 +1,49 @@
+.team {
+    padding: 50px 0;
+    background-color: $secondary;
+    h2 {
+    }
+
+    .row {
+        @include media(">=tablet") {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -8px;
+        }
+
+        @include media(">=desktop") {
+            margin: 0 -16px;
+        }
+    }
+
+    .col {
+        padding: 0 0 24px;
+
+        @include media(">=tablet") {
+            width: 33.332%;
+            padding: 0 8px 16px;
+        }
+
+        @include media(">=desktop") {
+            padding: 0 16px 32px;
+        }
+    }
+
+    &__box {
+        img {
+            width: 200px;
+            height: 200px;
+            margin: 0 0 16px;
+            object-fit: cover;
+        }
+
+        h4 {
+            margin: 0 0 8px;
+        }
+
+        &-position {
+            display: block;
+            margin: 0 0 8px;
+        }
+    }
+}

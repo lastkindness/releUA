@@ -1,0 +1,31 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'i' ]
+2 info using npm@1.1.45
+3 info using node@v0.8.4
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 verbose config file C:\Users\lastk\.npmrc
+6 verbose config file C:\Program Files\nodejs\etc\npmrc
+7 verbose config file C:\Users\lastk\AppData\Roaming\nvm\v0.8.4\node_modules\npm\npmrc
+8 verbose read json C:\OSPanel\domains\crispwps-start.loc\wp-content\themes\crispwps-1614\package.json
+9 error install Couldn't read dependencies
+10 error Error: No 'name' field
+10 error     at validName (C:\Users\lastk\AppData\Roaming\nvm\v0.8.4\node_modules\npm\node_modules\read-package-json\read-json.js:493:40)
+10 error     at final (C:\Users\lastk\AppData\Roaming\nvm\v0.8.4\node_modules\npm\node_modules\read-package-json\read-json.js:283:27)
+10 error     at C:\Users\lastk\AppData\Roaming\nvm\v0.8.4\node_modules\npm\node_modules\read-package-json\read-json.js:115:33
+10 error     at cb (C:\Users\lastk\AppData\Roaming\nvm\v0.8.4\node_modules\npm\node_modules\slide\lib\async-map.js:48:11)
+10 error     at C:\Users\lastk\AppData\Roaming\nvm\v0.8.4\node_modules\npm\node_modules\read-package-json\read-json.js:237:40
+10 error     at fs.readFile (fs.js:176:14)
+10 error     at fs.close (C:\Users\lastk\AppData\Roaming\nvm\v0.8.4\node_modules\npm\node_modules\graceful-fs\graceful-fs.js:94:5)
+10 error     at Object.oncomplete (fs.js:297:15)
+11 error If you need help, you may report this log at:
+11 error     <http://github.com/isaacs/npm/issues>
+11 error or email it to:
+11 error     <npm-@googlegroups.com>
+12 error System Windows_NT 6.2.9200
+13 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "i"
+14 error cwd C:\OSPanel\domains\crispwps-start.loc\wp-content\themes\crispwps-1614
+15 error node -v v0.8.4
+16 error npm -v 1.1.45
+17 verbose exit [ 1, true ]

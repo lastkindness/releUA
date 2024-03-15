@@ -1,0 +1,20 @@
+.social {
+    @extend %listreset;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 -8px;
+    li {
+        padding: 0 8px;
+    }
+    a {
+        @include animate(background);
+        position: relative;
+        display: block;
+        color: $light;
+        i {
+            font-size: 24px;
+            line-height: 1em;
+        }
+    }
+}

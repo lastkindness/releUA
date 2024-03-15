@@ -1,0 +1,8 @@
+.DS_Store
+.idea/
+vendor/
+node_modules/
+assets/dist/
+creds.txt
+credsError.txt
+gulpenv.js

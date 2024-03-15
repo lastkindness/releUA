@@ -1,0 +1,58 @@
+.tabs {
+    padding: 20px 0;
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: $white;
+    }
+
+    &__nav {
+        @extend %listreset;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+            cursor: pointer;
+            padding: 8px 16px;
+
+            &.active {
+                background: $primary;
+                color: $white;
+            }
+        }
+    }
+
+    &__content {
+        @include animate(height 0.3s);
+
+        position: relative;
+        height: auto;
+        overflow: hidden;
+        background: $primary;
+
+        &-item {
+            position: absolute;
+            left: 0;
+            right: 0;
+            opacity: 0;
+            padding: 16px;
+            transition: all 0.3s ease-in-out;
+
+            &.active {
+                opacity: 1;
+                color: $white;
+            }
+
+            p {
+                margin: 0 0 8px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

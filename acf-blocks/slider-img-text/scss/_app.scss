@@ -1,0 +1,65 @@
+.slider-img-text {
+    padding: 50px 0;
+
+    &__slider {
+        position: relative;
+        margin: 0 -16px;
+        padding: 0 0 42px;
+
+        .swiper-slide {
+            padding: 0 32px;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            left: 0;
+            right: auto;
+
+            &:after {
+                color: $primary;
+                font-size: 22px;
+
+                @include media(">=tablet") {
+                    font-size: 32px;
+                }
+            }
+        }
+
+        .swiper-button-next {
+            right: 0;
+            left: auto;
+        }
+
+        .swiper-pagination {
+            top: auto;
+            bottom: 0;
+
+            .swiper-pagination-bullet {
+                width: 10px;
+                height: 10px;
+                background: $primary;
+            }
+        }
+    }
+
+    h2 {
+    }
+
+    .row {
+        @include media(">=tablet") {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin: 0 -16px;
+        }
+
+        .col {
+            padding: 12px 0;
+
+            @include media(">=tablet") {
+                width: 50%;
+                padding: 0 16px;
+            }
+        }
+    }
+}

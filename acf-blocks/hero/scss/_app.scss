@@ -1,0 +1,64 @@
+.hero {
+    position: relative;
+    background-color: $secondary;
+    color: $white;
+    .swiper-slide {
+        position: relative;
+        background-size: cover;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        padding: 0 32px;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        min-height: calc(100vh - 67px);
+
+        @include media(">=desktop") {
+            min-height: calc(100vh - 110px);
+        }
+    }
+
+    &__text {
+        width: 100%;
+        padding: 32px 0;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        left: 0;
+        right: auto;
+
+        @include media(">=desktop") {
+            left: 10px;
+        }
+
+        &:after {
+            font-size: 22px;
+            color: $primary;
+
+            @include media(">=tablet") {
+                font-size: 32px;
+            }
+        }
+    }
+
+    .swiper-button-next {
+        right: 0;
+        left: auto;
+
+        @include media(">=desktop") {
+            right: 10px;
+        }
+    }
+
+    .swiper-pagination {
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: $primary;
+        }
+    }
+}

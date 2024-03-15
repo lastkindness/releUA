@@ -1,0 +1,57 @@
+.nav-opener {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    width: 42px;
+    height: 37px;
+    transform: translateY(-50%);
+    text-indent: -9999px;
+    overflow: hidden;
+    text-decoration: none;
+    z-index: 99;
+
+    @include media(">=desktop") {
+        display: none;
+    }
+
+    &:before,
+    &:after,
+    span {
+        background: $black;
+        position: absolute;
+        top: 19px;
+        left: 20%;
+        right: 20%;
+        height: 3px;
+        margin-top: -2px;
+        transition: all 0.2s linear;
+    }
+
+    &:before,
+    &:after {
+        content: "";
+        top: 10px;
+    }
+
+    &:after {
+        top: 28px;
+    }
+
+    .nav-active & {
+        &:before,
+        &:after {
+            transform: rotate(45deg);
+            top: 18px;
+            left: 15%;
+            right: 15%;
+        }
+
+        span {
+            opacity: 0;
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+    }
+}

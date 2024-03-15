@@ -1,0 +1,83 @@
+.columns-cards {
+    $self: &;
+    padding: 50px 0;
+
+    &.three-columns {
+        #{$self}__row {
+            @include media(">=widescreen") {
+                margin: 0 -32px;
+            }
+        }
+
+        #{$self}__col {
+            @include media(">=tablet") {
+                width: 33.332%;
+            }
+
+            .card {
+                &__body {
+                    p {
+                        margin: 0 0 24px;
+                    }
+                }
+            }
+        }
+    }
+
+    &.four-columns {
+        #{$self}__row {
+            @include media(">=widescreen") {
+                margin: 0 -24px;
+            }
+        }
+
+        #{$self}__col {
+            @include media(">=tablet") {
+                width: 50%;
+            }
+
+            @include media(">=desktop") {
+                width: 25%;
+            }
+
+            .card {
+                &__body {
+                    p {
+                        margin: 0 0 24px;
+                    }
+                }
+            }
+        }
+    }
+
+    .title {
+        display: block;
+    }
+
+    h2 {
+        margin: 0 0 32px;
+    }
+
+    &__row {
+        @include media(">=tablet") {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -16px;
+        }
+    }
+
+    &__col {
+        padding: 0 0 32px;
+
+        @include media(">=tablet") {
+            display: flex;
+            width: 50%;
+            padding: 0 16px 32px;
+        }
+
+        &:only-child {
+            width: 100%;
+            padding: 0;
+        }
+    }
+}

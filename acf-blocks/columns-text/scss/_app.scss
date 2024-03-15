@@ -1,0 +1,20 @@
+.columns-text {
+    padding: 50px 0;
+
+    &__row {
+        @include media(">=tablet") {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -16px;
+        }
+    }
+
+    &__col {
+        padding: 0 0 32px;
+
+        @include media(">=tablet") {
+            width: 50%;
+            padding: 0 16px 32px;
+        }
+    }
+}

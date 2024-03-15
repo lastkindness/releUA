@@ -1,0 +1,46 @@
+.two-columns {
+    padding: 20px 0;
+    background-color: $secondary;
+    @include media(">=tablet") {
+        padding: 50px 0;
+    }
+    &--reverse {
+        .row {
+            @include media(">=tablet") {
+                flex-direction: row-reverse;
+            }
+        }
+    }
+
+    h2 {
+    }
+
+    .row {
+        @include media(">=tablet") {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin: 0 -16px;
+        }
+
+        @include media(">=desktop") {
+            margin: 0 -32px;
+        }
+    }
+
+    .col {
+        padding: 0 0 24px;
+
+        @include media(">=tablet") {
+            width: 50%;
+            padding: 0 16px 24px;
+        }
+
+        @include media(">=desktop") {
+            padding: 0 32px 24px;
+        }
+    }
+    &_title {
+        background-color: transparent;
+    }
+}

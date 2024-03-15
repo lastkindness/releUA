@@ -1,0 +1,24 @@
+<section class="scrollbar">
+    <div class="container">
+        <h3>Custom Scrollbar</h3>
+        <div class="scrollbar__wrap">
+            <div class="scrollbar__wrap-img">
+                <img src="<?php echo get_template_directory_uri(); ?>/acf-blocks/scrollbar/img/placeholder.jpg" alt="image description">
+                <img src="<?php echo get_template_directory_uri(); ?>/acf-blocks/scrollbar/img/placeholder.jpg" alt="image description">
+                <img src="<?php echo get_template_directory_uri(); ?>/acf-blocks/scrollbar/img/placeholder.jpg" alt="image description">
+                <img src="<?php echo get_template_directory_uri(); ?>/acf-blocks/scrollbar/img/placeholder.jpg" alt="image description">
+                <img src="<?php echo get_template_directory_uri(); ?>/acf-blocks/scrollbar/img/placeholder.jpg" alt="image description">
+            </div>
+        </div>
+        <div class="scrollbar__wrap scrollbar-y">
+            <div class="scrollbar__wrap-text">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non mollitia dignissimos rem id assumenda nisi vero asperiores praesentium illo fugiat nulla tempora nostrum voluptate laborum pariatur impedit vitae odio ullam, laudantium dicta. Illo reiciendis, accusamus incidunt est odio veritatis voluptatibus officiis itaque vel molestiae. Officiis cumque excepturi quos labore repellat. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non mollitia dignissimos rem id assumenda nisi vero asperiores praesentium illo fugiat nulla tempora nostrum voluptate laborum pariatur impedit vitae odio ullam, laudantium dicta. Illo reiciendis, accusamus incidunt est odio veritatis voluptatibus officiis itaque vel molestiae. Officiis cumque excepturi quos labore repellat.</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non mollitia dignissimos rem id assumenda nisi vero asperiores praesentium illo fugiat nulla tempora nostrum voluptate laborum pariatur impedit vitae odio ullam, laudantium dicta. Illo reiciendis, accusamus incidunt est odio veritatis voluptatibus officiis itaque vel molestiae. Officiis cumque excepturi quos labore repellat.</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non mollitia dignissimos rem id assumenda nisi vero asperiores praesentium illo fugiat nulla tempora nostrum voluptate laborum pariatur impedit vitae odio ullam, laudantium dicta. Illo reiciendis, accusamus incidunt est odio veritatis voluptatibus officiis itaque vel molestiae. Officiis cumque excepturi quos labore repellat. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non mollitia dignissimos rem id assumenda nisi vero asperiores praesentium illo fugiat nulla tempora nostrum voluptate laborum pariatur impedit vitae odio ullam, laudantium dicta. Illo reiciendis, accusamus incidunt est odio veritatis voluptatibus officiis itaque vel molestiae. Officiis cumque excepturi quos labore repellat.</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non mollitia dignissimos rem id assumenda nisi vero asperiores praesentium illo fugiat nulla tempora nostrum voluptate laborum pariatur impedit vitae odio ullam, laudantium dicta. Illo reiciendis, accusamus incidunt est odio veritatis voluptatibus officiis itaque vel molestiae. Officiis cumque excepturi quos labore repellat.</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non mollitia dignissimos rem id assumenda nisi vero asperiores praesentium illo fugiat nulla tempora nostrum voluptate laborum pariatur impedit vitae odio ullam, laudantium dicta. Illo reiciendis, accusamus incidunt est odio veritatis voluptatibus officiis itaque vel molestiae. Officiis cumque excepturi quos labore repellat. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non mollitia dignissimos rem id assumenda nisi vero asperiores praesentium illo fugiat nulla tempora nostrum voluptate laborum pariatur impedit vitae odio ullam, laudantium dicta. Illo reiciendis, accusamus incidunt est odio veritatis voluptatibus officiis itaque vel molestiae. Officiis cumque excepturi quos labore repellat.</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non mollitia dignissimos rem id assumenda nisi vero asperiores praesentium illo fugiat nulla tempora nostrum voluptate laborum pariatur impedit vitae odio ullam, laudantium dicta. Illo reiciendis, accusamus incidunt est odio veritatis voluptatibus officiis itaque vel molestiae. Officiis cumque excepturi quos labore repellat.</p>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,16 @@
+.cta {
+    padding: 32px 0;
+    text-align: center;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    margin: 12px 0;
+    @include media('>=desktop') {
+        padding: 84px 0;
+        margin: 32px 0;
+    }
+    h2 {
+        color: $white;
+        text-align: center;
+    }
+}

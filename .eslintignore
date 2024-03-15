@@ -1,0 +1,9 @@
+node_modules
+/.vscode
+/.git
+assets/src/js/plugins
+assets/src/js/libs
+assets/dist
+blocks
+assets/src/js/modules/swiper.js
+assets/src/js/modules/smoothScroll.js

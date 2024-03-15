@@ -1,0 +1,28 @@
+.counter {
+    padding: 50px 0;
+
+    h2 {
+    }
+
+    &__row {
+        text-align: center;
+
+        @include media(">=tablet") {
+            display: flex;
+            justify-content: space-around;
+            margin: 0 -16px;
+        }
+    }
+
+    &__col {
+        @include media(">=tablet") {
+            width: 33.332%;
+            padding: 0 16px;
+        }
+    }
+
+    &__num {
+        font-size: 50px;
+        font-weight: 700;
+    }
+}

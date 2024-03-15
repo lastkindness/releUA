@@ -1,0 +1,26 @@
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+
+    .page-numbers {
+        @include animate(background);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background: $primary;
+        color: $white;
+        margin: 0 8px 0 0;
+        text-decoration: none;
+
+        &.current {
+            background: darken($primary, 25%);
+        }
+
+        &:hover {
+            background: darken($primary, 15%);
+        }
+    }
+}

@@ -1,0 +1,55 @@
+.experience {
+    padding: 50px 0;
+
+    .period {
+        font-weight: 700;
+    }
+
+    .diraction,
+    .location {
+        font-size: 0.8em;
+    }
+}
+
+.handorgel {
+    &__header {
+        @include media(">=tablet") {
+            font-size: 24px;
+        }
+
+        &--open {
+            .handorgel__header__button {
+                background: $primary;
+                color: $white;
+
+                &:before {
+                    transform: translateY(-50%) rotate(-180deg);
+                }
+            }
+        }
+
+        &--focus {
+            .handorgel__header__button {
+                background: $primary;
+                color: $white;
+            }
+        }
+
+        &__button {
+            position: relative;
+
+            &:before {
+                @include animate(transform);
+
+                content: "\e903";
+                font-family: "icomoon";
+                font-size: 20px;
+                font-weight: 400;
+                position: absolute;
+                top: 50%;
+                right: 15px;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}

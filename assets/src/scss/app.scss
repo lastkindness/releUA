@@ -1,0 +1,48 @@
+$breakpoints: (
+    'xs-phone': 320px,
+    'phone': 565px,
+    'tablet': 768px,
+    'desktop': 1024px,
+    'widescreen': 1200px,
+    'widescreen-lg': 1440px
+);
+
+@import "icomoon";
+@import "fonts";
+
+@import "~swiper/css/bundle";
+@import "~handorgel/src/scss/style.scss";
+@import "~aos/dist/aos.css";
+@import "~simplebar/dist/simplebar.css";
+
+@import "base/include-media";
+@import "base/variables";
+@import "base/mixins";
+@import "base/helpers";
+@import "base/reset";
+@import "base/typography";
+@import "base/forms";
+@import "base/normalize";
+
+@import "components/btn";
+@import "components/navbar-nav";
+@import "components/filter";
+@import "components/featured-post";
+@import "components/author-post";
+@import "components/article-section";
+@import "components/card";
+@import "components/social";
+@import "components/back-to-top";
+@import "components/contacts";
+@import "components/nav-opener";
+@import "components/phones";
+@import "components/emails";
+@import "components/pagination";
+@import "components/cards-grid";
+@import "components/didnt-find-banner";
+
+@import "layout/common";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/error-page";
+@import "layout/single-built-object";

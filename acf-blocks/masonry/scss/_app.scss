@@ -1,0 +1,23 @@
+.masonry {
+    padding: 50px 0;
+
+    h2 {
+    }
+
+    .grid {
+        margin: -12px;
+
+        &-sizer,
+        &-item {
+            padding: 12px;
+
+            @include media(">=phone") {
+                width: 50%;
+            }
+
+            @include media(">=tablet") {
+                width: 25%;
+            }
+        }
+    }
+}

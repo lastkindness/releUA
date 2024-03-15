@@ -1,0 +1,60 @@
+.portfolio {
+    padding: 50px 0;
+    &__wrapper {
+        @include media(">=tablet") {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+
+    &__col {
+        padding: 24px 8px 12px;
+        background-color: $pure_white;
+        text-align: center;
+        p,
+        h4 {
+            text-align: center;
+        }
+        img {
+            margin: 0 auto 16px;
+            width: 80%;
+            max-height: 80px;
+            object-fit: contain;
+            object-position: center;
+        }
+        &--dark {
+            background-color: $pure_black;
+            color: $white;
+            p,
+            h4 {
+                color: $white;
+            }
+        }
+        @include media(">=tablet") {
+            width: 33.332%;
+            padding: 16px 8px 8px;
+        }
+
+        @include media(">=desktop") {
+            padding: 32px 16px 16px;
+        }
+    }
+
+    &__box {
+        opacity: 1;
+        transition: 0.3s all;
+        text-decoration: none;
+        h4 {
+            margin: 0 0 8px;
+        }
+
+        &-position {
+            display: block;
+            margin: 0 0 8px;
+        }
+        &:hover {
+            opacity: 0.8;
+            transition: 0.3s all;
+        }
+    }
+}

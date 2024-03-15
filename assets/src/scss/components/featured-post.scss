@@ -1,0 +1,62 @@
+.featured-post {
+    &__row {
+        margin: 0 0 32px;
+        @include media(">=tablet") {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+    }
+
+    &__img {
+        display: block;
+        height: 300px;
+        @include media(">=desktop") {
+            width: calc(30% - 16px);
+        }
+        img {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
+    }
+
+    &__text {
+        padding: 16px 0 0;
+        @include media(">=desktop") {
+            width: 70%;
+            padding: 16px 32px;
+        }
+    }
+
+    .row {
+        @include media(">=576px") {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -8px;
+        }
+
+        @include media(">=desktop") {
+            margin: 0 -16px;
+        }
+    }
+
+    .col {
+        padding: 0 0 16px;
+
+        @include media(">=576px") {
+            display: flex;
+            width: 50%;
+            padding: 0 8px 16px;
+        }
+
+        @include media(">=tablet") {
+            width: 33.332%;
+        }
+
+        @include media(">=desktop") {
+            width: 25%;
+            padding: 0 16px 32px;
+        }
+    }
+}

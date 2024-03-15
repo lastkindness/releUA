@@ -1,0 +1,13 @@
+{
+    "name": "crispwp/rst",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Dima Mareychev",
+            "email": "dmareychev@crispwp.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "RST\\" : "src/" }
+    }
+}

@@ -1,0 +1,52 @@
+.intro {
+    padding: 50px 0;
+    &--reverse {
+        .intro {
+            &__wrapper {
+                @include media(">=tablet") {
+                    flex-direction: row-reverse;
+                }
+            }
+        }
+    }
+    &__wrapper {
+        @include media(">=tablet") {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            margin: 0 -16px;
+        }
+        @include media(">=desktop") {
+            margin: 0 -32px;
+        }
+    }
+
+    &__col {
+        padding: 0 0 24px;
+        img {
+            width: 100%;
+        }
+        &:first-child {
+            @include media(">=tablet") {
+                width: 70%;
+            }
+        }
+        &:last-child {
+            @include media(">=tablet") {
+                width: 30%;
+            }
+        }
+        @include media(">=tablet") {
+            padding: 0 16px 24px;
+        }
+        @include media(">=desktop") {
+            padding: 0 32px 24px;
+        }
+    }
+    &__properties {
+        margin: 0 0 20px;
+        .label {
+            font-weight: 700;
+        }
+    }
+}
