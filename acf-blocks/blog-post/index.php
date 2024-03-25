@@ -40,7 +40,7 @@
                             $button = get_field('archive_button','options');?>
                             <a href="<?php echo get_the_permalink();?>" class="btn"><?php echo $button;?></a>
                         <?php else:?>
-                            <a href="<?php echo get_the_permalink();?>" class="btn"><?php _e('Learn more',TEXTDOMAIN)?></a>
+                            <a href="<?php echo get_the_permalink();?>" class="btn"><?php _e('Learn more','ReleUA')?></a>
                         <?php endif; ?>
                     </article>
                 <?php endwhile;?>

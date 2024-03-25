@@ -52,7 +52,7 @@ $taxonomies = get_object_taxonomies($post);?>
                         </figure>
                         <?php the_content();?>
                         <div class="share">
-                            <strong><?php _e('Share this post',TEXTDOMAIN);?></strong>
+                            <strong><?php _e('Share this post','ReleUA');?></strong>
                             <?php
                             $url=get_the_permalink();
                             $title=get_the_title();

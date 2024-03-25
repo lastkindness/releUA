@@ -1,0 +1,56 @@
+.slider-img {
+    padding: 50px 0;
+
+    &__slider {
+        position: relative;
+        margin: 0 -16px;
+        padding: 0 0 42px;
+
+        .swiper-slide {
+            padding: 0 32px;
+            img {
+                object-fit: cover;
+                width: 100%;
+                height: 550px;
+                overflow: hidden;
+                border-radius: 26px;
+            }
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            left: 0;
+            right: auto;
+
+            &:after {
+                color: $primary;
+                font-size: 22px;
+            }
+        }
+
+        .swiper-button-next {
+            right: 0;
+            left: auto;
+        }
+
+        .swiper-pagination {
+            top: auto;
+            bottom: 0;
+
+            .swiper-pagination-bullet {
+                width: 10px;
+                height: 10px;
+                background: $primary;
+            }
+        }
+    }
+
+    h2 {
+    }
+
+    .row {
+        .col {
+            padding: 12px 0;
+        }
+    }
+}

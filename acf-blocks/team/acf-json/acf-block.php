@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'team',
-        'title' => __('Team Block', TEXTDOMAIN),
-        'description' => __('Team Block', TEXTDOMAIN),
+        'title' => __('Team Block', 'ReleUA'),
+        'description' => __('Team Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/team/index.php',
         'keywords' => ['Team'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

@@ -90,7 +90,7 @@ final class Guten extends Singleton
     public function enqueueScript()
     {
         wp_register_script(
-            TEXTDOMAIN.'-gutenberg-blocks',
+            'ReleUA'.'-gutenberg-blocks',
             get_template_directory_uri() . '/assets/dist/blocks.min.js',
             $this->dependencies,
             false, false
@@ -103,7 +103,7 @@ final class Guten extends Singleton
     public function enqueueStyle()
     {
         wp_enqueue_style(
-            TEXTDOMAIN.'-gutenberg-blocks',
+            'ReleUA'.'-gutenberg-blocks',
             get_template_directory_uri() . '/assets/dist/blocks.min.css'
         );
     }

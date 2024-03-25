@@ -27,7 +27,7 @@
                                     $button = get_field('archive_button','options');?>
                                     <a href="<?php the_permalink();?>"><?php echo $button;?></a>
                                 <?php else:?>
-                                    <a href="<?php the_permalink();?>"><?php _e('See More',TEXTDOMAIN);?></a>
+                                    <a href="<?php the_permalink();?>"><?php _e('See More','ReleUA');?></a>
                                 <?php endif; ?>
                             </div>
                         </div>

@@ -6,7 +6,7 @@ get_header();?>
 <main>
     <div class="container">
         <h1 class="page-title">
-            <?php _e( 'Search results for: ', TEXTDOMAIN ); ?>
+            <?php _e( 'Search results for: ', 'ReleUA' ); ?>
             <span class="page-description"><?php echo get_search_query(); ?></span>
         </h1>
         <div class="search__wrapper">
@@ -27,10 +27,10 @@ get_header();?>
                 <?php else :?>
                     <div class="search__no-posts">
                         <h2 class="h2 search__no-posts-title small-title">
-                            <span><?php _e('At your request: ',TEXTDOMAIN);?></span><strong>"<?php echo get_search_query();?>"</strong>
-                            <span><?php _e( ' nothing found', TEXTDOMAIN );?></span>
+                            <span><?php _e('At your request: ','ReleUA');?></span><strong>"<?php echo get_search_query();?>"</strong>
+                            <span><?php _e( ' nothing found', 'ReleUA' );?></span>
                         </h2>
-                        <h3 class="h3 search__no-posts-subtitle"><?php _e( 'Try another request!', TEXTDOMAIN );?></h3>
+                        <h3 class="h3 search__no-posts-subtitle"><?php _e( 'Try another request!', 'ReleUA' );?></h3>
                     </div>
                 <?php endif;?>
             </ul>

@@ -11,7 +11,7 @@
 ```php
 $сommander = new PostType('commander');
 $сommander->setLabels([
-    'name' => __('Commanders',TEXTDOMAIN),
+    'name' => __('Commanders','ReleUA'),
 ]);
 ```
 после подключения:

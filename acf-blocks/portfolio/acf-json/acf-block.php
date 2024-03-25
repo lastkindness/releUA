@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'portfolio',
-        'title' => __('Portfolio Block', TEXTDOMAIN),
-        'description' => __('Portfolio Block', TEXTDOMAIN),
+        'title' => __('Portfolio Block', 'ReleUA'),
+        'description' => __('Portfolio Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/portfolio/index.php',
         'keywords' => ['Portfolio'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

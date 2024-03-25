@@ -250,6 +250,27 @@
             "wpml_cf_preferences": 2
         },
         {
+            "key": "field_6600598f903bf",
+            "label": "Google Maps API Key",
+            "name": "google_maps_api_key",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_65d52d67f9cad",
             "label": "Copyright",
             "name": "copyright",
@@ -290,5 +311,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1710030482
+    "modified": 1711298992
 }

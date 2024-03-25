@@ -20,7 +20,7 @@ get_header(); ?>
             ]);?>
             <?php if($category):?>
                 <ul class="filter__list">
-                    <li <?php if(!isset($_GET['cat'])||$_GET['cat']==''):?>class="active"<?php endif;?>><a href="<?php echo $page_for_posts_url;?>"><?php _e('All',TEXTDOMAIN);?></a></li>
+                    <li <?php if(!isset($_GET['cat'])||$_GET['cat']==''):?>class="active"<?php endif;?>><a href="<?php echo $page_for_posts_url;?>"><?php _e('All','ReleUA');?></a></li>
                     <?php foreach ($category as $item):?>
                         <li <?php if(isset($_GET['cat'])&&$_GET['cat']==$item->term_id):?>class="active"<?php endif;?>><a href="<?php echo $page_for_posts_url.'?cat='.$item->term_id?>"><?php echo $item->name;?></a></li>
                     <?php endforeach;?>
@@ -46,7 +46,7 @@ get_header(); ?>
                             $button = get_field('archive_button','options');?>
                             <a href="<?php echo get_the_permalink($sticky_posts[0]);?>"><?php echo $button;?></a>
                         <?php else:?>
-                            <a href="<?php echo get_the_permalink($sticky_posts[0]);?>"><?php _e('Featured link',TEXTDOMAIN);?></a>
+                            <a href="<?php echo get_the_permalink($sticky_posts[0]);?>"><?php _e('Featured link','ReleUA');?></a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ get_header(); ?>
                                     $button = get_field('archive_button','options');?>
                                     <a href="<?php the_permalink();?>" class="btn"><?php echo $button;?></a>
                                 <?php else:?>
-                                    <a href="<?php the_permalink();?>" class="btn"><?php _e('See more',TEXTDOMAIN);?></a>
+                                    <a href="<?php the_permalink();?>" class="btn"><?php _e('See more','ReleUA');?></a>
                                 <?php endif; ?>
                             </article>
                         </div>

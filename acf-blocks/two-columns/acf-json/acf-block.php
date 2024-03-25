@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'two-columns',
-        'title' => __('Two Columns Block', TEXTDOMAIN),
-        'description' => __('Two Columns Block', TEXTDOMAIN),
+        'title' => __('Two Columns Block', 'ReleUA'),
+        'description' => __('Two Columns Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/two-columns/index.php',
         'keywords' => ['Two','Columns'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

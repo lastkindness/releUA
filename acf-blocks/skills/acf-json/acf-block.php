@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'skills',
-        'title' => __('Skills Block', TEXTDOMAIN),
-        'description' => __('Skills Block', TEXTDOMAIN),
+        'title' => __('Skills Block', 'ReleUA'),
+        'description' => __('Skills Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/skills/index.php',
         'keywords' => ['Skills','Skill'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

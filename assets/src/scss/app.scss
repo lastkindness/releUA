@@ -40,9 +40,12 @@ $breakpoints: (
 @import "components/pagination";
 @import "components/cards-grid";
 @import "components/didnt-find-banner";
+@import "components/more-real-estate";
+@import "components/map-section";
 
 @import "layout/common";
 @import "layout/header";
 @import "layout/footer";
 @import "layout/error-page";
 @import "layout/single-built-object";
+@import "layout/article-section";

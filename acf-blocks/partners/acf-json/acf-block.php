@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'partners',
-        'title' => __('Partners Block', TEXTDOMAIN),
-        'description' => __('Partners Block', TEXTDOMAIN),
+        'title' => __('Partners Block', 'ReleUA'),
+        'description' => __('Partners Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/partners/index.php',
         'keywords' => ['Partners'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

@@ -17,7 +17,7 @@
                     <?php if($video_id=get_sub_field('video_id')):?>
                         <p><a href="#" data-video='{"type": "<?php the_sub_field('video_source');?>", "video": "<?php echo $video_id;?>", "fluidWidth": true}'><?php the_sub_field('title');?></a></p>
                         <div data-video='{"type": "<?php the_sub_field('video_source');?>", "video": "<?php echo $video_id;?>", "autoplay": false, "fluidWidth": true}'>
-                            <a href="#" class="btn-play"><span><?php _e('Play',TEXTDOMAIN);?></span><em><?php _e('Pause',TEXTDOMAIN);?></em></a>
+                            <a href="#" class="btn-play"><span><?php _e('Play','ReleUA');?></span><em><?php _e('Pause','ReleUA');?></em></a>
                         </div>
                     <?php endif;?>
                 </div>

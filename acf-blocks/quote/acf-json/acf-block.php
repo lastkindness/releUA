@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'quote',
-        'title' => __('Quote Block', TEXTDOMAIN),
-        'description' => __('Quote Block', TEXTDOMAIN),
+        'title' => __('Quote Block', 'ReleUA'),
+        'description' => __('Quote Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/quote/index.php',
         'keywords' => ['Quote'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

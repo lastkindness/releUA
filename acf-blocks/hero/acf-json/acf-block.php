@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'hero',
-        'title' => __('Hero', TEXTDOMAIN),
-        'description' => __('Hero', TEXTDOMAIN),
+        'title' => __('Hero', 'ReleUA'),
+        'description' => __('Hero', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/hero/index.php',
         'keywords' => ['hero'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

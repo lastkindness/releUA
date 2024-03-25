@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'new-block', // 'new-block' -> Change to block folder name
-        'title' => __('New Block', TEXTDOMAIN), // 'New Block' -> Change to block name
-        'description' => __('New Block', TEXTDOMAIN), // 'New Block' -> Change to block name
+        'title' => __('New Block', 'ReleUA'), // 'New Block' -> Change to block name
+        'description' => __('New Block', 'ReleUA'), // 'New Block' -> Change to block name
         'render_template' => dirname(__FILE__,3) . '/new-block/index.php', // 'new-block' -> Change to block folder name
         'keywords' => ['New'], // 'New' -> Change to block name for search
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

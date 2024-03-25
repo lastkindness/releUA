@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'parallax',
-        'title' => __('Parallax Block', TEXTDOMAIN),
-        'description' => __('Parallax Block', TEXTDOMAIN),
+        'title' => __('Parallax Block', 'ReleUA'),
+        'description' => __('Parallax Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/parallax/index.php',
         'keywords' => ['Parallax'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

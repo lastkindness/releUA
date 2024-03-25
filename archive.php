@@ -2,40 +2,8 @@
 
 get_header(); ?>
 <main>
-    <?php $category = get_terms([
-        'taxonomy' => get_object_taxonomies(get_post())[0],
-        'hide_empty' => true,
-    ]);?>
-    <div class="two-columns two-columns_title">
-        <div class="container">
-            <?php
-            $home_id = (int)get_option('page_on_front');
-            $taxonomy_name = get_object_taxonomies(get_post())[0];
-            $taxonomy = get_taxonomy($taxonomy_name);
-            if ($taxonomy) {
-                $string = $taxonomy->labels->name;
-                $parts = explode(" ", $string);
-                $field = strtolower($parts[0]);
-                $field_value = get_field("page_elements", $home_id);
-                foreach ($field_value as $item):
-                    if($item["acf_fc_layout"]==$field) {?>
-                        <h1 class="archive__title"><?php echo $item["title"]; ?></h1>
-                    <?php }
-                endforeach;
-                ?>
-            <?php }?>
-        </div>
-    </div>
     <section class="featured-post">
         <div class="container">
-            <?php if($category):?>
-                <ul class="filter__list">
-                    <li <?php if(!isset($_GET['cat'])||$_GET['cat']==''):?>class="active"<?php endif;?>><a href="<?php echo $page_for_posts_url;?>"><?php _e('All',TEXTDOMAIN);?></a></li>
-                    <?php foreach ($category as $item):?>
-                        <li <?php if(isset($_GET['cat'])&&$_GET['cat']==$item->term_id):?>class="active"<?php endif;?>><a href="<?php echo get_post_type_archive_link(get_post_type()).$page_for_posts_url.$item->slug?>"><?php echo $item->name;?></a></li>
-                    <?php endforeach;?>
-                </ul>
-            <?php endif;?>
             <?php if ( have_posts() ) : ?>
                 <?php $sticky_posts=get_option( 'sticky_posts' );?>
                 <div class="featured-post__row">
@@ -53,7 +21,7 @@ get_header(); ?>
                             $button = get_field('archive_button','options');?>
                             <a href="<?php echo get_the_permalink($sticky_posts[0]);?>"><?php echo $button;?></a>
                         <?php else:?>
-                            <a href="<?php echo get_the_permalink($sticky_posts[0]);?>"><?php _e('Featured link',TEXTDOMAIN);?></a>
+                            <a href="<?php echo get_the_permalink($sticky_posts[0]);?>"><?php _e('Featured link','ReleUA');?></a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -88,7 +56,7 @@ get_header(); ?>
                                     $button = get_field('archive_button','options');?>
                                     <a href="<?php the_permalink();?>" class="btn"><?php echo $button;?></a>
                                 <?php else:?>
-                                    <a href="<?php the_permalink();?>" class="btn"><?php _e('Learn more',TEXTDOMAIN)?></a>
+                                    <a href="<?php the_permalink();?>" class="btn"><?php _e('Learn more','ReleUA')?></a>
                                 <?php endif; ?>
                             </article>
                         </div>

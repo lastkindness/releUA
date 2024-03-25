@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'experience',
-        'title' => __('Experience Block', TEXTDOMAIN),
-        'description' => __('Experience Block', TEXTDOMAIN),
+        'title' => __('Experience Block', 'ReleUA'),
+        'description' => __('Experience Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/experience/index.php',
         'keywords' => ['Experience'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

@@ -76,7 +76,7 @@ class Pagination
         }
 
         if ($this->displayText && $max > 1) {
-            $pages = '<span class="pages">' . esc_html__('Page: ',TEXTDOMAIN) . $current . esc_html__(' from ',TEXTDOMAIN) . $max . '</span>\r\n';
+            $pages = '<span class="pages">' . esc_html__('Page: ','ReleUA') . $current . esc_html__(' from ','ReleUA') . $max . '</span>\r\n';
         }
 
         $output .= $pages . paginate_links($a);

@@ -4,7 +4,7 @@
  * PSR-4 class autoloader
  */
 require_once 'vendor/autoload.php';
-const TEXTDOMAIN = 'crispwp';
+const TEXTDOMAIN = 'ReleUA';
 use RST\Theme;
 
 $theme = Theme::getInstance();
@@ -18,7 +18,7 @@ use RST\Base\Structure\Taxonomy;
 
 $team = new PostType('team');
 $team->setLabels([
-    'name' => __('Team',TEXTDOMAIN),
+    'name' => __('Team','ReleUA'),
 ]);
 $team->setArgs([
     'menu_icon' => 'dashicons-groups',
@@ -26,41 +26,42 @@ $team->setArgs([
 
 $estate = new PostType('estate');
 $estate->setLabels([
-    'name' => __('Estate',TEXTDOMAIN),
+    'name' => __('Estate','ReleUA'),
 ]);
 $estate->setArgs([
     'menu_icon' => 'dashicons-admin-home',
 ]);
 
-$estateCategory = new Taxonomy('estate_objects', 'estate');
+
+/*$estateCategory = new Taxonomy('estate_objects', 'estate');
 $estateCategory->setLabels([
-    'name' => __('Estate Built objects',TEXTDOMAIN),
+    'name' => __('Estate Built objects','ReleUA'),
 ]);
 $estateCategory->uses($estate);
 
 $estateCategory = new Taxonomy('estate_category', 'estate');
 $estateCategory->setLabels([
-    'name' => __('Estate category',TEXTDOMAIN),
+    'name' => __('Estate category','ReleUA'),
 ]);
 $estateCategory->uses($estate);
 
 $estateCategory = new Taxonomy('estate_type', 'estate');
 $estateCategory->setLabels([
-    'name' => __('Estate type',TEXTDOMAIN),
+    'name' => __('Estate type','ReleUA'),
 ]);
 $estateCategory->uses($estate);
 
 $estateCategory = new Taxonomy('estate_district', 'estate');
 $estateCategory->setLabels([
-    'name' => __('Estate city-district',TEXTDOMAIN),
+    'name' => __('Estate city-district','ReleUA'),
 ]);
 $estateCategory->uses($estate);
 
 $estateCategory = new Taxonomy('estate_compatible', 'estate');
 $estateCategory->setLabels([
-    'name' => __('Estate compatible with',TEXTDOMAIN),
+    'name' => __('Estate compatible with','ReleUA'),
 ]);
-$estateCategory->uses($estate);
+$estateCategory->uses($estate);*/
 
 
 
@@ -118,6 +119,8 @@ function rst_load_assets()
         wp_deregister_script('jquery');
         wp_register_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js', false, null, false);
         wp_enqueue_script('jquery');
+        wp_register_script('maps', '//maps.googleapis.com/maps/api/js?key='.get_field('google_maps_api_key', 'options'), false, null, false);
+        wp_enqueue_script('maps');
         wp_enqueue_script('app', get_template_directory_uri() . '/assets/dist/app.min.js', ['jquery'], $ver, true);
         // AJAX
         wp_localize_script( 'app', 'myajax',
@@ -139,23 +142,23 @@ add_action('acf/init', 'acf_op_init');
 function acf_op_init() {
     if( function_exists('acf_add_options_page') ) {
         acf_add_options_page(array(
-            'page_title' 	=> __('Theme General Settings',TEXTDOMAIN),
-            'menu_title'	=> __('Theme Settings',TEXTDOMAIN),
-            'menu_slug' 	=> __('theme-general-settings',TEXTDOMAIN),
-            'capability'	=> __('edit_posts',TEXTDOMAIN),
+            'page_title' 	=> __('Theme General Settings','ReleUA'),
+            'menu_title'	=> __('Theme Settings','ReleUA'),
+            'menu_slug' 	=> __('theme-general-settings','ReleUA'),
+            'capability'	=> __('edit_posts','ReleUA'),
             'redirect'		=> false
         ));
         acf_add_options_sub_page(array(
-            'page_title' 	=> __('Error 404 Settings',TEXTDOMAIN),
-            'menu_title'	=> __('Error 404 Settings',TEXTDOMAIN),
-            'parent_slug'	=> __('theme-general-settings',TEXTDOMAIN),
+            'page_title' 	=> __('Error 404 Settings','ReleUA'),
+            'menu_title'	=> __('Error 404 Settings','ReleUA'),
+            'parent_slug'	=> __('theme-general-settings','ReleUA'),
             'post_id'       => 'option-error',
         ));
         acf_add_options_page(array(
-            'page_title' 	=> __('Estate General Settings',TEXTDOMAIN),
-            'menu_title'	=> __('Estate General Settings',TEXTDOMAIN),
-            'menu_slug' 	=> __('estate-general-settings',TEXTDOMAIN),
-            'capability'	=> __('edit_posts',TEXTDOMAIN),
+            'page_title' 	=> __('Estate General Settings','ReleUA'),
+            'menu_title'	=> __('Estate General Settings','ReleUA'),
+            'menu_slug' 	=> __('estate-general-settings','ReleUA'),
+            'capability'	=> __('edit_posts','ReleUA'),
             'post_id'       => 'option-estate',
             'redirect'		=> false
         ));
@@ -219,6 +222,24 @@ function get_main_heading_id() {
     // If no main heading term is found, return 0 or whatever makes sense for your application
     return 0;
 }
+
+// Register and enqueue scripts
+function enqueue_custom_scripts() {
+    wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/singlePostMap.js', array('jquery'), '1.0', true);
+    wp_localize_script('custom-script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+}
+add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
+
+// AJAX handler function
+function filter_estate_posts() {
+    // Process AJAX request and filter estate posts here
+    // Retrieve filter values from $_POST
+    // Query estate posts with WP_Query
+    // Return filtered results
+}
+add_action('wp_ajax_filter_estate', 'filter_estate_posts');
+add_action('wp_ajax_nopriv_filter_estate', 'filter_estate_posts');
+
 
 
 

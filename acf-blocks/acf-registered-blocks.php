@@ -28,7 +28,7 @@ function crispWP_block_category($categories, $post)
         [
             [
                 'slug' => RELAUNCH_CATEGORY,
-                'title' => __('CrispWP Blocks', TEXTDOMAIN),
+                'title' => __('CrispWP Blocks', 'ReleUA'),
             ],
         ]
     );

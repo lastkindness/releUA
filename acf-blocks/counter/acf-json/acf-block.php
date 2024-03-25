@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'counter',
-        'title' => __('Counter Block', TEXTDOMAIN),
-        'description' => __('Counter Block', TEXTDOMAIN),
+        'title' => __('Counter Block', 'ReleUA'),
+        'description' => __('Counter Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/counter/index.php',
         'keywords' => ['Counter'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

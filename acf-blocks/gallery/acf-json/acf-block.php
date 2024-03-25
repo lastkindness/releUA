@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'gallery',
-        'title' => __('Gallery Block', TEXTDOMAIN),
-        'description' => __('Gallery Block', TEXTDOMAIN),
+        'title' => __('Gallery Block', 'ReleUA'),
+        'description' => __('Gallery Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/gallery/index.php',
         'keywords' => ['Gallery'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

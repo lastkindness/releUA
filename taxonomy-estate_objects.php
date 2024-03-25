@@ -10,11 +10,8 @@ if ($term && $term->parent) {
     $parking = get_field('parking');
     $distance_subway = get_field('distance_subway');
     $floors = get_field('floors');
-    $parking_icon = get_field('parking', 'option-estate')['url'];
-    $subway_icon = get_field('subway', 'option-estate')['url'];
-    $floors_icon = get_field('floors', 'option-estate')['url'];
-    $address_icon = get_field('address', 'option-estate')['url'];
-    $text_button_hero = get_field('hext_button_hero', 'option-estate');?>
+    $text_button_hero = get_field('hext_button_hero', 'option-estate');
+?>
 
     <main class="single-built-object">
         <section <?php if($hero_image):?> style="background-image: url('<?php echo $hero_image['url'];?>')" <?php endif;?> class="hero">
@@ -26,25 +23,25 @@ if ($term && $term->parent) {
                     <h1><?php single_term_title();?></h1>
                     <?php if($address):?>
                         <h6 class="hero__address">
-                            <img src="<?php echo $address_icon;?>" alt="" class="icon">
+                            <i class="icon icon-address"></i>
                             <span class="text"><?php echo $address;?></span>
                         </h6>
                     <?php endif;?>
                     <?php if($parking):?>
                         <h6 class="hero__address">
-                            <img src="<?php echo $parking_icon;?>" alt="" class="icon">
+                            <i class="icon icon-parking"></i>
                             <span class="text"><?php echo $parking;?></span>
                         </h6>
                     <?php endif;?>
                     <?php if($distance_subway):?>
                         <h6 class="hero__address">
-                            <img src="<?php echo $subway_icon;?>" alt="" class="icon">
+                            <i class="icon icon-icon8"></i>
                             <span class="text"><?php echo $distance_subway;?></span>
                         </h6>
                     <?php endif;?>
                     <?php if($floors):?>
                         <h6 class="hero__address">
-                            <img src="<?php echo $floors_icon;?>" alt="" class="icon">
+                            <i class="icon icon-build"></i>
                             <span class="text"><?php echo $floors;?></span>
                         </h6>
                     <?php endif;?>

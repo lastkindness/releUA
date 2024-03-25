@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'masonry',
-        'title' => __('Masonry Block', TEXTDOMAIN),
-        'description' => __('Masonry Block', TEXTDOMAIN),
+        'title' => __('Masonry Block', 'ReleUA'),
+        'description' => __('Masonry Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/masonry/index.php',
         'keywords' => ['Masonry'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

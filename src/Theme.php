@@ -73,8 +73,8 @@ final class Theme extends Singleton
     {
 
         $menus = [
-            'primary' => esc_html__('Primary', TEXTDOMAIN),
-            'secondary' => esc_html__('Secondary', TEXTDOMAIN)
+            'primary' => esc_html__('Primary', 'ReleUA'),
+            'secondary' => esc_html__('Secondary', 'ReleUA')
         ];
 
         register_nav_menus($menus);
@@ -140,7 +140,7 @@ final class Theme extends Singleton
 
         # Example of sidebar registration
         // register_sidebar( [
-        //     'name'          => sprintf( __( 'Example sidebar', TEXTDOMAIN ) ),
+        //     'name'          => sprintf( __( 'Example sidebar', 'ReleUA' ) ),
         //     'id'            => "example",
         //     'description'   => '',
         //     'class'         => '',

@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'columns-text',
-        'title' => __('Columns Text Block', TEXTDOMAIN),
-        'description' => __('Columns Text Block', TEXTDOMAIN),
+        'title' => __('Columns Text Block', 'ReleUA'),
+        'description' => __('Columns Text Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/columns-text/index.php',
         'keywords' => ['Columns','Text'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

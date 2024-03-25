@@ -1,6 +1,7 @@
 import import_js from './app.js';
 import '../scss/styles.scss';
 import blogpost_block from '../../../acf-blocks/blog-post/js/app.js';
+import allestate_block from '../../../acf-blocks/all-estate/js/app.js';
 import columnscards_block from '../../../acf-blocks/columns-cards/js/app.js';
 import columnstext_block from '../../../acf-blocks/columns-text/js/app.js';
 import contactform_block from '../../../acf-blocks/contact-form/js/app.js';
@@ -21,7 +22,9 @@ import quote_block from '../../../acf-blocks/quote/js/app.js';
 import scrollbar_block from '../../../acf-blocks/scrollbar/js/app.js';
 import skills_block from '../../../acf-blocks/skills/js/app.js';
 import sliderimgtext_block from '../../../acf-blocks/slider-img-text/js/app.js';
+import sliderimg_block from '../../../acf-blocks/slider-img/js/app.js';
 import tabs_block from '../../../acf-blocks/tabs/js/app.js';
 import team_block from '../../../acf-blocks/team/js/app.js';
 import twocolumns_block from '../../../acf-blocks/two-columns/js/app.js';
 import video_block from '../../../acf-blocks/video/js/app.js';
+import didntfind_block from '../../../acf-blocks/didnt-find-banner/js/app.js';

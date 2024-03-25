@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'intro',
-        'title' => __('Intro Block', TEXTDOMAIN),
-        'description' => __('Intro Block', TEXTDOMAIN),
+        'title' => __('Intro Block', 'ReleUA'),
+        'description' => __('Intro Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/intro/index.php',
         'keywords' => ['Intro'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'video',
-        'title' => __('Video Block', TEXTDOMAIN),
-        'description' => __('Video Block', TEXTDOMAIN),
+        'title' => __('Video Block', 'ReleUA'),
+        'description' => __('Video Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/video/index.php',
         'keywords' => ['Video'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'cta',
-        'title' => __('CTA Block', TEXTDOMAIN),
-        'description' => __('CTA Block', TEXTDOMAIN),
+        'title' => __('CTA Block', 'ReleUA'),
+        'description' => __('CTA Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/cta/index.php',
         'keywords' => ['CTA'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

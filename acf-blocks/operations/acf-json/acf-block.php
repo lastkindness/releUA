@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'blog-post',
-        'title' => __('Blog Post Block', TEXTDOMAIN),
-        'description' => __('Blog Post Block', TEXTDOMAIN),
+        'title' => __('Blog Post Block', 'ReleUA'),
+        'description' => __('Blog Post Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/blog-post/index.php',
         'keywords' => ['Blog','Post'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

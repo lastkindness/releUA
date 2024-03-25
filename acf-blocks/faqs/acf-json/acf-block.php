@@ -2,8 +2,8 @@
 acf_register_block_type(
     [
         'name' => 'faqs',
-        'title' => __('Faqs Block', TEXTDOMAIN),
-        'description' => __('Faqs Block', TEXTDOMAIN),
+        'title' => __('Faqs Block', 'ReleUA'),
+        'description' => __('Faqs Block', 'ReleUA'),
         'render_template' => dirname(__FILE__,3) . '/faqs/index.php',
         'keywords' => ['Faqs'],
         'category' => (RELAUNCH_CATEGORY) ?: 'common',

@@ -24,11 +24,20 @@ button {
     &:hover {
         transition:all 0.3s ease;
         color: $btn-background;
-        background: transparent;
+        background: $btn-color;
     }
     &_big {
         border-radius: 16px;
         padding: 22px 60px;
         font-size: 16px;
+    }
+    &_light {
+        color: $btn-background;
+        background: $btn-color;
+        border: 1px solid $btn-color;
+        &:hover {
+            color: $btn-color;
+            background: transparent;
+        }
     }
 }
