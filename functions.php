@@ -223,20 +223,84 @@ function get_main_heading_id() {
     return 0;
 }
 
-// Register and enqueue scripts
-function enqueue_custom_scripts() {
-    wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/singlePostMap.js', array('jquery'), '1.0', true);
-    wp_localize_script('custom-script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
-}
-add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
-
 // AJAX handler function
 function filter_estate_posts() {
-    // Process AJAX request and filter estate posts here
-    // Retrieve filter values from $_POST
-    // Query estate posts with WP_Query
-    // Return filtered results
+
+    $category_filters = isset($_POST['category_filters']) ? $_POST['category_filters'] : array();
+    $type_filters = isset($_POST['type_filters']) ? $_POST['type_filters'] : array();
+    $district_filters = isset($_POST['district_filters']) ? $_POST['district_filters'] : array();
+    $compatible_filters = isset($_POST['compatible_filters']) ? $_POST['compatible_filters'] : array();
+
+    var_dump($category_filters, $type_filters, $district_filters, $compatible_filters);
+
+    $args = array(
+        'post_type' => 'estate',
+        'tax_query' => array(
+            'relation' => 'AND',
+            array(
+                'relation' => 'OR',
+                array(
+                    'taxonomy' => 'estate_category',
+                    'field' => 'slug',
+                    'terms' => $category_filters,
+                    'operator' => 'IN',
+                ),
+            ),
+            array(
+                'relation' => 'OR',
+                array(
+                    'taxonomy' => 'estate_type',
+                    'field' => 'slug',
+                    'terms' => $type_filters,
+                    'operator' => 'IN',
+                ),
+            ),
+            array(
+                'relation' => 'OR',
+                array(
+                    'taxonomy' => 'estate_district',
+                    'field' => 'slug',
+                    'terms' => $district_filters,
+                    'operator' => 'IN',
+                ),
+            ),
+            array(
+                'relation' => 'OR',
+                array(
+                    'taxonomy' => 'estate_compatible',
+                    'field' => 'slug',
+                    'terms' => $compatible_filters,
+                    'operator' => 'IN',
+                ),
+            )
+        ),
+    );
+
+    $query = new WP_Query($args);
+    var_dump('--------------------------------------------------------------');
+    var_dump($args);
+
+    // Output filtered results
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            ?>
+            <div class="estate-post">
+                <h2><?php the_title(); ?></h2>
+                <div class="estate-content"><?php the_content(); ?></div>
+            </div>
+            <?php
+        }
+        wp_reset_postdata();
+    } else {
+        // No posts found
+        echo 'No posts found.';
+    }
+
+    // Always die() after echoing output in AJAX functions
+    die();
 }
+
 add_action('wp_ajax_filter_estate', 'filter_estate_posts');
 add_action('wp_ajax_nopriv_filter_estate', 'filter_estate_posts');
 

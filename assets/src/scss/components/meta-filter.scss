@@ -1,0 +1,66 @@
+.meta-filter {
+    margin-bottom: 20px;
+    input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 0px;
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        &:first-child {
+            z-index: 3;
+        }
+        &::-webkit-slider-runnable-track {
+            height: 0px;
+            background: $light;
+        }
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid $light;
+            background: $white;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: -10px;
+            position: relative;
+            z-index: 5 !important;
+        }
+    }
+    &__box {
+        position: relative;
+        height: 4px;
+        margin-bottom: 20px;
+    }
+    &__numbers {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .price-outer {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        background-color: $light; /* Gray color */
+        z-index: 1;
+        &_start {
+            left: 0;
+            width: 0%; /* Initial width percentage */
+        }
+        &_end {
+            right: 0;
+            width: 0%; /* Initial width percentage */
+        }
+    }
+    .range_bg {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        background-color: $secondary; /* Red color for the range background */
+        z-index: 1; /* Ensure range background is below the range input */
+    }
+}
