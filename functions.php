@@ -225,60 +225,106 @@ function get_main_heading_id() {
 
 // AJAX handler function
 function filter_estate_posts() {
-
     $category_filters = isset($_POST['category_filters']) ? $_POST['category_filters'] : array();
     $type_filters = isset($_POST['type_filters']) ? $_POST['type_filters'] : array();
     $district_filters = isset($_POST['district_filters']) ? $_POST['district_filters'] : array();
     $compatible_filters = isset($_POST['compatible_filters']) ? $_POST['compatible_filters'] : array();
 
-    var_dump($category_filters, $type_filters, $district_filters, $compatible_filters);
+    // Get range filter values
+    $min_room_area = isset($_POST['min_room_area']) ? $_POST['min_room_area'] : '';
+    $max_room_area = isset($_POST['max_room_area']) ? $_POST['max_room_area'] : '';
+    $min_sale_price = isset($_POST['min_sale_price']) ? $_POST['min_sale_price'] : '';
+    $max_sale_price = isset($_POST['max_sale_price']) ? $_POST['max_sale_price'] : '';
+    $min_rental_price = isset($_POST['min_rental_price']) ? $_POST['min_rental_price'] : '';
+    $max_rental_price = isset($_POST['max_rental_price']) ? $_POST['max_rental_price'] : '';
 
     $args = array(
         'post_type' => 'estate',
         'tax_query' => array(
             'relation' => 'AND',
-            array(
-                'relation' => 'OR',
-                array(
-                    'taxonomy' => 'estate_category',
-                    'field' => 'slug',
-                    'terms' => $category_filters,
-                    'operator' => 'IN',
-                ),
-            ),
-            array(
-                'relation' => 'OR',
-                array(
-                    'taxonomy' => 'estate_type',
-                    'field' => 'slug',
-                    'terms' => $type_filters,
-                    'operator' => 'IN',
-                ),
-            ),
-            array(
-                'relation' => 'OR',
-                array(
-                    'taxonomy' => 'estate_district',
-                    'field' => 'slug',
-                    'terms' => $district_filters,
-                    'operator' => 'IN',
-                ),
-            ),
-            array(
-                'relation' => 'OR',
-                array(
-                    'taxonomy' => 'estate_compatible',
-                    'field' => 'slug',
-                    'terms' => $compatible_filters,
-                    'operator' => 'IN',
-                ),
-            )
+        ),
+        'meta_query' => array(
+            'relation' => 'AND',
         ),
     );
 
+    if (isset($_POST['category_filters'])) {
+        $args['tax_query'][] = array(
+            'relation' => 'OR',
+            array(
+                'taxonomy' => 'estate_category',
+                'field' => 'slug',
+                'terms' => $category_filters,
+                'operator' => 'IN',
+            ),
+        );
+    }
+
+    if (isset($_POST['type_filters'])) {
+        $args['tax_query'][] = array(
+            'relation' => 'OR',
+            array(
+                'taxonomy' => 'estate_type',
+                'field' => 'ID',
+                'terms' => $type_filters,
+                'operator' => 'IN',
+            ),
+        );
+    }
+
+    if (isset($_POST['district_filters'])) {
+        $args['tax_query'][] = array(
+            'relation' => 'OR',
+            array(
+                'taxonomy' => 'estate_district',
+                'field' => 'ID',
+                'terms' => $district_filters,
+                'operator' => 'IN',
+            ),
+        );
+    }
+
+    if (isset($_POST['compatible_filters'])) {
+        $args['tax_query'][] = array(
+            'relation' => 'OR',
+            array(
+                'taxonomy' => 'estate_compatible',
+                'field' => 'ID',
+                'terms' => $compatible_filters,
+                'operator' => 'IN',
+            ),
+        );
+    }
+
+    // Add meta query for range filters
+    if (!empty($min_room_area) && !empty($max_room_area)) {
+        $args['meta_query'][] = array(
+            'key' => 'object_area',
+            'value' => array($min_room_area, $max_room_area),
+            'type' => 'numeric',
+            'compare' => 'BETWEEN',
+        );
+    }
+
+    if (!empty($min_sale_price) && !empty($max_sale_price)) {
+        $args['meta_query'][] = array(
+            'key' => 'sale_price',
+            'value' => array($min_sale_price, $max_sale_price),
+            'type' => 'numeric',
+            'compare' => 'BETWEEN',
+        );
+    }
+
+    if (!empty($min_rental_price) && !empty($max_rental_price)) {
+        $args['meta_query'][] = array(
+            'key' => 'rental_price',
+            'value' => array($min_rental_price, $max_rental_price),
+            'type' => 'numeric',
+            'compare' => 'BETWEEN',
+        );
+    }
+
     $query = new WP_Query($args);
-    var_dump('--------------------------------------------------------------');
-    var_dump($args);
 
     // Output filtered results
     if ($query->have_posts()) {
@@ -303,6 +349,7 @@ function filter_estate_posts() {
 
 add_action('wp_ajax_filter_estate', 'filter_estate_posts');
 add_action('wp_ajax_nopriv_filter_estate', 'filter_estate_posts');
+
 
 
 

@@ -1,55 +1,57 @@
 jQuery(function () {
-    metaFilter();
+    metaFilter('room-area');
+    metaFilter('sale-price');
+    metaFilter('rental-price');
 });
 
-function metaFilter () {
+function metaFilter(fieldPrefix) {
     // Get the range inputs and number input elements
-    var minRange = document.getElementById('room-area-min');
-    var maxRange = document.getElementById('room-area-max');
-    var minInput = document.getElementById('room-area-min-value');
-    var maxInput = document.getElementById('room-area-max-value');
-    var startOuter = document.querySelector('.price-outer_start');
-    var endOuter = document.querySelector('.price-outer_end');
-    var rangeBg = document.querySelector('.range_bg');
+    var minRange = document.getElementById(fieldPrefix + '-min');
+    var maxRange = document.getElementById(fieldPrefix + '-max');
+    var minInput = document.getElementById(fieldPrefix + '-min-value');
+    var maxInput = document.getElementById(fieldPrefix + '-max-value');
+    var startOuter = document.querySelector('.' + fieldPrefix + '-filter .price-outer_start');
+    var endOuter = document.querySelector('.' + fieldPrefix + '-filter .price-outer_end');
+    var rangeBg = document.querySelector('.' + fieldPrefix + '-filter .range_bg');
 
-// Update the range input values when the number input values change
-    minInput.addEventListener('input', function() {
+    // Update the range input values when the number input values change
+    minInput.addEventListener('input', function () {
         minRange.value = minInput.value;
+        updateWidths();
     });
 
-    maxInput.addEventListener('input', function() {
+    maxInput.addEventListener('input', function () {
         maxRange.value = maxInput.value;
+        updateWidths();
     });
 
-// Update the number input values when the range input values change
-    minRange.addEventListener('input', function() {
+    // Update the number input values when the range input values change
+    minRange.addEventListener('input', function () {
         minInput.value = minRange.value;
+        updateWidths();
     });
 
-    maxRange.addEventListener('input', function() {
+    maxRange.addEventListener('input', function () {
         maxInput.value = maxRange.value;
+        updateWidths();
     });
 
-// Update the width of the start and end background elements based on the range values
+    // Update the width of the start and end background elements based on the range values
     function updateWidths() {
-        var min = parseInt(minRange.value);
-        var max = parseInt(maxRange.value);
-        var total = parseInt(maxRange.max);
+        var min = parseFloat(minRange.value);
+        var max = parseFloat(maxRange.value);
+        var total = parseFloat(maxRange.max) - parseFloat(maxRange.min);
 
-        var startWidth = (min / total) * 100 + '%';
-        var endWidth = ((total - max) / total) * 100 + '%';
+        var startWidth = ((min - parseFloat(minRange.min)) / total) * 100 + '%';
+        var endWidth = ((parseFloat(maxRange.max) - max) / total) * 100 + '%';
 
         startOuter.style.width = startWidth;
         endOuter.style.width = endWidth;
 
         rangeBg.style.left = startWidth;
-        rangeBg.style.width = 'calc(' + (100 - parseInt(startWidth)) + '% - ' + endWidth + ')';
+        rangeBg.style.width = 'calc(' + (100 - parseFloat(startWidth)) + '% - ' + endWidth + ')';
     }
 
-// Add event listeners to the range inputs
-    minRange.addEventListener('input', updateWidths);
-    maxRange.addEventListener('input', updateWidths);
-
-// Initial call to set widths
+    // Initial call to set widths
     updateWidths();
 }
