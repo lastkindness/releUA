@@ -10,7 +10,8 @@ import linksClick from './modules/common';
 import singlePostMap from './modules/singlePostMap';
 import CustomOverlay from './modules/singlePostMap';
 import filterEstate from './modules/filterEstate';
-import metaFilter from './modules/meta-filter';
+import metaFilter from './modules/metaFilter';
+import loadMorePosts from './modules/loadMorePosts';
 //import preViewUploadsPhotoInsert from './modules/preViewUploadsPhotoInsert';
 
 $(document).ready(() => {

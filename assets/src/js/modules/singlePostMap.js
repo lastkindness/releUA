@@ -28,7 +28,7 @@ function singlePostMap () {
         var request = {
             origin: pointA,
             destination: pointB,
-            travelMode: 'WALKING' // You can change this to other travel modes if needed
+            travelMode: 'DRIVING' // You can change this to other travel modes if needed
         };
 
         // Use the directions service to get the route

@@ -6,7 +6,10 @@ Template name: Objects Template
 */
 get_header();
 $text_button_hero = get_field('title_for_category', 'option-estate');
-$didnt_find_banner = get_field('didnt_find', 'option-estate');?>
+$didnt_find_banner = get_field('didnt_find', 'option-estate');
+$current_term = get_queried_object();
+$term_id = $current_term->term_id;
+?>
 <main class="archive-built-objects">
     <?php if($text_button_hero):?>
         <section class="title-section">
@@ -15,7 +18,7 @@ $didnt_find_banner = get_field('didnt_find', 'option-estate');?>
             </div>
         </section>
     <?php endif;?>
-    <section class="cards-grid">
+    <section class="cards-grid" id="cards-grid">
         <div class="container">
             <div class="cards-grid__wrapper">
                 <?php
@@ -38,11 +41,20 @@ $didnt_find_banner = get_field('didnt_find', 'option-estate');?>
                             $address = get_field('address', $child_term);
                             $term_link = get_term_link($child_term);
                             $button_build_estate = get_field('button_build_estate', 'option-estate');
+                            $post_count = $child_term->count;
                             ?>
 
                             <div class="card">
                                 <?php if($hero_image):?>
-                                    <img class="card__img" src="<?php echo $hero_image['url']; ?>" alt="<?php echo $hero_image['alt']; ?>">
+                                    <div class="card__img">
+                                        <img class="img" src="<?php echo $hero_image['url']; ?>" alt="<?php echo $hero_image['alt']; ?>">
+                                        <?php if($post_count):?>
+                                            <span class="tag">
+                                                <span class="icon icon-build"></span>
+                                                <span class="count"><?php echo $post_count;?></span>
+                                            </span>
+                                        <?php endif;?>
+                                    </div>
                                 <?php endif;?>
                                 <h1 class="card__title"><?php echo $child_term->name; ?></h1>
                                 <h4 class="card__address"><?php echo $address; ?></h4>
@@ -54,13 +66,18 @@ $didnt_find_banner = get_field('didnt_find', 'option-estate');?>
             </div>
         </div>
     </section>
-<!--    <section id="seo-text" class="seo-text">
-        <div class="container">
-            <div class="seo-text__wrapper">
-                <?php echo term_description($term_id, 'estate_objects'); ?>
+    <?php $seo_title = get_field('seo_title'); $seo_text = get_field('seo_text'); if($seo_text):?>
+        <section id="seo-text" class="seo-text">
+            <div class="container">
+                <div class="seo-text__wrapper">
+                    <h1 class="seo-text__title"><?php echo $seo_title; ?></h1>
+                    <div class="seo-text__text">
+                        <?php echo $seo_text; ?>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>-->
+        </section>
+    <?php endif; ?>
     <?php if($didnt_find_banner):
         $title = $didnt_find_banner['title'];
         $description = $didnt_find_banner['description'];
@@ -74,7 +91,9 @@ $didnt_find_banner = get_field('didnt_find', 'option-estate');?>
                     <div class="didnt-find-banner__content">
                         <h5 class="didnt-find-banner__title"><?php echo $title; ?></h5>
                         <p class="didnt-find-banner__text"><?php echo $description; ?></p>
-                        <a href="<?php echo $button["url"]; ?>"><?php echo $button["title"]; ?></a>
+                        <?php if($button):?>
+                            <a href="<?php echo $button['url'];?>" class="btn btn_big btn_light didnt-find-banner__btn" <?php if($button['target']=='_blank'):?>target="_blank"<?php endif;?>><?php echo $button['title'];?></a>
+                        <?php endif;?>
                     </div>
                 </div>
             </div>

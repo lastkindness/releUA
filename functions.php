@@ -63,8 +63,6 @@ $estateCategory->setLabels([
 ]);
 $estateCategory->uses($estate);*/
 
-
-
 /**
  * Rest resource checking
  */
@@ -106,8 +104,7 @@ try {
  * @since       1.0.0
  * @author      Luke Kortunov
  */
-function rst_load_assets()
-{
+function rst_load_assets() {
     $ver='';
     require_once 'src/ver.php';
     //--- Load scripts and styles only for frontend: -----------------------------
@@ -184,16 +181,15 @@ function blocks_filter( string $block_content, array $block ): string {
     return $block_content;
 }
 
-// Register Header Lang Switcher for WPML
 function wpb_widgets_init() {
     register_sidebar( array(
-        'name'          => 'Header Lang Switcher', // Name of the sidebar
-        'id'            => 'header_lang_switcher', // ID used to identify the sidebar
-        'description'   => 'Widgets in this area will be shown in the header.', // Description of the sidebar
-        'before_widget' => '<div id="%1$s" class="widget %2$s">', // HTML to place before each widget
-        'after_widget'  => '</div>', // HTML to place after each widget
-        'before_title'  => '<h2 class="widget-title">', // HTML to place before the widget title
-        'after_title'   => '</h2>', // HTML to place after the widget title
+        'name'          => 'Header Lang Switcher',
+        'id'            => 'header_lang_switcher',
+        'description'   => 'Widgets in this area will be shown in the header.',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
     ) );
 }
 add_action( 'widgets_init', 'wpb_widgets_init' );
@@ -203,34 +199,30 @@ add_action( 'widgets_init', 'wpb_widgets_init' );
  * You need to replace 'your_taxonomy_slug' with the actual slug of your taxonomy.
  */
 function get_main_heading_id() {
-    // Get the main heading term using some logic
-    // For example, you might retrieve the term with the highest parent
     $args = array(
-        'taxonomy' => 'estate_objects', // Replace with your taxonomy slug
-        'parent' => 0, // Get terms with no parent (main headings)
-        'hide_empty' => false, // Make sure to include empty terms
+        'taxonomy' => 'estate_objects',
+        'parent' => 0,
+        'hide_empty' => false,
     );
-    
     $main_heading = get_terms($args);
-    
-    // Check if any main heading terms are found
+
     if (!empty($main_heading) && !is_wp_error($main_heading)) {
-        // Return the ID of the first main heading term found
         return $main_heading[0]->term_id;
     }
-    
-    // If no main heading term is found, return 0 or whatever makes sense for your application
     return 0;
 }
 
-// AJAX handler function
 function filter_estate_posts() {
     $category_filters = isset($_POST['category_filters']) ? $_POST['category_filters'] : array();
     $type_filters = isset($_POST['type_filters']) ? $_POST['type_filters'] : array();
     $district_filters = isset($_POST['district_filters']) ? $_POST['district_filters'] : array();
     $compatible_filters = isset($_POST['compatible_filters']) ? $_POST['compatible_filters'] : array();
+    $subway_filters = isset($_POST['subway_filters']) ? $_POST['subway_filters'] : array();
+    $floor_filters = isset($_POST['floor_filters']) ? $_POST['floor_filters'] : array();
+    $parking_filters = isset($_POST['parking_filters']) ? $_POST['parking_filters'] : array();
+    $ad_type_filters = isset($_POST['ad_type_filters']) ? $_POST['ad_type_filters'] : array();
+    $backlight_filters = isset($_POST['backlight_filters']) ? $_POST['backlight_filters'] : array();
 
-    // Get range filter values
     $min_room_area = isset($_POST['min_room_area']) ? $_POST['min_room_area'] : '';
     $max_room_area = isset($_POST['max_room_area']) ? $_POST['max_room_area'] : '';
     $min_sale_price = isset($_POST['min_sale_price']) ? $_POST['min_sale_price'] : '';
@@ -238,8 +230,14 @@ function filter_estate_posts() {
     $min_rental_price = isset($_POST['min_rental_price']) ? $_POST['min_rental_price'] : '';
     $max_rental_price = isset($_POST['max_rental_price']) ? $_POST['max_rental_price'] : '';
 
+    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    $posts_per_page = get_option('posts_per_page');
+    $offset = ($page - 1) * $posts_per_page;
+
     $args = array(
         'post_type' => 'estate',
+        'posts_per_page' => $posts_per_page,
+        'offset' => $offset,
         'tax_query' => array(
             'relation' => 'AND',
         ),
@@ -250,53 +248,105 @@ function filter_estate_posts() {
 
     if (isset($_POST['category_filters'])) {
         $args['tax_query'][] = array(
-            'relation' => 'OR',
-            array(
-                'taxonomy' => 'estate_category',
-                'field' => 'slug',
-                'terms' => $category_filters,
-                'operator' => 'IN',
-            ),
+            'taxonomy' => 'estate_category',
+            'field' => 'slug',
+            'terms' => $category_filters,
+            'operator' => 'IN',
         );
     }
 
     if (isset($_POST['type_filters'])) {
         $args['tax_query'][] = array(
-            'relation' => 'OR',
-            array(
-                'taxonomy' => 'estate_type',
-                'field' => 'ID',
-                'terms' => $type_filters,
-                'operator' => 'IN',
-            ),
+            'taxonomy' => 'estate_type',
+            'field' => 'ID',
+            'terms' => $type_filters,
+            'operator' => 'IN',
         );
     }
 
     if (isset($_POST['district_filters'])) {
         $args['tax_query'][] = array(
-            'relation' => 'OR',
-            array(
-                'taxonomy' => 'estate_district',
-                'field' => 'ID',
-                'terms' => $district_filters,
-                'operator' => 'IN',
-            ),
+            'taxonomy' => 'estate_district',
+            'field' => 'ID',
+            'terms' => $district_filters,
+            'operator' => 'IN',
         );
     }
 
     if (isset($_POST['compatible_filters'])) {
         $args['tax_query'][] = array(
-            'relation' => 'OR',
-            array(
-                'taxonomy' => 'estate_compatible',
-                'field' => 'ID',
-                'terms' => $compatible_filters,
-                'operator' => 'IN',
-            ),
+            'taxonomy' => 'estate_compatible',
+            'field' => 'ID',
+            'terms' => $compatible_filters,
+            'operator' => 'IN',
         );
     }
 
-    // Add meta query for range filters
+    if (isset($_POST['subway_filters'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'subway_station',
+            'field' => 'ID',
+            'terms' => $subway_filters,
+            'operator' => 'IN',
+        );
+    }
+
+    if (isset($_POST['ad_type_filters'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'types_ad',
+            'field' => 'ID',
+            'terms' => $ad_type_filters,
+            'operator' => 'IN',
+        );
+    }
+
+    if (!empty($floor_filters)) {
+        $args['meta_query'][] = array(
+            'key' => 'floor',
+            'value' => $floor_filters,
+            'compare' => 'IN',
+            'type' => 'NUMERIC',
+        );
+    }
+
+    if (!empty($parking_filters)) {
+        $args['meta_query'][] = array(
+            'key' => 'parking_spaces',
+            'value' => $parking_filters,
+            'compare' => 'IN',
+            'type' => 'NUMERIC',
+        );
+    }
+
+    if (!empty($backlight_filters)) {
+        $types_ad_terms = get_terms( array(
+            'taxonomy' => 'types_ad',
+            'hide_empty' => false,
+        ) );
+
+        $types_ad_term_slugs = array();
+
+        if ( ! empty( $types_ad_terms ) && ! is_wp_error( $types_ad_terms ) ) {
+            foreach ( $types_ad_terms as $term ) {
+                $types_ad_term_slugs[] = $term->term_id;
+            }
+        }
+        if ( ! empty( $types_ad_term_slugs ) ) {
+            $args['tax_query'][] = array(
+                'taxonomy' => 'types_ad',
+                'field'    => 'ID',
+                'terms'    => $types_ad_term_slugs,
+                'operator' => 'IN',
+            );
+        }
+        $args['meta_query'][] = array(
+            'key' => 'lighting',
+            'value' => $backlight_filters,
+            'compare' => 'IN',
+            'type' => 'BOOLEAN',
+        );
+    }
+
     if (!empty($min_room_area) && !empty($max_room_area)) {
         $args['meta_query'][] = array(
             'key' => 'object_area',
@@ -323,33 +373,154 @@ function filter_estate_posts() {
             'compare' => 'BETWEEN',
         );
     }
-
+    $rent = get_field('rent', 'option-estate');
+    $no_rent = get_field('no_rent', 'option-estate');
+    $sale = get_field('sale', 'option-estate');
+    $no_sale = get_field('no_sale', 'option-estate');
     $query = new WP_Query($args);
 
-    // Output filtered results
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
             ?>
-            <div class="estate-post">
-                <h2><?php the_title(); ?></h2>
-                <div class="estate-content"><?php the_content(); ?></div>
-            </div>
+            <article class="card">
+                <?php $taxonomies = get_object_taxonomies(get_post());
+                $sale_price = get_field('sale_price');
+                $rental_price = get_field('rental_price');
+                ?>
+                <div class="card__img">
+                    <?php if (has_post_thumbnail()) :
+                        the_post_thumbnail('medium');
+                    else : ?>
+                        <img src="<?php echo get_field('logo','options')['url']; ?>" alt="image description">
+                    <?php endif; ?>
+                    <?php if(get_field('unique_property') && $unique_property = get_field('text_unique_property', 'option-estate')):?>
+                        <span class="tag"><?php echo $unique_property;?></span>
+                    <?php endif;?>
+                </div>
+                <div class="card__body">
+                    <?php the_title('<h1 class="card__title">', '</h1>') ?>
+                    <?php $address = get_field('address'); if ($address) : ?>
+                        <h6 class="card__address"><?php echo $address; ?></h6>
+                    <?php endif; ?>
+                    <ul class="card__prices">
+                        <li class="card__price">
+                            <?php if($rent):?>
+                                <span class="title"><?php echo $rent;?>:</span>
+                            <?php endif;?>
+                            <?php  if (has_term('rent', 'estate_category')||has_term('rent-en', 'estate_category')||has_term('rent-ru', 'estate_category')) {?>
+                                <span class="info"><?php echo $rental_price;?>uah./м²</span>
+                            <?php } else { ?>
+                                <span class="info"><?php echo $no_rent;?></span>
+                            <?php } ?>
+                        </li>
+                        <li class="card__price">
+                            <?php if($sale):?>
+                                <span class="title"><?php echo $sale;?>:</span>
+                            <?php endif;?>
+                            <?php  if (has_term('sale', 'estate_category')||has_term('sale-en', 'estate_category')||has_term('sale-ru', 'estate_category')) {?>
+                                <span class="info">$<?php echo $sale_price;?> м²</span>
+                            <?php } else { ?>
+                                <span class="info"><?php echo $no_sale;?></span>
+                            <?php } ?>
+                        </li>
+                    </ul>
+                </div>
+                <?php if(get_field('archive_button','options')):
+                    $button = get_field('archive_button','options');?>
+                    <a href="<?php the_permalink();?>" class="btn"><?php echo $button;?></a>
+                <?php else:?>
+                    <a href="<?php the_permalink();?>" class="btn"><?php _e('Learn more','ReleUA')?></a>
+                <?php endif; ?>
+            </article>
             <?php
         }
         wp_reset_postdata();
+        echo count($query->posts);
     } else {
-        // No posts found
-        echo 'No posts found.';
+        echo __('No more posts to load', 'your-text-domain');
     }
-
-    // Always die() after echoing output in AJAX functions
     die();
 }
 
 add_action('wp_ajax_filter_estate', 'filter_estate_posts');
 add_action('wp_ajax_nopriv_filter_estate', 'filter_estate_posts');
 
+function releua_loadmore_ajax_handler(){
+    $rent = get_field('rent', 'option-estate');
+    $no_rent = get_field('no_rent', 'option-estate');
+    $sale = get_field('sale', 'option-estate');
+    $no_sale = get_field('no_sale', 'option-estate');
+    $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    var_dump($paged);
+
+    // Your existing WP_Query arguments
+    $args = array(
+        'post_type' => 'estate',
+        'posts_per_page' => 5,
+        'paged' => $paged
+    );
+    $estate_query = new WP_Query($args);
+
+    if ($estate_query->have_posts()) :
+        while ($estate_query->have_posts()) : $estate_query->the_post(); ?>
+            <article class="card">
+                <?php $taxonomies = get_object_taxonomies(get_post());
+                $sale_price = get_field('sale_price');
+                $rental_price = get_field('rental_price');
+                ?>
+                <div class="card__img">
+                    <?php if (has_post_thumbnail()) :
+                        the_post_thumbnail('medium');
+                    else : ?>
+                        <img src="<?php echo get_field('logo','options')['url']; ?>" alt="image description">
+                    <?php endif; ?>
+                    <?php if(get_field('unique_property') && $unique_property = get_field('text_unique_property', 'option-estate')):?>
+                        <span class="tag"><?php echo $unique_property;?></span>
+                    <?php endif;?>
+                </div>
+                <div class="card__body">
+                    <?php the_title('<h1 class="card__title">', '</h1>') ?>
+                    <?php $address = get_field('address'); if ($address) : ?>
+                        <h6 class="card__address"><?php echo $address; ?></h6>
+                    <?php endif; ?>
+                    <ul class="card__prices">
+                        <li class="card__price">
+                            <?php if($rent):?>
+                                <span class="title"><?php echo $rent;?>:</span>
+                            <?php endif;?>
+                            <?php  if (has_term('rent', 'estate_category')||has_term('rent-en', 'estate_category')||has_term('rent-ru', 'estate_category')) {?>
+                                <span class="info"><?php echo $rental_price;?>uah./м²</span>
+                            <?php } else { ?>
+                                <span class="info"><?php echo $no_rent;?></span>
+                            <?php } ?>
+                        </li>
+                        <li class="card__price">
+                            <?php if($sale):?>
+                                <span class="title"><?php echo $sale;?>:</span>
+                            <?php endif;?>
+                            <?php  if (has_term('sale', 'estate_category')||has_term('sale-en', 'estate_category')||has_term('sale-ru', 'estate_category')) {?>
+                                <span class="info">$<?php echo $sale_price;?> м²</span>
+                            <?php } else { ?>
+                                <span class="info"><?php echo $no_sale;?></span>
+                            <?php } ?>
+                        </li>
+                    </ul>
+                </div>
+                <?php if(get_field('archive_button','options')):
+                    $button = get_field('archive_button','options');?>
+                    <a href="<?php the_permalink();?>" class="btn"><?php echo $button;?></a>
+                <?php else:?>
+                    <a href="<?php the_permalink();?>" class="btn"><?php _e('Learn more','ReleUA')?></a>
+                <?php endif; ?>
+            </article>
+        <?php endwhile;
+        wp_reset_postdata();
+    endif;
+    die;
+}
+add_action('wp_ajax_loadmore', 'releua_loadmore_ajax_handler');
+add_action('wp_ajax_nopriv_loadmore', 'releua_loadmore_ajax_handler');
 
 
 
