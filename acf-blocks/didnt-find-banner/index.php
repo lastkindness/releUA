@@ -1,5 +1,5 @@
 <section <?php if($id = get_sub_field('id')): echo 'id="' . $id . '"'; endif;?> class="didnt-find-banner" style="background-image: url(<?php the_sub_field('background_image'); ?>)">
-    <div class="container">
+    <div class="container container_small">
         <div class="didnt-find-banner__wrapper">
             <?php if($img=get_sub_field('img')):?>
                 <img src="<?php echo $img['url'];?>" alt="<?php echo $img['alt'];?>" title="<?php echo $img['title'];?>" class="didnt-find-banner__img">

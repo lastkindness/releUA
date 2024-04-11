@@ -12,6 +12,7 @@ import CustomOverlay from './modules/singlePostMap';
 import filterEstate from './modules/filterEstate';
 import metaFilter from './modules/metaFilter';
 import loadMorePosts from './modules/loadMorePosts';
+import mapBox from './modules/mapBox';
 //import preViewUploadsPhotoInsert from './modules/preViewUploadsPhotoInsert';
 
 $(document).ready(() => {

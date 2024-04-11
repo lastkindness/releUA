@@ -109,7 +109,7 @@ if ($term && $term->parent) {
         <section id="properties-this-building"  class="cards-grid cards-grid_properties-this-building single-built-object__properties-this-building">
             <div class="container">
                 <?php if($title_available_properties):?>
-                    <h3 class="seo-text__title"><?php echo $title_available_properties; ?></h3>
+                    <h3 class="h4 seo-text__title"><?php echo $title_available_properties; ?></h3>
                 <?php endif;?>
                 <div class="cards-grid__wrapper">
                     <?php
@@ -129,7 +129,7 @@ if ($term && $term->parent) {
                     if ($posts_query->have_posts()) :
                         while ($posts_query->have_posts()) : $posts_query->the_post();
                             ?>
-                            <article class="card">
+                            <a href="<?php the_permalink(); ?>" class="card">
                                 <?php
                                 $unique_property = get_field('unique_property', get_the_ID());
                                 $text_unique_property = get_field('text_unique_property', 'option-estate');
@@ -182,11 +182,11 @@ if ($term && $term->parent) {
                                 <?php if (get_field('archive_button', 'options')) :
                                     $button = get_field('archive_button', 'options');
                                     ?>
-                                    <a href="<?php the_permalink(); ?>" class="btn"><?php echo $button; ?></a>
+                                    <button class="btn card__btn"><?php echo $button; ?></button>
                                 <?php else : ?>
-                                    <a href="<?php the_permalink(); ?>" class="btn"><?php _e('Learn more', 'ReleUA') ?></a>
+                                    <button class="btn card__btn"><?php _e('Learn more', 'ReleUA') ?></button>
                                 <?php endif; ?>
-                            </article>
+                            </a>
                         <?php
                         endwhile;
                         wp_reset_postdata();
@@ -201,7 +201,7 @@ if ($term && $term->parent) {
         <section id="other-built-objects"  class="cards-grid cards-grid_other-built-objects single-built-object__other-built-objects">
             <div class="container">
                 <?php if($title_other_built_objects):?>
-                    <h3 class="seo-text__title"><?php echo $title_other_built_objects; ?></h3>
+                    <h3 class="h4 seo-text__title"><?php echo $title_other_built_objects; ?></h3>
                 <?php endif;?>
                 <div class="cards-grid__wrapper">
                     <?php $current_term_id = get_queried_object_id();
@@ -222,7 +222,7 @@ if ($term && $term->parent) {
                             ));
                             if (!empty($child_terms) && !is_wp_error($child_terms)) {
                                 foreach ($child_terms as $child_term) { $post_count = $child_term->count; ?>
-                                    <article class="card">
+                                    <a href="<?php echo get_term_link($child_term); ?>" class="card">
                                         <div class="card__img">
                                             <?php $image = get_field('image', 'estate_objects_' . $child_term->term_id)['url'];
                                             if ($image) : ?>
@@ -246,11 +246,11 @@ if ($term && $term->parent) {
                                         <?php if (get_field('archive_button', 'options')) :
                                             $button = get_field('archive_button', 'options');
                                             ?>
-                                            <a href="<?php echo get_term_link($child_term); ?>" class="btn"><?php echo $button; ?></a>
+                                            <button class="btn card__btn"><?php echo $button; ?></button>
                                         <?php else : ?>
-                                            <a href="<?php echo get_term_link($child_term); ?>" class="btn"><?php _e('Learn more', 'ReleUA') ?></a>
+                                            <button class="btn card__btn"><?php _e('Learn more', 'ReleUA') ?></button>
                                         <?php endif; ?>
-                                    </article>
+                                    </a>
                                     <?php
                                 }
                             }
@@ -268,7 +268,7 @@ if ($term && $term->parent) {
                 <div class="container">
                     <div class="seo-text__wrapper">
                         <?php if($seo_title):?>
-                            <h1 class="seo-text__title"><?php echo $seo_title; ?></h1>
+                            <h1 class="h4 seo-text__title"><?php echo $seo_title; ?></h1>
                         <?php endif;?>
                         <?php echo $seo_text; ?>
                     </div>
@@ -315,13 +315,13 @@ if ($term && $term->parent) {
 <?php if (!empty($child_term_ids)) {
         if($term_title):?>
             <section id="title-section" class="catalogue-built-objects__title-section title-section">
-                <div class="container">
-                    <h1 class="title"><?php echo $term_title; ?></h1>
+                <div class="container container_small">
+                    <h1 class="h4 title"><?php echo $term_title; ?></h1>
                 </div>
             </section>
         <?php endif;?>
-        <section id="cards-grid" class="catalogue-built-objects__cards-grid cards-grid">
-            <div class="container">
+        <section id="cards-grid" class="catalogue-built-objects__cards-grid cards-grid cards-grid_big cards-grid_decorate">
+            <div class="container container_small">
                 <div class="cards-grid__wrapper">
                     <?php foreach ($child_term_ids as $child_term_id) {
                         $child_term = get_term_by('id', $child_term_id, 'estate_objects');
@@ -332,7 +332,7 @@ if ($term && $term->parent) {
                         $button_build_estate = get_field('button_build_estate', 'option-estate');
                         $post_count = $child_term->count;
                         ?>
-                        <div class="card">
+                        <a href="<?php $term_link; ?>" class="card">
                             <?php if($hero_image):?>
                                 <div class="card__img">
                                     <img class="img" src="<?php echo $hero_image['url']; ?>" alt="<?php echo $hero_image['alt']; ?>">
@@ -347,10 +347,12 @@ if ($term && $term->parent) {
                                     <?php endif;?>
                                 </div>
                             <?php endif;?>
-                            <h1 class="card__title"><?php echo $child_term->name; ?></h1>
-                            <h4 class="card__address"><?php echo $address; ?></h4>
-                            <a href="<?php echo $term_link; ?>" class="btn card_btn"><?php echo $button_build_estate; ?></a>
-                        </div>
+                            <div class="card__body">
+                                <h1 class="card__title"><?php echo $child_term->name; ?></h1>
+                                <h4 class="card__address"><?php echo $address; ?></h4>
+                                <button class="btn btn_dark card__btn"><?php echo $button_build_estate; ?></button>
+                            </div>
+                        </a>
                     <?php }?>
                 </div>
             </div>
@@ -374,11 +376,11 @@ if ($term && $term->parent) {
             $image = $didnt_find_banner['image'];
             $background_image = $didnt_find_banner['background_image']; ?>
             <section style="background-image: url('<?php echo $background_image["url"]; ?>')" class="catalogue-built-objects__didnt-find-banner didnt-find-banner" id="didnt-find-banner">
-                <div class="container">
+                <div class="container container_small">
                     <div class="didnt-find-banner__wrapper">
-                        <img src="<?php echo $image["url"]; ?>" alt="<?php echo $image["alt"]; ?>">
+                        <img class="didnt-find-banner__img" src="<?php echo $image["url"]; ?>" alt="<?php echo $image["alt"]; ?>">
                         <div class="didnt-find-banner__content">
-                            <h5 class="didnt-find-banner__title"><?php echo $title; ?></h5>
+                            <h2 class="didnt-find-banner__title"><?php echo $title; ?></h2>
                             <p class="didnt-find-banner__text"><?php echo $description; ?></p>
                             <?php if($button):?>
                                 <a href="<?php echo $button['url'];?>" class="btn btn_big btn_light didnt-find-banner__btn" <?php if($button['target']=='_blank'):?>target="_blank"<?php endif;?>><?php echo $button['title'];?></a>

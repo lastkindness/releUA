@@ -60,9 +60,9 @@ input[type="checkbox"],
 input[type="radio"] {
     display: inline-block;
     vertical-align: top;
-    width: 24px;
-    height: 24px;
-    border: 2px solid $black;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $light;
     border-radius: 0;
     -webkit-tap-highlight-color: transparent;
     flex-shrink: 0;
@@ -118,7 +118,43 @@ input[type="radio"] {
         }
     }
 }
-
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 0px;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    &:first-child {
+        z-index: 3;
+    }
+    &::-webkit-slider-runnable-track {
+        height: 0px;
+        background: $light;
+    }
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid $light;
+        background: $white;
+        border-radius: 50%;
+        cursor: pointer;
+        margin-top: -10px;
+        position: relative;
+        z-index: 5 !important;
+    }
+}
 form {
     display: flex;
     align-items: center;
@@ -141,7 +177,7 @@ label {
     font-size: 16px;
     color: $black;
     padding: 0 5px 0 0;
-    font-weight: 400;
+    font-weight: 300;
     display: flex;
     align-items: center;
     text-align: left;

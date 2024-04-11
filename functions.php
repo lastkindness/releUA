@@ -151,6 +151,12 @@ function acf_op_init() {
             'parent_slug'	=> __('theme-general-settings','ReleUA'),
             'post_id'       => 'option-error',
         ));
+        acf_add_options_sub_page(array(
+            'page_title' 	=> __('Contact Page Settings','ReleUA'),
+            'menu_title'	=> __('Contact Page Settings','ReleUA'),
+            'parent_slug'	=> __('theme-general-settings','ReleUA'),
+            'post_id'       => 'option-contacts',
+        ));
         acf_add_options_page(array(
             'page_title' 	=> __('Estate General Settings','ReleUA'),
             'menu_title'	=> __('Estate General Settings','ReleUA'),
@@ -377,6 +383,13 @@ function filter_estate_posts() {
     $no_rent = get_field('no_rent', 'option-estate');
     $sale = get_field('sale', 'option-estate');
     $no_sale = get_field('no_sale', 'option-estate');
+
+    $count_args = $args;
+    $count_args['posts_per_page'] = -1;
+    $count_query = new WP_Query($count_args);
+    $total_posts_count = $count_query->found_posts;
+    wp_reset_postdata();
+
     $query = new WP_Query($args);
 
     if ($query->have_posts()) {
@@ -434,11 +447,14 @@ function filter_estate_posts() {
                 <?php endif; ?>
             </article>
             <?php
-        }
+        }?>
+        <input id="found-post-filters" type="hidden" value="<?php echo $total_posts_count; ?>">
+        <input id="max-post-per-page" type="hidden" value="<?php echo count($query->posts); ?>">
+        <?php
         wp_reset_postdata();
-        echo count($query->posts);
+
     } else {
-        echo __('No more posts to load', 'your-text-domain');
+        echo __('No more posts to load', 'ReleUA');
     }
     die();
 }
@@ -447,19 +463,180 @@ add_action('wp_ajax_filter_estate', 'filter_estate_posts');
 add_action('wp_ajax_nopriv_filter_estate', 'filter_estate_posts');
 
 function releua_loadmore_ajax_handler(){
+    $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    $posts_per_page = get_option('posts_per_page');
+    $offset = ($page - 1) * $posts_per_page;
+
     $rent = get_field('rent', 'option-estate');
     $no_rent = get_field('no_rent', 'option-estate');
     $sale = get_field('sale', 'option-estate');
     $no_sale = get_field('no_sale', 'option-estate');
-    $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
-    var_dump($paged);
 
-    // Your existing WP_Query arguments
+    $category_filters = isset($_POST['category_filters']) ? $_POST['category_filters'] : array();
+    $type_filters = isset($_POST['type_filters']) ? $_POST['type_filters'] : array();
+    $district_filters = isset($_POST['district_filters']) ? $_POST['district_filters'] : array();
+    $compatible_filters = isset($_POST['compatible_filters']) ? $_POST['compatible_filters'] : array();
+    $subway_filters = isset($_POST['subway_filters']) ? $_POST['subway_filters'] : array();
+    $floor_filters = isset($_POST['floor_filters']) ? $_POST['floor_filters'] : array();
+    $parking_filters = isset($_POST['parking_filters']) ? $_POST['parking_filters'] : array();
+    $ad_type_filters = isset($_POST['ad_type_filters']) ? $_POST['ad_type_filters'] : array();
+    $backlight_filters = isset($_POST['backlight_filters']) ? $_POST['backlight_filters'] : array();
+
+    $min_room_area = isset($_POST['min_room_area']) ? $_POST['min_room_area'] : '';
+    $max_room_area = isset($_POST['max_room_area']) ? $_POST['max_room_area'] : '';
+    $min_sale_price = isset($_POST['min_sale_price']) ? $_POST['min_sale_price'] : '';
+    $max_sale_price = isset($_POST['max_sale_price']) ? $_POST['max_sale_price'] : '';
+    $min_rental_price = isset($_POST['min_rental_price']) ? $_POST['min_rental_price'] : '';
+    $max_rental_price = isset($_POST['max_rental_price']) ? $_POST['max_rental_price'] : '';
+
     $args = array(
         'post_type' => 'estate',
-        'posts_per_page' => 5,
-        'paged' => $paged
+        'posts_per_page' => $posts_per_page,
+        'paged' => $paged,
+        'offset' => $offset,
+        'tax_query' => array(
+            'relation' => 'AND',
+        ),
+        'meta_query' => array(
+            'relation' => 'AND',
+        ),
     );
+
+    if (isset($_POST['category_filters'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'estate_category',
+            'field' => 'slug',
+            'terms' => $category_filters,
+            'operator' => 'IN',
+        );
+    }
+
+    if (isset($_POST['type_filters'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'estate_type',
+            'field' => 'ID',
+            'terms' => $type_filters,
+            'operator' => 'IN',
+        );
+    }
+
+    if (isset($_POST['district_filters'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'estate_district',
+            'field' => 'ID',
+            'terms' => $district_filters,
+            'operator' => 'IN',
+        );
+    }
+
+    if (isset($_POST['compatible_filters'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'estate_compatible',
+            'field' => 'ID',
+            'terms' => $compatible_filters,
+            'operator' => 'IN',
+        );
+    }
+
+    if (isset($_POST['subway_filters'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'subway_station',
+            'field' => 'ID',
+            'terms' => $subway_filters,
+            'operator' => 'IN',
+        );
+    }
+
+    if (isset($_POST['ad_type_filters'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'types_ad',
+            'field' => 'ID',
+            'terms' => $ad_type_filters,
+            'operator' => 'IN',
+        );
+    }
+
+    if (!empty($floor_filters)) {
+        $args['meta_query'][] = array(
+            'key' => 'floor',
+            'value' => $floor_filters,
+            'compare' => 'IN',
+            'type' => 'NUMERIC',
+        );
+    }
+
+    if (!empty($parking_filters)) {
+        $args['meta_query'][] = array(
+            'key' => 'parking_spaces',
+            'value' => $parking_filters,
+            'compare' => 'IN',
+            'type' => 'NUMERIC',
+        );
+    }
+
+    if (!empty($backlight_filters)) {
+        $types_ad_terms = get_terms( array(
+            'taxonomy' => 'types_ad',
+            'hide_empty' => false,
+        ) );
+
+        $types_ad_term_slugs = array();
+
+        if ( ! empty( $types_ad_terms ) && ! is_wp_error( $types_ad_terms ) ) {
+            foreach ( $types_ad_terms as $term ) {
+                $types_ad_term_slugs[] = $term->term_id;
+            }
+        }
+        if ( ! empty( $types_ad_term_slugs ) ) {
+            $args['tax_query'][] = array(
+                'taxonomy' => 'types_ad',
+                'field'    => 'ID',
+                'terms'    => $types_ad_term_slugs,
+                'operator' => 'IN',
+            );
+        }
+        $args['meta_query'][] = array(
+            'key' => 'lighting',
+            'value' => $backlight_filters,
+            'compare' => 'IN',
+            'type' => 'BOOLEAN',
+        );
+    }
+
+    if (!empty($min_room_area) && !empty($max_room_area)) {
+        $args['meta_query'][] = array(
+            'key' => 'object_area',
+            'value' => array($min_room_area, $max_room_area),
+            'type' => 'numeric',
+            'compare' => 'BETWEEN',
+        );
+    }
+
+    if (!empty($min_sale_price) && !empty($max_sale_price)) {
+        $args['meta_query'][] = array(
+            'key' => 'sale_price',
+            'value' => array($min_sale_price, $max_sale_price),
+            'type' => 'numeric',
+            'compare' => 'BETWEEN',
+        );
+    }
+
+    if (!empty($min_rental_price) && !empty($max_rental_price)) {
+        $args['meta_query'][] = array(
+            'key' => 'rental_price',
+            'value' => array($min_rental_price, $max_rental_price),
+            'type' => 'numeric',
+            'compare' => 'BETWEEN',
+        );
+    }
+
+    $count_args = $args;
+    $count_args['posts_per_page'] = -1;
+    $count_query = new WP_Query($count_args);
+    $total_posts_count = $count_query->found_posts;
+    wp_reset_postdata();
+
     $estate_query = new WP_Query($args);
 
     if ($estate_query->have_posts()) :
@@ -514,7 +691,10 @@ function releua_loadmore_ajax_handler(){
                     <a href="<?php the_permalink();?>" class="btn"><?php _e('Learn more','ReleUA')?></a>
                 <?php endif; ?>
             </article>
-        <?php endwhile;
+        <?php endwhile; ?>
+        <input id="found-post-filters" type="hidden" value="<?php echo $total_posts_count; ?>">
+        <input id="max-post-per-page" type="hidden" value="<?php echo count($estate_query->posts); ?>">
+        <?php
         wp_reset_postdata();
     endif;
     die;
@@ -523,5 +703,46 @@ add_action('wp_ajax_loadmore', 'releua_loadmore_ajax_handler');
 add_action('wp_ajax_nopriv_loadmore', 'releua_loadmore_ajax_handler');
 
 
+
+function populate_address_options() {
+    $args = array(
+        'taxonomy' => 'estate_objects',
+        'hide_empty' => false,
+    );
+    $terms = get_terms($args);
+    $options = array();
+    if (!empty($terms)) {
+        foreach ($terms as $term) {
+            $address = get_field('address', $term);
+            if ($address) {
+                $options[] = $address;
+            }
+        }
+    }
+    return $options;
+}
+
+function populate_address_shortcode($tag) {
+    $options = populate_address_options();
+    $html = '<select name="' . esc_attr($tag['name']) . '" id="' . esc_attr($tag['id']) . '" class="' . esc_attr($tag['class']) . '">';
+    $current_language = apply_filters('wpml_current_language', NULL);
+    switch ($current_language) {
+        case 'en':
+            $html .= '<option value="">Choose the option</option>';
+            break;
+        case 'ru':
+            $html .= '<option value="">Выберете объект</option>';
+            break;
+        default:
+            $html .= '<option value="">Виберіть обєкт</option>';
+    }
+    foreach ($options as $option) {
+        $html .= '<option value="' . esc_attr($option) . '">' . esc_html($option) . '</option>';
+    }
+    $html .= '</select>';
+    return $html;
+}
+
+wpcf7_add_shortcode('populate_address', 'populate_address_shortcode');
 
 

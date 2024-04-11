@@ -21,6 +21,7 @@ button {
     border: 1px solid $btn-background;
     transition:all 0.3s ease;
     overflow: hidden;
+    font-size: 14px;
     &:hover {
         transition:all 0.3s ease;
         color: $btn-background;
@@ -30,6 +31,7 @@ button {
         border-radius: 16px;
         padding: 22px 60px;
         font-size: 16px;
+        text-transform: uppercase;
     }
     &_light {
         color: $btn-background;
@@ -38,6 +40,23 @@ button {
         &:hover {
             color: $btn-color;
             background: transparent;
+        }
+    }
+    &_dark {
+        color: $btn-background;
+        background: $btn-color;
+        border: 1px solid $btn-background;
+        &:hover {
+            color: $btn-color;
+            background: $btn-background;
+        }
+    }
+    &_disabled {
+        background: $light;
+        cursor: auto;
+        &:hover {
+            color: $btn-color;
+            background: $light;
         }
     }
 }

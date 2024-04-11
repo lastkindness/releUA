@@ -346,7 +346,7 @@ $taxonomies = get_object_taxonomies($post);?>
                             <div class="container">
                                 <div class="seo-text__wrapper">
                                     <?php if($seo_title):?>
-                                        <h1 class="seo-text__title"><?php echo $seo_title; ?></h1>
+                                        <h1 class="h4 seo-text__title"><?php echo $seo_title; ?></h1>
                                     <?php endif;?>
                                     <div class="seo-text__text"><?php echo $seo_text; ?></div>
                                 </div>

@@ -1,7 +1,7 @@
 /**
  *  Load modules
  */
-import heroSwiper from './modules/heroSwiper.js';
+import animTitleLine from './modules/heroSwiper.js';
 
 // $(document).ready(() => {
 //

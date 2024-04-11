@@ -43,6 +43,9 @@ $breakpoints: (
 @import "components/more-real-estate";
 @import "components/map-section";
 @import "components/meta-filter";
+@import "components/estate-filter";
+@import "components/estate-catalogue";
+@import "components/seo-text";
 
 @import "layout/common";
 @import "layout/header";
@@ -50,3 +53,4 @@ $breakpoints: (
 @import "layout/error-page";
 @import "layout/single-built-object";
 @import "layout/article-section";
+@import "layout/page-template-template-flexible-content";

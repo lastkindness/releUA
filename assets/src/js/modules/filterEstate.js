@@ -1,10 +1,8 @@
 jQuery(function () {
-    // Event listener for filter change
     $('#estate-filter').on('change', 'input[type="range"], input[type="number"], input[type="checkbox"]', function() {
         filterEstate();
     });
     $('#reset-filters-btn').click(function() {
-        // Reset all filter inputs
         $('input[type="range"]').val(function() {
             return this.defaultValue;
         });
@@ -12,35 +10,24 @@ jQuery(function () {
             return this.defaultValue;
         });
         $('input[type="checkbox"]').prop('checked', false);
-
-        // Trigger the filter function to reset the results
         filterEstate();
     });
 });
 
 function filterEstate () {
-
+    var button = $('#load-more-posts');
+    $(button).data('current-page', 1);
     var currentURL = window.location.href;
-
+    var currentPage = parseInt(button.data('current-page'));
+    var nextPage = parseInt(button.data('current-page')) + 1;
+    var maxPages = parseInt(button.data('max-pages'));
     function extractDomain(url) {
-        // Remove any whitespace at the beginning or end of the URL
         url = url.trim();
-
-        // Remove 'http://' or 'https://' from the beginning of the URL
         url = url.replace(/^https?:\/\//, '');
-
-        // Remove any language subdomain followed by a dot
         url = url.replace(/^[a-zA-Z]{2}\./, '');
-
-        // Remove anything after the first slash '/'
         url = url.split('/')[0];
-
-        // Remove 'www.' from the beginning of the domain if present
         url = url.replace(/^www\./, '');
-
-        // Remove any trailing slashes '/'
         url = url.replace(/\/+$/, '');
-
         return url;
     }
 
@@ -55,45 +42,34 @@ function filterEstate () {
     var parkingFilter = [];
     var adTypeFilter = [];
     var backlightFilter = [];
-
-    if (lastPart !== '' && lastPart !== '/' && lastPart !== extractDomain(currentURL)) {
+    /*if (lastPart !== '' && lastPart !== '/' && lastPart !== extractDomain(currentURL)) {
         categoryFilters.push(lastPart);
-    }
-
+    }*/
     $('input.estate-category-filter:checked').each(function() {
         categoryFilters.push($(this).val());
     });
-
     $('input.estate-type-filter:checked').each(function() {
         typeFilters.push($(this).val());
     });
-
     $('input.estate-district-filter:checked').each(function() {
         districtFilters.push($(this).val());
     });
-
     $('input.estate-compatible-filter:checked').each(function() {
         compatibleFilters.push($(this).val());
     });
-
     $('input.estate-subway-filter:checked').each(function() {
         subwayFilter.push($(this).val());
     });
-
     $('input.estate-floor-filter:checked').each(function() {
         floorFilter.push($(this).val());
     });
-
     $('input.parking-spaces-filter:checked').each(function() {
         parkingFilter.push($(this).val());
     });
-
     $('input.type-advertising-filter:checked').each(function() {
         adTypeFilter.push($(this).val());
     });
     $('input.estate-backlight-filter:checked').each(function() {
-        /*var booleanValue = Boolean($(this).val())
-        backlightFilter.push(booleanValue);*/
         backlightFilter.push($(this).val());
     });
 
@@ -103,6 +79,8 @@ function filterEstate () {
     var maxSalePrice = $('#sale-price-max').val(); // Example: ACF field for maximum sale price
     var minRentalPrice = $('#rental-price-min').val(); // Example: ACF field for minimum rental price
     var maxRentalPrice = $('#rental-price-max').val(); // Example: ACF field for maximum rental price
+    var maxPostsPerPage = Number($('#posts-per-page').val());
+
 
     var data = {
         action: 'filter_estate',
@@ -128,17 +106,23 @@ function filterEstate () {
         type: 'POST',
         success: function(response) {
             $('#estate-results').html(response);
-            var numProperties = $('#estate-results').find('.card').length;
-            alert(numProperties + ' properties found');
-            if (numProperties > 0) {
+            var numberOfPosts = $('#estate-results').find('.card').length;
+            var maxPosts = Number($('#max-posts').val());
+            var maxPostsPerPage = Number($('#max-post-per-page').val());
+            var postsFoundFilters = Number($('#found-post-filters').val());
+            $('#found-filters-posts').html(postsFoundFilters);
+            console.log(numberOfPosts, maxPosts, maxPostsPerPage, postsFoundFilters);
+            if (numberOfPosts > 0 && postsFoundFilters<maxPosts) {
                 $('#reset-filters-btn').show();
+                $('#found-filters-block').show();
             } else {
                 $('#reset-filters-btn').hide();
+                $('#found-filters-block').hide();
             }
-            if (response.trim() === '') {
-                $('#load-more-container').hide(); // Hide button if no more posts
+            if (nextPage >= maxPages||postsFoundFilters<=maxPostsPerPage) {
+                $('#load-more-posts').addClass('btn_disabled').prop('disabled', true);
             } else {
-                $('#load-more-container').show(); // Show button if more posts available
+                $('#load-more-posts').removeClass('btn_disabled').prop('disabled', false);
             }
         }
     });

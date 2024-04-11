@@ -13,13 +13,13 @@ $term_id = $current_term->term_id;
 <main class="archive-built-objects">
     <?php if($text_button_hero):?>
         <section class="title-section">
-            <div class="container">
-                <h1 class="title"><?php echo $text_button_hero; ?></h1>
+            <div class="container container_small">
+                <h1 class="h4 title"><?php echo $text_button_hero; ?></h1>
             </div>
         </section>
     <?php endif;?>
-    <section class="cards-grid" id="cards-grid">
-        <div class="container">
+    <section class="cards-grid cards-grid_big cards-grid_decorate" id="cards-grid">
+        <div class="container container_small">
             <div class="cards-grid__wrapper">
                 <?php
                 // Get all terms of 'estate_objects' taxonomy
@@ -44,7 +44,7 @@ $term_id = $current_term->term_id;
                             $post_count = $child_term->count;
                             ?>
 
-                            <div class="card">
+                            <a href="<?php echo $term_link; ?>" class="card">
                                 <?php if($hero_image):?>
                                     <div class="card__img">
                                         <img class="img" src="<?php echo $hero_image['url']; ?>" alt="<?php echo $hero_image['alt']; ?>">
@@ -56,10 +56,12 @@ $term_id = $current_term->term_id;
                                         <?php endif;?>
                                     </div>
                                 <?php endif;?>
-                                <h1 class="card__title"><?php echo $child_term->name; ?></h1>
-                                <h4 class="card__address"><?php echo $address; ?></h4>
-                                <a href="<?php echo $term_link; ?>" class="btn card_btn"><?php echo $button_build_estate; ?></a>
-                            </div><?php
+                                <div class="card__body">
+                                    <h1 class="card__title"><?php echo $child_term->name; ?></h1>
+                                    <h4 class="card__address"><?php echo $address; ?></h4>
+                                    <button class="btn btn_dark card__btn"><?php echo $button_build_estate; ?></button>
+                                </div>
+                            </a><?php
                         }
                     }
                 }?>
@@ -70,7 +72,7 @@ $term_id = $current_term->term_id;
         <section id="seo-text" class="seo-text">
             <div class="container">
                 <div class="seo-text__wrapper">
-                    <h1 class="seo-text__title"><?php echo $seo_title; ?></h1>
+                    <h1 class="h4 seo-text__title"><?php echo $seo_title; ?></h1>
                     <div class="seo-text__text">
                         <?php echo $seo_text; ?>
                     </div>
@@ -85,11 +87,11 @@ $term_id = $current_term->term_id;
         $image = $didnt_find_banner['image'];
         $background_image = $didnt_find_banner['background_image']; ?>
         <section style="background-image: url('<?php echo $background_image["url"]; ?>')" class="didnt-find-banner" id="didnt-find-banner">
-            <div class="container">
+            <div class="container container_small">
                 <div class="didnt-find-banner__wrapper">
-                    <img src="<?php echo $image["url"]; ?>" alt="<?php echo $image["alt"]; ?>">
+                    <img class="didnt-find-banner__img" src="<?php echo $image["url"]; ?>" alt="<?php echo $image["alt"]; ?>">
                     <div class="didnt-find-banner__content">
-                        <h5 class="didnt-find-banner__title"><?php echo $title; ?></h5>
+                        <h2 class="didnt-find-banner__title"><?php echo $title; ?></h2>
                         <p class="didnt-find-banner__text"><?php echo $description; ?></p>
                         <?php if($button):?>
                             <a href="<?php echo $button['url'];?>" class="btn btn_big btn_light didnt-find-banner__btn" <?php if($button['target']=='_blank'):?>target="_blank"<?php endif;?>><?php echo $button['title'];?></a>

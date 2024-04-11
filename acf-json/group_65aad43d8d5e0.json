@@ -149,7 +149,9 @@
                         "whatsapp": "Whatsapp",
                         "github": "Github",
                         "skype": "Skype",
-                        "messenger": "Facebook Messenger"
+                        "messenger": "Facebook Messenger",
+                        "viber": "Viber",
+                        "tiktok": "TikTok"
                     },
                     "default_value": false,
                     "return_format": "value",
@@ -311,5 +313,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1711298992
+    "modified": 1712576901
 }

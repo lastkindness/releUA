@@ -1,31 +1,22 @@
 .hero {
     position: relative;
-    background-color: $secondary;
-    color: $white;
+    background-color: $primary;
+    color: $pure_white;
+    overflow: hidden;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        color: $pure_white;
+    }
     .swiper-slide {
         position: relative;
         background-size: cover;
         background-position: 50% 50%;
         background-repeat: no-repeat;
-        padding: 0 32px;
+        padding: 80px 0 240px;
     }
-
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        min-height: calc(100vh - 67px);
-
-        @include media(">=desktop") {
-            min-height: calc(100vh - 110px);
-        }
-    }
-
-    &__text {
-        width: 100%;
-        padding: 32px 0;
-    }
-
     .swiper-button-prev,
     .swiper-button-next {
         left: 0;
@@ -44,21 +35,68 @@
             }
         }
     }
-
     .swiper-button-next {
         right: 0;
         left: auto;
-
         @include media(">=desktop") {
             right: 10px;
         }
     }
-
     .swiper-pagination {
         .swiper-pagination-bullet {
             width: 10px;
             height: 10px;
             background: $primary;
+        }
+    }
+    &__text {
+        width: 100%;
+    }
+    &__content {
+        max-width: 600px;
+        position: relative;
+        z-index: 2;
+    }
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__image {
+        position: absolute;
+        right: -7%;
+        bottom: -30%;
+        width: 53%;
+        z-index: 1;
+    }
+    &__subtitle {
+        color: $highlighting;
+        font-weight: 400;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .icon {
+            width: 56px;
+            height: 56px;
+            background-color: $decorative2;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 0;
+            font-size: 0;
+            img {
+                width: 34px;
+                height: 34px;
+                line-height: 0;
+                font-size: 0;
+            }
+        }
+        .text {
+            padding-left: 15px;
+            display: inline-block;
+            width: calc(100% - 56px);
         }
     }
 }

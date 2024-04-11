@@ -1,0 +1,38 @@
+.didnt-find-banner {
+    color: $pure_white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    padding: 65px 0;
+    margin-top: 135px;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+        color: $pure_white;
+    }
+    &__btn {
+        text-transform: uppercase;
+    }
+    &__title {
+
+    }
+    &__img {
+        width: 56%;
+        position: absolute;
+        bottom: 0;
+        left: -7%;
+    }
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    &__content {
+        max-width: 530px;
+    }
+}

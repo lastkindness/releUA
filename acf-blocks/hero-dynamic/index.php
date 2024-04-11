@@ -1,6 +1,7 @@
 <?php
 $video_id = get_sub_field('video_id');
 $video_source = get_sub_field('video_source');
+$bg_image = get_sub_field('bg_image');
 $title = get_sub_field('title_hero');
 $titleLeftAlign = get_sub_field('title_left_align');
 $titleRightAlign = get_sub_field('title_right_align');
@@ -11,35 +12,23 @@ $classHero = '';
 
 <!-- Hero section front  -->
 <section class="hero-dynamic">
-    <div class="container" data-video='{"type": "<?php echo $video_source;?>", "video": "<?php echo $video_id;?>", "autoplay": true}'>
+    <div class="container"
+        <?php if ($video_id): ?>
+            data-video='{"type": "<?php echo $video_source;?>", "video": "<?php echo $video_id;?>", "autoplay": true}'
+        <?php endif; ?>
+        <?php if ($bg_image): ?>
+            style="background-image: url(<?php echo $bg_image; ?>)"
+        <?php endif; ?>
+    >
         <div class="hero-dynamic__wrapper">
-            <?php if ($titleLeftAlign || $titleRightAlign): ?>
-                <div class="hero-dynamic__title-wrap">
-                    <h1 class="hero-dynamic__title">
-                        <?php if ($titleLeftAlign): ?>
-                            <div class="hero-dynamic__title-line"><span
-                                    class="anim-title-line"><?php echo $titleLeftAlign; ?></span></div>
-                        <?php endif; ?>
-                        <?php if ($titleRightAlign): ?>
-                            <div class="hero-dynamic__title-line"><span
-                                    class="anim-title-line"><?php echo $titleRightAlign; ?></span></div>
-                        <?php endif; ?>
-                    </h1>
-                </div>
-            <?php endif; ?>
             <?php if ($title): ?>
-                <div class="hero-dynamic__title-wrap">
-                    <h2 class="hero-dynamic__title">
-                        <div class="hero-dynamic__title-line"><span class="anim-title-line"><?php echo $title; ?></span>
-                        </div>
-                    </h2>
-                </div>
+                <h1 class="hero-dynamic__title"><?php echo $title; ?></h1>
             <?php endif; ?>
 
             <?php if ($description): ?>
-                <div class="hero-dynamic__description">
+                <h6 class="hero-dynamic__description">
                     <?php echo $description; ?>
-                </div>
+                </h6>
             <?php endif; ?>
             <div class="hero-dynamic__footer">
                 <?php if ($buttons): ?>
@@ -52,7 +41,7 @@ $classHero = '';
                                 $link_title = $link['title'];
                                 $link_target = $link['target'] ? $link['target'] : '_self';
                                 ?>
-                                <a class="btn hero-dynamic__btn" href="<?php echo esc_url($link_url); ?>"
+                                <a class="btn btn_big btn_light hero-dynamic__btn" href="<?php echo esc_url($link_url); ?>"
                                    target="<?php echo esc_attr($link_target); ?>"><?php echo esc_html($link_title); ?></a>
                             <?php endif; ?>
                         <?php endforeach; ?>
