@@ -26,8 +26,7 @@ $taxonomies = get_object_taxonomies($post);?>
     $title_see_more = get_field('title_see_more', 'option-estate');
     $more_real_estate = get_field('more_real_estate', 'option-estate');
     $floor_text = get_field('text_floor', 'option-estate');
-
-
+    $title_advantages = get_field('title_advantages', 'option-estate');
 
     if ( have_posts() ) : ?>
         <main class="single-estate">
@@ -47,33 +46,60 @@ $taxonomies = get_object_taxonomies($post);?>
                 $furnished = get_field('furnished');
                 $electricity = get_field('electricity');
                 $additional_information = get_field('additional_information');
+                $advantages_items = get_field('advantages_items');
                 $map_coords = get_field('map_coords');
                 $slider_images = get_field('slider_images');
                 $seo_title = get_field('seo_title');
                 $seo_text = get_field('seo_text');
             ?>
                 <div class="single-estate__wrapper">
-                    <?php if($main_images):?>
-                        <section id="gallery" class="single-estate__gallery gallery">
-                            <div class="container">
-                                <div class="row">
-                                    <?php while (have_rows('main_images') ) : the_row(); ?>
-                                        <?php if($image=get_sub_field('image')):?>
-                                            <div class="col">
-                                                <a href="<?php echo $image['url'];?>" class="glightbox">
-                                                    <img src="<?php echo $image['url'];?>" title="<?php echo $image['title'];?>" alt="<?php echo $image['alt'];?>">
-                                                </a>
-                                            </div>
-                                        <?php endif;?>
-                                    <?php endwhile;?>
-                                </div>
+                    <div class="single-estate__hero">
+                        <div class="container">
+                            <?php the_title('<h1 class="article-section__title">','</h1>')?>
+                            <div class="single-estate__hero-wrapper">
+                                <?php if($main_images):?>
+                                    <section id="gallery" class="single-estate__gallery gallery">
+                                        <div class="row">
+                                            <?php while (have_rows('main_images') ) : the_row(); ?>
+                                                <?php if($image=get_sub_field('image')):?>
+                                                    <div class="col">
+                                                        <a href="<?php echo $image['url'];?>" class="glightbox">
+                                                            <img src="<?php echo $image['url'];?>" title="<?php echo $image['title'];?>" alt="<?php echo $image['alt'];?>">
+                                                        </a>
+                                                    </div>
+                                                <?php endif;?>
+                                            <?php endwhile;?>
+                                        </div>
+                                    </section>
+                                <?php endif;?>
+                                <?php if($form_text_object):?>
+                                    <section id="form" class="form single-estate__form">
+                                        <div class="form__wrapper">
+                                            <?php if( have_rows('form_text_object', 'option-estate') ):
+                                                while( have_rows('form_text_object', 'option-estate') ): the_row();
+                                                    $title = get_sub_field('title');
+                                                    $description = get_sub_field('description');
+                                                    $shortcode_form = get_sub_field('shortcode_form');
+                                                    if($title):?>
+                                                        <h2><?php echo $title;?></h2>
+                                                    <?php endif;?>
+                                                    <?php if($description):?>
+                                                        <p><?php echo $description;?></p>
+                                                    <?php endif;?>
+                                                    <?php if($shortcode_form): ?>
+                                                        <div class="contacts__popup-form"><?php echo do_shortcode($shortcode_form); ?></div>
+                                                    <?php endif;
+                                                endwhile;
+                                            endif; ?>
+                                        </div>
+                                    </section>
+                                <?php endif;?>
                             </div>
-                        </section>
-                    <?php endif;?>
-                    <section id="map-section" class="single-estate__info">
+                        </div>
+                    </div>
+                    <section id="single-estate-info" class="single-estate__info">
                         <div class="container">
                             <div class="article-section__wrapper">
-                                <?php the_title('<h1 class="article-section__title">','</h1>')?>
                                 <div class="article-section__buttons">
                                     <div class="article-section__button article-section__button_rent">
                                         <?php if($rent):?>
@@ -117,7 +143,7 @@ $taxonomies = get_object_taxonomies($post);?>
                                 <ul class="article-section__details">
                                     <li class="article-section__detail">
                                         <?php if($minimum_rental):?>
-                                            <span class="title"><?php echo $minimum_rental;?>:</span>
+                                            <span class="title"><?php echo $minimum_rental;?> - </span>
                                         <?php endif;?>
                                         <?php if($minimum_rental_period):?>
                                             <span class="tags">
@@ -127,7 +153,7 @@ $taxonomies = get_object_taxonomies($post);?>
                                     </li>
                                     <li class="article-section__detail">
                                         <?php if($best_for):?>
-                                            <span class="title"><?php echo $best_for;?>:</span>
+                                            <span class="title"><?php echo $best_for;?> - </span>
                                         <?php endif;?>
                                         <?php $compatible_terms = get_the_terms(get_the_ID(), 'estate_compatible'); if ($compatible_terms && !is_wp_error($compatible_terms)) {?>
                                             <span class="tags">
@@ -141,7 +167,7 @@ $taxonomies = get_object_taxonomies($post);?>
                                 </ul>
                                 <div class="article-section__characteristics">
                                     <?php if($characteristics_block):?>
-                                        <h3 class="article-section__characteristic-title"><?php echo $characteristics_block;?></h3>
+                                        <h5 class="article-section__characteristic-title"><?php echo $characteristics_block;?></h5>
                                     <?php endif;?>
                                     <ul class="article-section__characteristic-list">
                                         <?php if($address):?>
@@ -215,26 +241,26 @@ $taxonomies = get_object_taxonomies($post);?>
                             </div>
                         </div>
                     </section>
-                    <?php if($form_text_object):?>
-                        <section id="form" class="form single-estate__form">
+                    <?php if($advantages_items):?>
+                        <section id="advantages" class="singe-advantages">
                             <div class="container">
-                                <div class="form__wrapper">
-                                    <?php if( have_rows('form_text_object', 'option-estate') ):
-                                        while( have_rows('form_text_object', 'option-estate') ): the_row();
-                                            $title = get_sub_field('title');
-                                            $description = get_sub_field('description');
-                                            $shortcode_form = get_sub_field('shortcode_form');
-                                            if($title):?>
-                                                <h2><?php echo $title;?></h2>
+                                <?php if($title_advantages):?>
+                                    <h3 class="singe-advantages__title"><?php echo $title_advantages;?></h3>
+                                <?php endif;?>
+                                <div class="singe-advantages__wrapper">
+                                    <?php while ( have_rows('advantages_items') ) : the_row(); ?>
+                                        <div class="singe-advantages__item">
+                                            <?php if($image=get_sub_field('image')):?>
+                                                <img class="singe-advantages__img" src="<?php echo $image['url'];?>" alt="<?php echo $image['alt'];?>">
                                             <?php endif;?>
-                                            <?php if($description):?>
-                                                <p><?php echo $description;?></p>
+                                            <?php if($title=get_sub_field('title')):?>
+                                                <h6 class="singe-advantages__subtitle"><?php echo $title;?></h6>
                                             <?php endif;?>
-                                            <?php if($shortcode_form): ?>
-                                                <div class="contacts__popup-form"><?php echo do_shortcode($shortcode_form); ?></div>
-                                            <?php endif;
-                                        endwhile;
-                                    endif; ?>
+                                            <?php if($text=get_sub_field('text')):?>
+                                                <div class="singe-advantages__text"><?php echo $text;?></div>
+                                            <?php endif;?>
+                                        </div>
+                                    <?php endwhile;?>
                                 </div>
                             </div>
                         </section>
@@ -278,7 +304,7 @@ $taxonomies = get_object_taxonomies($post);?>
                             <div class="container">
                                 <div class="map-section__wrapper">
                                     <?php if($title_map):?>
-                                        <h2 class="map-section__title"><?php echo $title_map;?></h2>
+                                        <h4 class="map-section__title"><?php echo $title_map;?></h4>
                                     <?php endif;?>
                                     <?php while ( have_rows('map_coords') ) : the_row(); ?>
                                         <?php if(get_sub_field('object') && get_sub_field('subway')):?>
@@ -319,20 +345,67 @@ $taxonomies = get_object_taxonomies($post);?>
                                         )
                                     );
                                     $related_posts_query = new WP_Query($args);
-                                    if ($related_posts_query->have_posts()) :
-                                        ?>
-                                        <div class="related-posts">
+                                    if ($related_posts_query->have_posts()) : ?>
+                                        <div id="related-posts" class="related-posts cards-grid__wrapper">
                                             <?php while ($related_posts_query->have_posts()) : $related_posts_query->the_post(); ?>
-                                                <div class="card">
-                                                    <h4><?php the_title(); ?></h4>
-                                                    <div class="post-thumbnail">
-                                                        <?php the_post_thumbnail(); ?>
+                                                <a href="<?php the_permalink();?>" class="card">
+                                                    <?php
+                                                    $unique_property = get_field('unique_property', get_the_ID());
+                                                    $text_unique_property = get_field('text_unique_property', 'option-estate');
+                                                    $taxonomies = get_object_taxonomies(get_post());
+                                                    ?>
+                                                    <div class="card__img">
+                                                        <?php if($unique_property && $text_unique_property):?>
+                                                            <span class="tag"><?php echo $text_unique_property;?></span>
+                                                        <?php endif;?>
+                                                        <?php if (has_post_thumbnail()) :
+                                                            the_post_thumbnail('medium');
+                                                        else : ?>
+                                                            <img src="<?php echo get_field('logo','options')['url']; ?>" alt="image description">
+                                                        <?php endif; ?>
                                                     </div>
-                                                    <div class="post-content">
-                                                        <p><?php the_excerpt(); ?></p>
-                                                        <a href="<?php the_permalink(); ?>">Read more</a>
+                                                    <div class="card__body">
+                                                        <?php the_title('<h1 class="card__title">', '</h1>') ?>
+                                                        <?php $address = get_field('address');
+                                                        $rent = get_field('rent', 'option-estate');
+                                                        $no_rent = get_field('no_rent', 'option-estate');
+                                                        $sale = get_field('sale', 'option-estate');
+                                                        $no_sale = get_field('no_sale', 'option-estate');
+                                                        $sale_price = get_field('sale_price');
+                                                        $rental_price = get_field('rental_price');
+                                                        if ($address) : ?>
+                                                            <h6 class="card__address"><?php echo $address; ?></h6>
+                                                        <?php endif; ?>
+                                                        <ul class="card__prices">
+                                                            <li class="card__price">
+                                                                <?php if($rent):?>
+                                                                    <span class="title"><?php echo $rent;?>:</span>
+                                                                <?php endif;?>
+                                                                <?php  if (has_term('rent', 'estate_category')||has_term('rent-en', 'estate_category')||has_term('rent-ru', 'estate_category')) {?>
+                                                                    <span class="info"><?php echo $rental_price;?>uah./м²</span>
+                                                                <?php } else { ?>
+                                                                    <span class="info"><?php echo $no_rent;?></span>
+                                                                <?php } ?>
+                                                            </li>
+                                                            <li class="card__price">
+                                                                <?php if($sale):?>
+                                                                    <span class="title"><?php echo $sale;?>:</span>
+                                                                <?php endif;?>
+                                                                <?php  if (has_term('sale', 'estate_category')||has_term('sale-en', 'estate_category')||has_term('sale-ru', 'estate_category')) {?>
+                                                                    <span class="info">$<?php echo $sale_price;?> м²</span>
+                                                                <?php } else { ?>
+                                                                    <span class="info"><?php echo $no_sale;?></span>
+                                                                <?php } ?>
+                                                            </li>
+                                                        </ul>
                                                     </div>
-                                                </div>
+                                                    <?php if(get_field('archive_button','options')):
+                                                        $button = get_field('archive_button','options');?>
+                                                        <button class="btn card__btn"><?php echo $button;?></button>
+                                                    <?php else:?>
+                                                        <button class="btn card__btn"><?php _e('Learn more','ReleUA')?></button>
+                                                    <?php endif; ?>
+                                                </a>
                                             <?php endwhile; ?>
                                         </div>
                                         <?php wp_reset_postdata();

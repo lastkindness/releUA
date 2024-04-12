@@ -746,3 +746,79 @@ function populate_address_shortcode($tag) {
 wpcf7_add_shortcode('populate_address', 'populate_address_shortcode');
 
 
+function populate_estate_type_options() {
+    $args = array(
+        'taxonomy'   => 'estate_type',
+        'hide_empty' => false,
+    );
+    $terms = get_terms($args);
+    $options = array();
+    if (!empty($terms)) {
+        foreach ($terms as $term) {
+            $options[] = $term->name;
+        }
+    }
+    return $options;
+}
+
+function populate_estate_type_shortcode($tag) {
+    $options = populate_estate_type_options();
+    $html = '<select name="' . esc_attr($tag['name']) . '" id="' . esc_attr($tag['id']) . '" class="' . esc_attr($tag['class']) . '">';
+    $current_language = apply_filters('wpml_current_language', NULL);
+    switch ($current_language) {
+        case 'en':
+            $html .= '<option value="">Choose the option</option>';
+            break;
+        case 'ru':
+            $html .= '<option value="">Выберите тип недвижимости</option>';
+            break;
+        default:
+            $html .= '<option value="">Оберіть тип нерухомості</option>';
+    }
+    foreach ($options as $option) {
+        $html .= '<option value="' . esc_attr($option) . '">' . esc_html($option) . '</option>';
+    }
+    $html .= '</select>';
+    return $html;
+}
+
+wpcf7_add_shortcode('populate_estate_type', 'populate_estate_type_shortcode');
+
+
+function populate_estate_category_options() {
+    $args = array(
+        'taxonomy'   => 'estate_category',
+        'hide_empty' => false,
+    );
+    $terms = get_terms($args);
+    $options = array();
+    if (!empty($terms)) {
+        foreach ($terms as $term) {
+            $options[] = $term->name;
+        }
+    }
+    return $options;
+}
+
+function populate_estate_category_shortcode($tag) {
+    $options = populate_estate_category_options();
+    $html = '<select name="' . esc_attr($tag['name']) . '" id="' . esc_attr($tag['id']) . '" class="' . esc_attr($tag['class']) . '">';
+    $current_language = apply_filters('wpml_current_language', NULL);
+    switch ($current_language) {
+        case 'en':
+            $html .= '<option value="">Choose the option</option>';
+            break;
+        case 'ru':
+            $html .= '<option value="">Выберите категорию недвижимости</option>';
+            break;
+        default:
+            $html .= '<option value="">Оберіть категорію нерухомості</option>';
+    }
+    foreach ($options as $option) {
+        $html .= '<option value="' . esc_attr($option) . '">' . esc_html($option) . '</option>';
+    }
+    $html .= '</select>';
+    return $html;
+}
+
+wpcf7_add_shortcode('populate_estate_category', 'populate_estate_category_shortcode');

@@ -25,13 +25,13 @@ $form_shortcode = get_field('form_shortcode', 'option-contacts');
                         <h2 class="contact__title"><?php echo $main_title;?></h2>
                     <?php endif;?>
                     <?php if($subtitle):?>
-                        <h1 class="contacts__subtitle"><?php echo $subtitle;?></h1>
+                        <h1 class="contact__subtitle"><?php echo $subtitle;?></h1>
                     <?php endif;?>
                     <?php if($phones):?>
-                        <ul class="contact__phones phones">
+                        <ul class="contact__items contact__phones phones">
                             <?php foreach ($phones as $item): ?>
                                 <?php if($phone=$item['phone']): ?>
-                                    <li>
+                                    <li class="contact__item">
                                         <i class="icon icon-icon13"></i>
                                         <a class="phone" href="tel:<?php echo preg_replace('/[^0-9+]/', '', $phone); ?>" target="_blank"><?php echo $phone;?></a>
                                         <?php if($text=$item['text']): ?>
@@ -43,10 +43,10 @@ $form_shortcode = get_field('form_shortcode', 'option-contacts');
                         </ul>
                     <?php endif;?>
                     <?php if($emails):?>
-                        <ul class="contact__phones phones">
+                        <ul class="contact__items contact__emails emails">
                             <?php foreach ($emails as $item): ?>
                                 <?php if($email=$item['email']): ?>
-                                    <li>
+                                    <li class="contact__item">
                                         <i class="icon icon-mail-envelope-closed1"></i>
                                         <a class="email" href="mailto:<?php echo $email; ?>" target="_blank"><?php echo $email;?></a>
                                         <?php if($text=$item['text']): ?>
@@ -58,10 +58,10 @@ $form_shortcode = get_field('form_shortcode', 'option-contacts');
                         </ul>
                     <?php endif;?>
                     <?php if($addresses):?>
-                        <ul class="contact__phones phones">
+                        <ul class="contact__items contact__addresses addresses">
                             <?php foreach ($addresses as $item): ?>
                                 <?php if($address=$item['address']): ?>
-                                    <li>
+                                    <li class="contact__item">
                                         <i class="icon icon-icon12"></i>
                                         <a class="address" href="<?php echo $address;?>" target="_blank"><?php echo $item['text'];?></a>
                                     </li>
@@ -70,11 +70,11 @@ $form_shortcode = get_field('form_shortcode', 'option-contacts');
                         </ul>
                     <?php endif;?>
                     <?php if($social):?>
-                        <ul class="contact__social social">
+                        <ul class="contact__items contact__social social">
                             <?php foreach ($social as $item):?>
                                 <?php if($link=$item['link']):?>
-                                    <li>
-                                        <a href="<?php echo $link;?>" target="_blank"><i class="icon-<?php echo $item['icon']?>"></i></a>
+                                    <li class="contact__item">
+                                        <a class="<?php echo $item['icon']?>" href="<?php echo $link;?>" target="_blank"><i class="icon icon-<?php echo $item['icon']?>"></i></a>
                                     </li>
                                 <?php endif;?>
                             <?php endforeach;?>

@@ -1,4 +1,5 @@
 .single-built-object {
+    padding: 80px 0 0;
     .hero {
         height: calc(100vh - 45px);
         width: 100vw;
@@ -28,9 +29,79 @@
         .container  {
             position: relative;
             z-index: 2;
+            height: 100%;
+        }
+        &__title {
+            font-size: 64px;
+        }
+        &__wrapper {
+            padding-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            height: 100%;
+        }
+        &__tag {
+            background-color: $tags;
+            font-weight: 600;
+            border-radius: 30px;
+            padding: 5px 18px;
         }
         &__item {
+            font-size: 24px;
+            font-weight: 400;
+        }
+        &__btn {
+            margin: 20px 0 0;
+        }
+    }
+    &__form {
+        margin: 95px 0 75px;
+        .contact-form {
+            &__wrapper {
+                border-radius: 22px;
+                box-shadow: 0px 4px 50px 0px rgba(0,0,0,0.2);
+                padding: 60px;
+                display: grid;
+                align-items: center;
+                justify-content: space-between;
+                grid-template-columns: 1fr 2fr;
+                grid-gap: 40px;
+            }
+            &__title {
 
+            }
+            &__description {
+                font-size: 20px;
+                font-weight: 400;
+                text-align: left;
+            }
+        }
+    }
+    &__other-built-objects {
+        position: relative;
+        margin: 120px 0;
+        .cards-grid {
+            &__wrapper {
+                display: flex;
+            }
+            &__title {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+        .card {
+            height: auto;
+        }
+        .swiper-pagination {
+            bottom: -42px;
+        }
+        .swiper-button-next,
+        .swiper-button-prev {
+            position: static;
+            margin: 0;
         }
     }
 }

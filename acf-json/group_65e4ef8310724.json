@@ -483,6 +483,27 @@
             "append": ""
         },
         {
+            "key": "field_66193a69b26ab",
+            "label": "Title for Advantages",
+            "name": "title_advantages",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_65e4f100039e0",
             "label": "Form text",
             "name": "form_text",
@@ -821,6 +842,27 @@
             "key": "field_65f26b7200d9e",
             "label": "Button for each build estate \"Select ➔\"",
             "name": "button_build_estate",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6618e14c3f95d",
+            "label": "Button for \"Read more\"",
+            "name": "button_read_more",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -1424,5 +1466,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1712449074
+    "modified": 1712929412
 }

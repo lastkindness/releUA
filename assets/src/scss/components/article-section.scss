@@ -1,6 +1,8 @@
 .article-section {
     padding: 50px 0;
-
+    &__title {
+        font-size: 40px;
+    }
     .container {
         max-width: 90%;
         margin: 0 auto;
@@ -67,6 +69,11 @@
     &__image {
 
     }
+    &__detail {
+        .tag {
+            font-weight: 700;
+        }
+    }
     &__category {
         position: absolute;
         padding: 5px 10px;
@@ -75,5 +82,27 @@
         top: 10px;
         left: 0;
         font-size: 12px;
+    }
+    &__characteristics {
+        margin: 50px 0;
+    }
+    &__characteristic {
+        border-radius: 50px;
+        background-color: $pure_white;
+        box-shadow: 0px 4px 27px 0px rgba(60,58,105,0.2);
+        font-size: 24px;
+        font-weight: 400;
+        padding: 15px 40px;
+        width: auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 0 20px 20px 0;
+        .icon {
+            margin: 0 10px 0 0;
+        }
+        &-list {
+            @extend %listreset;
+        }
     }
 }

@@ -30,7 +30,7 @@
                     <?php foreach ($social as $item):?>
                         <?php if($link=$item['link']):?>
                             <li>
-                                <a href="<?php echo $link;?>" target="_blank"><i class="icon-<?php echo $item['icon']?>"></i></a>
+                                <a class="<?php echo $item['icon']?>" href="<?php echo $link;?>" target="_blank"><i class="icon icon-<?php echo $item['icon']?>"></i></a>
                             </li>
                         <?php endif;?>
                     <?php endforeach;?>

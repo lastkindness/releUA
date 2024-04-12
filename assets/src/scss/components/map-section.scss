@@ -1,4 +1,8 @@
 .map-section {
+    margin: 0 0 75px;
+    &__title {
+        text-align: center;
+    }
     &__box {
         height: 600px;
     }

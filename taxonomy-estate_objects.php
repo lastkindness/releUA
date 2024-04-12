@@ -19,6 +19,8 @@ if ($term && $term->parent) {
     $title_map = get_field('title_map', 'option-estate');
     $map_coords = get_field('map_coords');
     $form_text = get_field('form_text', 'option-estate');
+    $form_text_object = get_field('form_text_object', 'option-estate');
+    $button_read_more = get_field('button_read_more', 'option-estate');
 ?>
 
     <main class="single-built-object">
@@ -54,7 +56,7 @@ if ($term && $term->parent) {
                         </h6>
                     <?php endif;?>
                     <?php if($text_button_hero):?>
-                        <a href="#" class="btn btn_big"><?php echo $text_button_hero;?></a>
+                        <a href="#" class="btn btn_big btn_light hero__btn"><?php echo $text_button_hero;?></a>
                     <?php endif;?>
                 </div>
             </div>
@@ -64,25 +66,30 @@ if ($term && $term->parent) {
                 <div class="description__wrapper">
                     <p><?php echo term_description(); ?></p>
                 </div>
+                <?php if($button_read_more):?>
+                    <button class="btn description__btn"><?php echo $button_read_more;?></button>
+                <?php endif;?>
             </div>
         </section>
-        <?php if($form_text):?>
-            <section id="form" class="form single-built-object__form">
+        <?php if($form_text_object):?>
+            <section id="form" class="contact-form single-built-object__form">
                 <div class="container">
-                    <div class="form__wrapper">
-                        <?php if( have_rows('form_text', 'option-estate') ):
-                            while( have_rows('form_text', 'option-estate') ): the_row();
+                    <div class="contact-form__wrapper">
+                        <?php if( have_rows('form_text_object', 'option-estate') ):
+                            while( have_rows('form_text_object', 'option-estate') ): the_row();
                                 $title = get_sub_field('title');
                                 $description = get_sub_field('description');
-                                $shortcode_form = get_sub_field('shortcode_form');
-                                if($title):?>
-                                    <h2><?php echo $title;?></h2>
-                                <?php endif;?>
-                                <?php if($description):?>
-                                    <p><?php echo $description;?></p>
-                                <?php endif;?>
+                                $shortcode_form = get_sub_field('shortcode_form');?>
+                                <div class="contact-form__content">
+                                    <?php if($title):?>
+                                        <h2 class="contact-form__title"><?php echo $title;?></h2>
+                                    <?php endif;?>
+                                    <?php if($description):?>
+                                        <div class="contact-form__description"><?php echo $description;?></div>
+                                    <?php endif;?>
+                                </div>
                                 <?php if($shortcode_form): ?>
-                                    <div class="contacts__popup-form"><?php echo do_shortcode($shortcode_form); ?></div>
+                                    <div class="contact-form__form"><?php echo do_shortcode($shortcode_form); ?></div>
                                 <?php endif;
                             endwhile;
                         endif; ?>
@@ -95,7 +102,7 @@ if ($term && $term->parent) {
                 <div class="container">
                     <div class="map-section__wrapper">
                         <?php if($title_map):?>
-                            <h2 class="map-section__title"><?php echo $title_map;?></h2>
+                            <h4 class="map-section__title"><?php echo $title_map;?></h4>
                         <?php endif;?>
                         <?php while ( have_rows('map_coords') ) : the_row(); ?>
                             <?php if(get_sub_field('object') && get_sub_field('subway')):?>
@@ -200,65 +207,72 @@ if ($term && $term->parent) {
 
         <section id="other-built-objects"  class="cards-grid cards-grid_other-built-objects single-built-object__other-built-objects">
             <div class="container">
-                <?php if($title_other_built_objects):?>
-                    <h3 class="h4 seo-text__title"><?php echo $title_other_built_objects; ?></h3>
-                <?php endif;?>
-                <div class="cards-grid__wrapper">
-                    <?php $current_term_id = get_queried_object_id();
-                    $parent_terms = get_terms(array(
-                        'taxonomy' => 'estate_objects',
-                        'parent' => 0,
-                        'exclude' => array($current_term_id),
-                        'hide_empty' => false,
-                    ));
+                <div class="swiper-container">
+                    <?php if($title_other_built_objects):?>
+                        <h3 class="h4 cards-grid__title">
+                            <div class="swiper-button-prev"></div>
+                            <span class="text"><?php echo $title_other_built_objects; ?></span>
+                            <div class="swiper-button-next"></div>
+                        </h3>
+                    <?php endif;?>
+                    <div class="cards-grid__wrapper swiper-wrapper">
+                        <?php $current_term_id = get_queried_object_id();
+                        $parent_terms = get_terms(array(
+                            'taxonomy' => 'estate_objects',
+                            'parent' => 0,
+                            'exclude' => array($current_term_id),
+                            'hide_empty' => false,
+                        ));
 
-                    if (!empty($parent_terms) && !is_wp_error($parent_terms)) {
-                        foreach ($parent_terms as $parent_term) {
-                            $child_terms = get_terms(array(
-                                'taxonomy' => 'estate_objects',
-                                'parent' => $parent_term->term_id,
-                                'exclude' => array($current_term_id),
-                                'hide_empty' => false,
-                            ));
-                            if (!empty($child_terms) && !is_wp_error($child_terms)) {
-                                foreach ($child_terms as $child_term) { $post_count = $child_term->count; ?>
-                                    <a href="<?php echo get_term_link($child_term); ?>" class="card">
-                                        <div class="card__img">
-                                            <?php $image = get_field('image', 'estate_objects_' . $child_term->term_id)['url'];
-                                            if ($image) : ?>
-                                                <img src="<?php echo($image); ?>" alt="image description">
-                                            <?php else : ?>
-                                                <img src="<?php echo(get_field('logo', 'options')['url']); ?>" alt="image description">
-                                            <?php endif; ?>
-                                            <?php if($post_count):?>
-                                                <span class="tag">
+                        if (!empty($parent_terms) && !is_wp_error($parent_terms)) {
+                            foreach ($parent_terms as $parent_term) {
+                                $child_terms = get_terms(array(
+                                    'taxonomy' => 'estate_objects',
+                                    'parent' => $parent_term->term_id,
+                                    'exclude' => array($current_term_id),
+                                    'hide_empty' => false,
+                                ));
+                                if (!empty($child_terms) && !is_wp_error($child_terms)) {
+                                    foreach ($child_terms as $child_term) { $post_count = $child_term->count; ?>
+                                        <a href="<?php echo get_term_link($child_term); ?>" class="card swiper-slide">
+                                            <div class="card__img">
+                                                <?php $image = get_field('image', 'estate_objects_' . $child_term->term_id)['url'];
+                                                if ($image) : ?>
+                                                    <img src="<?php echo($image); ?>" alt="image description">
+                                                <?php else : ?>
+                                                    <img src="<?php echo(get_field('logo', 'options')['url']); ?>" alt="image description">
+                                                <?php endif; ?>
+                                                <?php if($post_count):?>
+                                                    <span class="tag">
                                                 <span class="icon icon-build"></span>
                                                 <span class="count"><?php echo $post_count;?></span>
                                             </span>
-                                            <?php endif;?>
-                                        </div>
-                                        <div class="card__body">
-                                            <h1 class="card__title"><?php echo $child_term->name; ?></h1>
-                                            <?php $address = get_field('address', 'estate_objects_' . $child_term->term_id); if ($address) : ?>
-                                                <h6 class="card__address"><?php echo $address; ?></h6>
+                                                <?php endif;?>
+                                            </div>
+                                            <div class="card__body">
+                                                <h1 class="card__title"><?php echo $child_term->name; ?></h1>
+                                                <?php $address = get_field('address', 'estate_objects_' . $child_term->term_id); if ($address) : ?>
+                                                    <h6 class="card__address"><?php echo $address; ?></h6>
+                                                <?php endif; ?>
+                                            </div>
+                                            <?php if (get_field('archive_button', 'options')) :
+                                                $button = get_field('archive_button', 'options');
+                                                ?>
+                                                <button class="btn card__btn"><?php echo $button; ?></button>
+                                            <?php else : ?>
+                                                <button class="btn card__btn"><?php _e('Learn more', 'ReleUA') ?></button>
                                             <?php endif; ?>
-                                        </div>
-                                        <?php if (get_field('archive_button', 'options')) :
-                                            $button = get_field('archive_button', 'options');
-                                            ?>
-                                            <button class="btn card__btn"><?php echo $button; ?></button>
-                                        <?php else : ?>
-                                            <button class="btn card__btn"><?php _e('Learn more', 'ReleUA') ?></button>
-                                        <?php endif; ?>
-                                    </a>
-                                    <?php
+                                        </a>
+                                        <?php
+                                    }
                                 }
                             }
+                        } else {
+                            echo '<h4 class="card__title">No posts found</h4>';
                         }
-                    } else {
-                        echo '<h4 class="card__title">No posts found</h4>';
-                    }
-                    ?>
+                        ?>
+                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </section>
@@ -285,7 +299,7 @@ if ($term && $term->parent) {
                     $image = get_sub_field('image');
                     $background_image = get_sub_field('background_image');?>
                     <section id="more-real-estate" class="more-real-estate single-built-object__more-real-estate" style="background-image: url('<?php echo $background_image;?>')">
-                        <div class="container">
+                        <div class="container container_small">
                             <div class="more-real-estate__wrapper">
                                 <div class="more-real-estate__content">
                                     <?php if($title):?>

@@ -46,6 +46,9 @@ $breakpoints: (
 @import "components/estate-filter";
 @import "components/estate-catalogue";
 @import "components/seo-text";
+@import "components/description";
+@import "components/gallery";
+@import "components/singe-advantages";
 
 @import "layout/common";
 @import "layout/header";
@@ -55,3 +58,4 @@ $breakpoints: (
 @import "layout/article-section";
 @import "layout/page-template-template-flexible-content";
 @import "layout/contacts";
+@import "layout/single-estate";

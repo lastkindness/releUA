@@ -1,0 +1,13 @@
+.single-estate {
+    &__hero {
+        margin: 0 0 30px;
+        &-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 30px;
+        }
+    }
+    &__gallery {
+        grid-column: 1/3;
+    }
+}
