@@ -1,17 +1,20 @@
 .nav-opener {
-    position: absolute;
     top: 50%;
     right: 15px;
-    width: 42px;
     height: 37px;
     transform: translateY(-50%);
     text-indent: -9999px;
     overflow: hidden;
     text-decoration: none;
     z-index: 99;
-
-    @include media(">=desktop") {
-        display: none;
+    position: static;
+    width: 0;
+    opacity: 0;
+    @extend %transition;
+    @include media("<=desktop") {
+        width: 42px;
+        opacity: 1;
+        position: absolute;
     }
 
     &:before,
@@ -25,6 +28,7 @@
         height: 3px;
         margin-top: -2px;
         transition: all 0.2s linear;
+        width: 61%;
     }
 
     &:before,
@@ -35,6 +39,9 @@
 
     &:after {
         top: 28px;
+        width: 45%;
+        right: 20%;
+        left: unset;
     }
 
     .nav-active & {
@@ -44,6 +51,7 @@
             top: 18px;
             left: 15%;
             right: 15%;
+            width: 61%;
         }
 
         span {

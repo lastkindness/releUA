@@ -11,6 +11,9 @@
         font-weight: 500;
         font-size: 14px;
         @extend %transition;
+        @include media("<=widescreen") {
+            font-size: 13px;
+        }
         &:hover {
             opacity: 0.7;
         }
@@ -21,20 +24,24 @@
         background: $decorative;
     }
     .container {
-        @include media(">=tablet") {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
+        &:first-child {
+            .footer {
+                &__wrapper {
+
+                }
+            }
+        }
+        &:last-child {
+            .footer {
+                &__wrapper {
+
+                }
+            }
         }
     }
 
     .social {
-        margin-top: 24px;
-
-        @include media(">=tablet") {
-            margin-top: 0;
-        }
+        margin-top: 0;
     }
     &__wrapper {
         display: flex;
@@ -43,11 +50,24 @@
         flex-wrap: wrap;
         width: 100%;
         padding: 30px 0;
+        @include media("<=widescreen") {
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        @include media("<=desktop") {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
     }
     &__logo {
         display: block;
         width: 146px;
         max-height: 50px;
+        @include media("<=widescreen") {
+            width: 115px;
+        }
         img {
             width: 100%;
             height: 100%;
@@ -59,11 +79,39 @@
         color: $light;
         line-height: 1em;
         font-size: 14px;
+        @include media("<=widescreen") {
+            width: auto;
+            order: 0;
+        }
+        @include media("<=desktop") {
+            order: 1;
+        }
         .сopyright {
             margin: 0;
         }
     }
     &__navbar {
         padding: 0 20px;
+        @include media("<=widescreen") {
+            padding: 20px 0 0;
+        }
+    }
+    &__social {
+        @include media("<=widescreen") {
+            display: none;
+        }
+        &_mobile {
+            display: none;
+            margin: 0 0 15px !important;
+            @include media("<=widescreen") {
+                display: flex;
+                margin: 0 !important;
+                order: 1;
+            }
+            @include media("<=desktop") {
+                margin: 0 0 15px !important;
+                order: 0;
+            }
+        }
     }
 }

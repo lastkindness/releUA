@@ -1,16 +1,24 @@
 .phones {
     @extend %listreset;
-    margin: 0 45px 0 0;
-    @include media(">=desktop") {
-        margin: 0;
+    margin: 0;
+    @include media("<=desktop") {
+        margin: 0 45px 0 0;
     }
     a {
         font-size: 18px;
         font-weight: 600;
         text-decoration: none;
         font-family: $headings-font-family;
+        white-space: nowrap;
         @extend %transition;
         &:hover {
+            color: $light;
+        }
+        @include media("<=widescreen-lg") {
+            font-size: 14px;
+        }
+        @include media("<=desktop") {
+            font-size: 24px;
             color: $light;
         }
     }

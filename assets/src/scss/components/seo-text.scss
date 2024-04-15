@@ -1,3 +1,6 @@
 .seo-text {
     margin: 50px 0 130px;
+    @include media("<=desktop") {
+        margin: 30px 0 50px;
+    }
 }

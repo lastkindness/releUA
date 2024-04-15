@@ -2,17 +2,66 @@
     &__title {
         width: calc(100% - 250px);
         margin: 0 0 25px 250px;
+        @include media("<=desktop") {
+            width: 100%;
+            margin: 0 0 20px;
+            text-align: center;
+        }
     }
     &__wrapper {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
+        @include media("<=desktop") {
+            flex-wrap: wrap;
+        }
     }
     &__filter {
         width: 250px;
         padding: 0 20px 0 0;
+        @include media("<=desktop") {
+            width: 100%;
+            padding: 0;
+            margin: 0 0 40px;
+        }
+        &_mobile {
+            .handorgel {
+                border: none;
+                display: none;
+                .estate-filter {
+                    &__filter {
+                        margin: 0;
+                    }
+                }
+                &__header {
+                    &--open {
+                        .handorgel {
+                            &__header {
+                                &__button {
+                                    background-color: transparent;
+                                    color: $light;
+                                }
+                            }
+                        }
+                    }
+                }
+                &__content {
+                    &--opened {
+                        .handorgel {
+                            &__content {
+                                &__inner {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     &__grid {
         width: calc(100% - 250px);
+        @include media("<=desktop") {
+            width: 100%;
+        }
     }
 }

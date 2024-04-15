@@ -6,6 +6,12 @@
     position: relative;
     padding: 65px 0;
     margin-top: 135px;
+    @include media("<=desktop") {
+        text-align: center;
+        margin-top: 50px;
+        padding: 45px 0 165px;
+        text-align: center;
+    }
     h1,
     h2,
     h3,
@@ -19,20 +25,39 @@
         text-transform: uppercase;
     }
     &__title {
-
+        @include media("<=desktop") {
+            text-align: center;
+        }
     }
     &__img {
         width: 56%;
         position: absolute;
         bottom: 0;
         left: -7%;
+        z-index: 1;
+        @include media("<=widescreen-lg") {
+            width: 70%;
+            left: -17%;
+        }
+        @include media("<=widescreen") {
+            width: 80%;
+            left: -37%;
+        }
+        @include media("<=desktop") {
+            left: 17%;
+        }
     }
     &__wrapper {
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        @include media("<=desktop") {
+            justify-content: center;
+        }
     }
     &__content {
+        position: relative;
+        z-index: 2;
         max-width: 530px;
     }
 }

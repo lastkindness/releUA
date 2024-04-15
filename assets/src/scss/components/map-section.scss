@@ -1,5 +1,8 @@
 .map-section {
     margin: 0 0 75px;
+    &:last-child {
+        margin: 0;
+    }
     &__title {
         text-align: center;
     }

@@ -7,7 +7,8 @@ function moreBuild () {
         if (jQuery('.single-built-object__other-built-objects .swiper-container').length) {
             const swiper = new Swiper(".single-built-object__other-built-objects .swiper-container", {
                 loop: true,
-                slidesPerView: 4,
+                slidesPerView: 2,
+                centeredSlidesBounds: true,
                 navigation: {
                     nextEl: ".swiper-button-next",
                     prevEl: ".swiper-button-prev",
@@ -15,6 +16,14 @@ function moreBuild () {
                 pagination: {
                     el: ".swiper-pagination",
                     clickable: true,
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                    },
                 },
             });
         }

@@ -3052,8 +3052,8 @@
                 },
                 "layout_65c2a888e1dfb": {
                     "key": "layout_65c2a888e1dfb",
-                    "name": "experience",
-                    "label": "Experience",
+                    "name": "accordion",
+                    "label": "Accordion",
                     "display": "block",
                     "sub_fields": [
                         {
@@ -3079,8 +3079,8 @@
                         },
                         {
                             "key": "field_65aacfd4e57f4",
-                            "label": "Experience Block Title",
-                            "name": "experience_block_title",
+                            "label": "Accordion Block Title",
+                            "name": "accordion_block_title",
                             "aria-label": "",
                             "type": "text",
                             "instructions": "",
@@ -3091,17 +3091,17 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "wpml_cf_preferences": 2,
                             "default_value": "",
                             "maxlength": "",
                             "placeholder": "",
                             "prepend": "",
-                            "append": "",
-                            "wpml_cf_preferences": 2
+                            "append": ""
                         },
                         {
                             "key": "field_65aacfd4e92e0",
-                            "label": "Experience",
-                            "name": "experience",
+                            "label": "Accordion",
+                            "name": "accordion",
                             "aria-label": "",
                             "type": "repeater",
                             "instructions": "",
@@ -3112,14 +3112,13 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "wpml_cf_preferences": 1,
                             "layout": "table",
-                            "pagination": 0,
                             "min": 0,
                             "max": 0,
                             "collapsed": "",
                             "button_label": "Добавить",
                             "rows_per_page": 20,
-                            "wpml_cf_preferences": 1,
                             "sub_fields": [
                                 {
                                     "key": "field_65aacfd4ecf37",
@@ -4082,5 +4081,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1712608864
+    "modified": 1713129024
 }

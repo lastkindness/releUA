@@ -12,9 +12,16 @@ body {
     display: flex;
     flex-direction: column;
     &.nav-active {
-        .navbar__nav {
-            opacity: 1;
-            visibility: visible;
+        .header {
+            background-color: $white;
+            @extend %transition;
+            &__menu {
+                opacity: 1;
+                visibility: visible;
+                z-index: 996;
+                display: flex;
+                @extend %transition;
+            }
         }
     }
 }
@@ -33,20 +40,20 @@ a {
 }
 
 .container {
-    padding: 0 15px;
-    @include media(">=desktop") {
+    padding: 0 95px;
+    @include media("<=widescreen-lg") {
         padding: 0 45px;
     }
-    @include media(">=widescreen-lg") {
-        padding: 0 95px;
+    @include media("<=desktop") {
+        padding: 0 15px;
     }
     &_small {
-        padding: 0 15px;
-        @include media(">=desktop") {
+        padding: 0 275px;
+        @include media("<=widescreen-lg") {
             padding: 0 45px;
         }
-        @include media(">=widescreen-lg") {
-            padding: 0 275px;
+        @include media("<=desktop") {
+            padding: 0 15px;
         }
     }
 }

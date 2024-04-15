@@ -17,7 +17,7 @@
                 color: $white;
 
                 &:before {
-                    transform: translateY(-50%) rotate(-180deg);
+                    transform: translateY(-50%) rotate(90deg);
                 }
             }
         }
@@ -35,7 +35,7 @@
             &:before {
                 @include animate(transform);
 
-                content: "\e903";
+                content: "\ea3c";
                 font-family: "icomoon";
                 font-size: 20px;
                 font-weight: 400;

@@ -9,7 +9,7 @@ import contactform_block from '../../../acf-blocks/contact-form/js/app.js';
 import counter_block from '../../../acf-blocks/counter/js/app.js';
 import cta_block from '../../../acf-blocks/cta/js/app.js';
 import didntfindbanner_block from '../../../acf-blocks/didnt-find-banner/js/app.js';
-import experience_block from '../../../acf-blocks/experience/js/app.js';
+import experience_block from '../../../acf-blocks/accordion/js/app.js';
 import faqs_block from '../../../acf-blocks/faqs/js/app.js';
 import gallery_block from '../../../acf-blocks/gallery/js/app.js';
 import hero_block from '../../../acf-blocks/hero/js/app.js';

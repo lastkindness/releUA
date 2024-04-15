@@ -8,6 +8,9 @@
         background-repeat: no-repeat;
         position: relative;
         color: $pure_white;
+        @include media("<=desktop") {
+            height: auto;
+        }
         h1,
         h2,
         h3,
@@ -33,6 +36,9 @@
         }
         &__title {
             font-size: 64px;
+            @include media("<=desktop") {
+                font-size: 30px;
+            }
         }
         &__wrapper {
             padding-top: 40px;
@@ -41,6 +47,9 @@
             align-items: flex-start;
             justify-content: flex-start;
             height: 100%;
+            @include media("<=desktop") {
+                padding: 50px 0 150px;
+            }
         }
         &__tag {
             background-color: $tags;
@@ -68,6 +77,11 @@
                 justify-content: space-between;
                 grid-template-columns: 1fr 2fr;
                 grid-gap: 40px;
+                @include media("<=desktop") {
+                    padding: 20px;
+                    grid-gap: 30px;
+                    grid-template-columns: 1fr;
+                }
             }
             &__title {
 

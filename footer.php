@@ -26,7 +26,7 @@
             ] );
             ?>
             <?php if($social=get_field('social','options')):?>
-                <ul class="footer__social social">
+                <ul class="social footer__social">
                     <?php foreach ($social as $item):?>
                         <?php if($link=$item['link']):?>
                             <li>
@@ -41,6 +41,17 @@
     <hr>
     <div class="container">
         <div class="footer__wrapper">
+            <?php if($social=get_field('social','options')):?>
+                <ul class="social footer__social footer__social_mobile">
+                    <?php foreach ($social as $item):?>
+                        <?php if($link=$item['link']):?>
+                            <li>
+                                <a class="<?php echo $item['icon']?>" href="<?php echo $link;?>" target="_blank"><i class="icon icon-<?php echo $item['icon']?>"></i></a>
+                            </li>
+                        <?php endif;?>
+                    <?php endforeach;?>
+                </ul>
+            <?php endif;?>
             <div class="footer__сopyright">
                 <?php if($сopyright=get_field('copyright','options')):?>
                     <p class="сopyright"><?php echo $сopyright;?></p>
@@ -48,9 +59,8 @@
             </div>
         </div>
     </div>
-
-    <button type="button" id="back-to-top"><i class="icon-arrow-up"></i></button>
 </footer>
+<button type="button" id="back-to-top"><i class="icon-arrow-up"></i></button>
 <?php wp_footer(); ?>
 </div>
 </body>

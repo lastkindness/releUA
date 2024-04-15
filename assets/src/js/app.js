@@ -14,6 +14,7 @@ import metaFilter from './modules/metaFilter';
 import loadMorePosts from './modules/loadMorePosts';
 import mapBox from './modules/mapBox';
 import moreBuild from './modules/moreBuild';
+import openMobileFilters from './modules/openMobileFilters';
 //import preViewUploadsPhotoInsert from './modules/preViewUploadsPhotoInsert';
 
 $(document).ready(() => {

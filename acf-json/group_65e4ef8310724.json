@@ -1153,6 +1153,27 @@
             "endpoint": 0
         },
         {
+            "key": "field_661c60519533b",
+            "label": "Main Title Filters",
+            "name": "main_title_filters",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_660ee48edf240",
             "label": "Area",
             "name": "area_filter",
@@ -1466,5 +1487,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1712929412
+    "modified": 1713135721
 }

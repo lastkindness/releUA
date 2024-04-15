@@ -22,6 +22,9 @@ button {
     transition:all 0.3s ease;
     overflow: hidden;
     font-size: 14px;
+    @include media("<=desktop") {
+        padding: 10px 17px;
+    }
     &:hover {
         transition:all 0.3s ease;
         color: $btn-background;
@@ -32,6 +35,9 @@ button {
         padding: 22px 46px;
         font-size: 16px;
         text-transform: uppercase;
+        @include media("<=desktop") {
+            padding: 20px 28px;
+        }
     }
     &_light {
         color: $btn-background;

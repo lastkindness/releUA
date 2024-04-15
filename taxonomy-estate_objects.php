@@ -339,14 +339,14 @@ if ($term && $term->parent) {
                 <div class="cards-grid__wrapper">
                     <?php foreach ($child_term_ids as $child_term_id) {
                         $child_term = get_term_by('id', $child_term_id, 'estate_objects');
+                        $post_count = $child_term->count;
                         $hero_image = get_field('image', $child_term);
                         $term_link = get_term_link($child_term);
                         $address = get_field('address', $child_term);
                         $unique_property = get_field('text_unique_property', $child_term);
                         $button_build_estate = get_field('button_build_estate', 'option-estate');
-                        $post_count = $child_term->count;
                         ?>
-                        <a href="<?php $term_link; ?>" class="card">
+                        <a href="<?php echo $term_link; ?>" class="card">
                             <?php if($hero_image):?>
                                 <div class="card__img">
                                     <img class="img" src="<?php echo $hero_image['url']; ?>" alt="<?php echo $hero_image['alt']; ?>">

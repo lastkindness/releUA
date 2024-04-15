@@ -7,32 +7,19 @@
     &__nav {
         width: 100%;
         justify-content: space-between;
+        display: flex;
         @extend %listreset;
         @include animate(opacity visibility);
-        @include media("<desktop") {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: $white;
-            padding: 15px;
-            opacity: 0;
-            visibility: hidden;
-            z-index: 996;
+        @include media("<=desktop") {
+            flex-direction: column;
+            text-align: center;
         }
-        @include media(">=desktop") {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
         > li {
             position: relative;
-            padding: 0 0 10px;
-
-            @include media(">=desktop") {
-                padding: 0 10px;
+            padding: 0 10px;
+            @include media("<=widescreen-lg") {
+                padding: 0 0 10px;
             }
-
             &:hover {
                 .sub-menu {
                     opacity: 1;
@@ -40,36 +27,62 @@
                 }
             }
         }
-
         a {
-            color: $black;
             text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            @extend %transition;
+            color: $black;
             &:hover {
                 color: $light;
+                opacity: 0.7;
+            }
+            @include media("<=desktop") {
+                font-size: 24px;
+                font-weight: 300;
+                width: 100%;
+                display: block;
+                line-height: 1em;
+            }
+        }
+        .menu-item {
+            padding: 0 20px;
+            @include media("<=widescreen-lg") {
+                padding: 0 7px;
+            }
+            @include media("<=desktop") {
+                padding: 0;
+                margin: 10px 0;
+                line-height: 1em;
+            }
+            &.current-menu-item {
+                &>a {
+                    border-bottom: 1px solid $decorative;
+                }
             }
         }
 
         .sub-menu {
             @extend %listreset;
             @include animate(opacity visibility);
-
-            display: none;
-            padding: 0 0 7px;
+            display: block;
+            opacity: 0;
+            visibility: hidden;
             z-index: 99;
-
-            @include media(">=desktop") {
-                display: block;
-                opacity: 0;
-                visibility: hidden;
-                z-index: 99;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                font-size: 13px;
-                line-height: 1.1;
-                padding: 15px 10px 10px;
-                background: $black;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            font-size: 13px;
+            line-height: 1.1;
+            padding: 15px 10px 10px;
+            background: $black;
+            @include media("<=desktop") {
+                padding: 0;
+                background: transparent;
+                opacity: 1;
+                position: static;
+                visibility: visible;
             }
 
             li {
@@ -78,27 +91,22 @@
 
             a {
                 color: $white;
+                @include media("<=desktop") {
+                    color: $black;
+                    margin: 10px 0 0;
+                }
             }
-        }
-    }
-}
-
-
-.navbar__nav {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    @extend %listreset;
-    .menu-item {
-        padding: 0 20px;
-    }
-    a {
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 14px;
-        @extend %transition;
-        &:hover {
-            opacity: 0.7;
+            .menu-item {
+                @include media("<=desktop") {
+                    margin: 0;
+                    padding: 0;
+                }
+                a {
+                    @include media("<=desktop") {
+                        font-size: 20px;
+                    }
+                }
+            }
         }
     }
 }
