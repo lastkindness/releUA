@@ -37,7 +37,6 @@ function singlePostMap () {
                 // Display the route on the map
                 directionsRenderer.setDirections(response);
                 var duration = response.routes[0].legs[0].duration.text;
-                console.log('duration = ', duration);
                 var duration = response.routes[0].legs[0].duration.text;
 
                 // Define position for the info window

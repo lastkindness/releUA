@@ -6,6 +6,9 @@
 
 html {
     height: 100%;
+    &.popup-open {
+        overflow: hidden;
+    }
 }
 
 body {
@@ -60,7 +63,7 @@ a {
 
 main {
     flex-grow: 1;
-    padding: 100px 0 0;
+    padding: 80px 0 0;
 }
 
 main {
@@ -130,7 +133,55 @@ main {
     z-index: 100;
 }
 
+.swiper-button-prev,
+.swiper-button-next {
+    right: auto;
+    left: 10px;
+    border-radius: 50%;
+    background-color: $primary;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+        background-color: $decorative2;
+        @extend %transition;
+    }
+    @include media("<=desktop") {
+        display: none;
+    }
+    &:after {
+        font-size: 24px;
+        color: $pure_white;
 
+    }
+}
 
+.swiper-pagination {
+    &-bullet {
+        &-active {
+            background-color: $primary;
+        }
+    }
+}
+
+.codedropz-upload-container {
+    @include media("<=desktop") {
+        padding: 10px 10px 25px !important;
+        font-size: 16px;
+    }
+}
+
+.wpcf7 form .wpcf7-response-output {
+    margin: 10px !important;
+    position: relative;
+    top: 0;
+    left: 0;
+    font-size: 12px;
+    line-height: 1em;
+    padding: 10px !important;
+    border-radius: 10px;
+}
 
 

@@ -208,7 +208,7 @@ function get_main_heading_id() {
     $args = array(
         'taxonomy' => 'estate_objects',
         'parent' => 0,
-        'hide_empty' => false,
+        'hide_empty' => true,
     );
     $main_heading = get_terms($args);
 
@@ -327,7 +327,7 @@ function filter_estate_posts() {
     if (!empty($backlight_filters)) {
         $types_ad_terms = get_terms( array(
             'taxonomy' => 'types_ad',
-            'hide_empty' => false,
+            'hide_empty' => true,
         ) );
 
         $types_ad_term_slugs = array();
@@ -417,7 +417,7 @@ function filter_estate_posts() {
                         <h6 class="card__address"><?php echo $address; ?></h6>
                     <?php endif; ?>
                     <ul class="card__prices">
-                        <li class="card__price">
+                        <li class="card__price price-rent">
                             <?php if($rent):?>
                                 <span class="title"><?php echo $rent;?>:</span>
                             <?php endif;?>
@@ -427,7 +427,7 @@ function filter_estate_posts() {
                                 <span class="info"><?php echo $no_rent;?></span>
                             <?php } ?>
                         </li>
-                        <li class="card__price">
+                        <li class="card__price price-sale">
                             <?php if($sale):?>
                                 <span class="title"><?php echo $sale;?>:</span>
                             <?php endif;?>
@@ -441,9 +441,9 @@ function filter_estate_posts() {
                 </div>
                 <?php if(get_field('archive_button','options')):
                     $button = get_field('archive_button','options');?>
-                    <a href="<?php the_permalink();?>" class="btn"><?php echo $button;?></a>
+                    <a href="<?php the_permalink();?>" class="btn card__btn"><?php echo $button;?></a>
                 <?php else:?>
-                    <a href="<?php the_permalink();?>" class="btn"><?php _e('Learn more','ReleUA')?></a>
+                    <a href="<?php the_permalink();?>" class="btn card__btn"><?php _e('Learn more','ReleUA')?></a>
                 <?php endif; ?>
             </article>
             <?php
@@ -454,7 +454,14 @@ function filter_estate_posts() {
         wp_reset_postdata();
 
     } else {
-        echo __('No more posts to load', 'ReleUA');
+        $locale = get_locale();
+        if ($locale === 'en_US') {
+            echo __('No more posts to load', 'ReleUA');
+        } elseif ($locale === 'ru_RU') {
+            echo __('Больше нет постов для загрузки', 'ReleUA');
+        } elseif ($locale === 'uk_UA') {
+            echo __('Більше немає постів для завантаження', 'ReleUA');
+        }
     }
     die();
 }
@@ -578,7 +585,7 @@ function releua_loadmore_ajax_handler(){
     if (!empty($backlight_filters)) {
         $types_ad_terms = get_terms( array(
             'taxonomy' => 'types_ad',
-            'hide_empty' => false,
+            'hide_empty' => true,
         ) );
 
         $types_ad_term_slugs = array();
@@ -662,17 +669,17 @@ function releua_loadmore_ajax_handler(){
                         <h6 class="card__address"><?php echo $address; ?></h6>
                     <?php endif; ?>
                     <ul class="card__prices">
-                        <li class="card__price">
+                        <li class="card__price price-rent">
                             <?php if($rent):?>
                                 <span class="title"><?php echo $rent;?>:</span>
                             <?php endif;?>
-                            <?php  if (has_term('rent', 'estate_category')||has_term('rent-en', 'estate_category')||has_term('rent-ru', 'estate_category')) {?>
+                            <?php if (has_term('rent', 'estate_category')||has_term('rent-en', 'estate_category')||has_term('rent-ru', 'estate_category')) {?>
                                 <span class="info"><?php echo $rental_price;?>uah./м²</span>
                             <?php } else { ?>
                                 <span class="info"><?php echo $no_rent;?></span>
                             <?php } ?>
                         </li>
-                        <li class="card__price">
+                        <li class="card__price price-sale">
                             <?php if($sale):?>
                                 <span class="title"><?php echo $sale;?>:</span>
                             <?php endif;?>
@@ -686,9 +693,9 @@ function releua_loadmore_ajax_handler(){
                 </div>
                 <?php if(get_field('archive_button','options')):
                     $button = get_field('archive_button','options');?>
-                    <a href="<?php the_permalink();?>" class="btn"><?php echo $button;?></a>
+                    <a href="<?php the_permalink();?>" class="btn card__btn"><?php echo $button;?></a>
                 <?php else:?>
-                    <a href="<?php the_permalink();?>" class="btn"><?php _e('Learn more','ReleUA')?></a>
+                    <a href="<?php the_permalink();?>" class="btn card__btn"><?php _e('Learn more','ReleUA')?></a>
                 <?php endif; ?>
             </article>
         <?php endwhile; ?>
@@ -707,7 +714,7 @@ add_action('wp_ajax_nopriv_loadmore', 'releua_loadmore_ajax_handler');
 function populate_address_options() {
     $args = array(
         'taxonomy' => 'estate_objects',
-        'hide_empty' => false,
+        'hide_empty' => true,
     );
     $terms = get_terms($args);
     $options = array();
@@ -724,7 +731,7 @@ function populate_address_options() {
 
 function populate_address_shortcode($tag) {
     $options = populate_address_options();
-    $html = '<select name="' . esc_attr($tag['name']) . '" id="' . esc_attr($tag['id']) . '" class="' . esc_attr($tag['class']) . '">';
+    $html = '<select name="populate_address[]" id="' . esc_attr($tag['id']) . '" class="' . esc_attr($tag['class']) . '">';
     $current_language = apply_filters('wpml_current_language', NULL);
     switch ($current_language) {
         case 'en':
@@ -749,7 +756,7 @@ wpcf7_add_shortcode('populate_address', 'populate_address_shortcode');
 function populate_estate_type_options() {
     $args = array(
         'taxonomy'   => 'estate_type',
-        'hide_empty' => false,
+        'hide_empty' => true,
     );
     $terms = get_terms($args);
     $options = array();
@@ -763,7 +770,7 @@ function populate_estate_type_options() {
 
 function populate_estate_type_shortcode($tag) {
     $options = populate_estate_type_options();
-    $html = '<select name="' . esc_attr($tag['name']) . '" id="' . esc_attr($tag['id']) . '" class="' . esc_attr($tag['class']) . '">';
+    $html = '<select name="populate_estate_type[]" id="' . esc_attr($tag['id']) . '" class="' . esc_attr($tag['class']) . '">';
     $current_language = apply_filters('wpml_current_language', NULL);
     switch ($current_language) {
         case 'en':
@@ -788,7 +795,7 @@ wpcf7_add_shortcode('populate_estate_type', 'populate_estate_type_shortcode');
 function populate_estate_category_options() {
     $args = array(
         'taxonomy'   => 'estate_category',
-        'hide_empty' => false,
+        'hide_empty' => true,
     );
     $terms = get_terms($args);
     $options = array();
@@ -802,7 +809,7 @@ function populate_estate_category_options() {
 
 function populate_estate_category_shortcode($tag) {
     $options = populate_estate_category_options();
-    $html = '<select name="' . esc_attr($tag['name']) . '" id="' . esc_attr($tag['id']) . '" class="' . esc_attr($tag['class']) . '">';
+    $html = '<select name="populate_estate_category[]" id="' . esc_attr($tag['id']) . '" class="' . esc_attr($tag['class']) . '">';
     $current_language = apply_filters('wpml_current_language', NULL);
     switch ($current_language) {
         case 'en':
@@ -822,3 +829,59 @@ function populate_estate_category_shortcode($tag) {
 }
 
 wpcf7_add_shortcode('populate_estate_category', 'populate_estate_category_shortcode');
+
+function populate_area_range_shortcode($tag) {
+    $args = array(
+        'post_type' => 'estate',
+        'posts_per_page' => -1,
+    );
+    $query = new WP_Query($args);
+    $min_area = PHP_INT_MAX;
+    $max_area = 0;
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            // Get the value of the "object_area" field using ACF function
+            $object_area = get_field('object_area');
+            if ($object_area < 0) {
+                $object_area = 0;
+            }
+            if ($object_area < $min_area) {
+                $min_area = $object_area;
+            }
+            if ($object_area > $max_area) {
+                $max_area = $object_area;
+            }
+            $min_area = $min_area - 1;
+            $max_area = $max_area + 1;
+            if ($min_area < 0) {
+                $min_area = 0;
+            }
+        }
+        wp_reset_postdata();
+    }
+
+    // Generate HTML for the range field
+    $html = '<div class="meta-filter ' . esc_attr($tag['type']) . '-filter estate-filter__filter">';
+    $html .= '<div class="meta-filter__box">';
+    $html .= '<div class="price-outer price-outer_start"></div>';
+    $html .= '<input id="' . esc_attr($tag['type']) . '-min" type="range" name="populate_area_range_min" min="' . esc_attr($min_area) . '" max="' . esc_attr($max_area) . '" value="' . esc_attr($min_area) . '">';
+    $html .= '<input id="' . esc_attr($tag['type']) . '-max" type="range" name="populate_area_range_max" min="' . esc_attr($min_area) . '" max="' . esc_attr($max_area) . '" value="' . esc_attr($max_area) . '">';
+    $html .= '<div class="price-outer price-outer_end"></div>';
+    $html .= '<div class="range_bg"></div>';
+    $html .= '</div>';
+    $html .= '<div class="meta-filter__numbers">';
+    $html .= '<input id="' . esc_attr($tag['type']) . '-min-value" name="populate_area_range_min" type="number" min="' . esc_attr($min_area) . '" max="' . esc_attr($max_area) . '" value="' . esc_attr($min_area) . '">';
+    $html .= ' — ';
+    $html .= '<input id="' . esc_attr($tag['type']) . '-max-value" name="populate_area_range_max" type="number" min="' . esc_attr($min_area) . '" max="' . esc_attr($max_area) . '" value="' . esc_attr($max_area) . '">';
+    $html .= '</div>';
+    $html .= '</div>';
+
+    return $html;
+}
+
+wpcf7_add_shortcode('populate_area_range', 'populate_area_range_shortcode');
+
+
+

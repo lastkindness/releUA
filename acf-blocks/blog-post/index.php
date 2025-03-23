@@ -20,7 +20,7 @@
                         <time class="post__date" datetime="<?php echo get_the_date('Y-m-d'); ?> <?php echo get_the_time('H:i:s'); ?>">
                             <?php echo get_the_date('d F Y'); ?>, <?php echo get_the_time(); ?>
                         </time>
-                        <h3><a href="<?php echo get_the_permalink();?>"><?php the_title();?></a></h3>
+                        <h3><a href="<?php echo get_the_permalink();?>" alt="Post Link" title="Post Link"><?php the_title();?></a></h3>
                         <div class="post__img">
                             <?php $categories = get_the_category();
                             if(!empty($categories)) {
@@ -31,22 +31,22 @@
                             <?php if (has_post_thumbnail()) :
                                 the_post_thumbnail('medium');
                             else : ?>
-                                <img src="<?php echo get_field('logo','options')['url']; ?>" alt="image description">
+                                <img src="<?php echo get_field('logo','options')['url']; ?>" alt="logo" title="logo">
                             <?php endif; ?>
                         </div>
                         <?php $content = wp_trim_words(get_the_content(), 20, '...');
                         echo '<div class="post__text">' . $content . '</div>'; ?>
                         <?php if(get_field('archive_button','options')):
                             $button = get_field('archive_button','options');?>
-                            <a href="<?php echo get_the_permalink();?>" class="btn"><?php echo $button;?></a>
+                            <a href="<?php echo get_the_permalink();?>" class="btn" alt="Post Link" title="Post Link"><?php echo $button;?></a>
                         <?php else:?>
-                            <a href="<?php echo get_the_permalink();?>" class="btn"><?php _e('Learn more','ReleUA')?></a>
+                            <a href="<?php echo get_the_permalink();?>" class="btn" alt="Post Link" title="Post Link"><?php _e('Learn more','ReleUA')?></a>
                         <?php endif; ?>
                     </article>
                 <?php endwhile;?>
             </div>
             <?php $button_all = get_sub_field('button_text');?>
-            <a href="/novini/" class="blog-post__btn btn"><?php echo $button_all;?> >> </a>
+            <a href="/novini/" class="blog-post__btn btn" alt="News"><?php echo $button_all;?> >> </a>
         </div>
     </section>
 <?php endif;?>

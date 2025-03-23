@@ -12,11 +12,11 @@
         project_data($_GET['projectId']);
     }?>
     <header class="header">
-        <div class="container container_small">
+        <div class="container">
             <div class="header__wrapper">
                 <?php if($header_logo=get_field('logo','options')):?>
-                    <a class="header__logo" href="<?php echo home_url(); ?>">
-                        <img src="<?php echo $header_logo['url'];?>" alt="<?php echo $header_logo['alt'];?>">
+                    <a class="header__logo" href="<?php echo home_url(); ?>" alt="Header Logo Home Link" title="Header Logo Home Link">
+                        <img src="<?php echo $header_logo['url'];?>" alt="<?php echo $header_logo['alt'];?>" title="<?php echo $header_logo['alt'];?>">
                     </a>
                 <?php endif;?>
                 <div class="header__menu">
@@ -44,7 +44,7 @@
                             <ul class="header__phones phones">
                                 <?php if($link=$phones[0]['text']): ?>
                                     <li>
-                                        <a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $link); ?>" target="_blank"><?php echo $link;?></a>
+                                        <a alt="telephone number" title="telephone number" href="tel:<?php echo preg_replace('/[^0-9+]/', '', $link); ?>" target="_blank"><?php echo $link;?></a>
                                     </li>
                                 <?php endif;?>
                             </ul>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="#" class="nav-opener"><span></span></a>
+                <a href="#" class="nav-opener" alt="Mobile Menu Bar" title="Mobile Menu Bar"><span></span></a>
             </div>
         </div>
     </header>

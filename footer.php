@@ -2,8 +2,8 @@
     <div class="container">
         <div class="footer__wrapper">
             <?php if($footer_logo=get_field('logo_footer','options')):?>
-                <a class="footer__logo" href="<?php echo home_url(); ?>">
-                    <img src="<?php echo $footer_logo['url'];?>" alt="<?php echo $footer_logo['alt'];?>">
+                <a class="footer__logo" href="<?php echo home_url(); ?>" alt="Footer Logo Home Link" title="Footer Logo Home Link">
+                    <img src="<?php echo $footer_logo['url'];?>" alt="<?php echo $footer_logo['alt'];?>" title="<?php echo $footer_logo['alt'];?>">
                 </a>
             <?php endif;?>
             <?php
@@ -30,7 +30,7 @@
                     <?php foreach ($social as $item):?>
                         <?php if($link=$item['link']):?>
                             <li>
-                                <a class="<?php echo $item['icon']?>" href="<?php echo $link;?>" target="_blank"><i class="icon icon-<?php echo $item['icon']?>"></i></a>
+                                <a class="<?php echo $item['icon']?>" alt="<?php echo $item['icon']?>" title="<?php echo $item['icon']?>" href="<?php echo $link;?>" target="_blank"><i class="icon icon-<?php echo $item['icon']?>"></i></a>
                             </li>
                         <?php endif;?>
                     <?php endforeach;?>
@@ -46,7 +46,7 @@
                     <?php foreach ($social as $item):?>
                         <?php if($link=$item['link']):?>
                             <li>
-                                <a class="<?php echo $item['icon']?>" href="<?php echo $link;?>" target="_blank"><i class="icon icon-<?php echo $item['icon']?>"></i></a>
+                                <a class="<?php echo $item['icon']?>" alt="<?php echo $item['icon']?>" title="<?php echo $item['icon']?>" href="<?php echo $link;?>" target="_blank"><i class="icon icon-<?php echo $item['icon']?>"></i></a>
                             </li>
                         <?php endif;?>
                     <?php endforeach;?>

@@ -5,6 +5,7 @@ $(document).ready(() => {
         const swiper = new Swiper(".slider-img__slider", {
             loop: true,
             centeredSlides: true,
+            spaceBetween: 80,
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",

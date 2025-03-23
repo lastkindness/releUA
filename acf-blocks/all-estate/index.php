@@ -59,7 +59,7 @@
                                     <?php
                                     $categories = get_terms(array(
                                         'taxonomy' => 'estate_category',
-                                        'hide_empty' => false,
+                                        'hide_empty' => true,
                                     ));
                                     if (!empty($categories)) :
                                         foreach ($categories as $category) : ?>
@@ -83,7 +83,7 @@
                                     <?php
                                     $types = get_terms(array(
                                         'taxonomy' => 'estate_type',
-                                        'hide_empty' => false,
+                                        'hide_empty' => true,
                                     ));
                                     if (!empty($types)) :
                                         foreach ($types as $type) : ?>
@@ -107,7 +107,7 @@
                                 <div class="handorgel__content__inner">
                                     <?php $districts = get_terms(array(
                                         'taxonomy' => 'estate_district',
-                                        'hide_empty' => false,
+                                        'hide_empty' => true,
                                     ));
                                     if (!empty($districts)) :
                                         foreach ($districts as $district) : ?>
@@ -130,7 +130,7 @@
                                 <div class="handorgel__content__inner">
                                     <?php $subways = get_terms(array(
                                         'taxonomy' => 'subway_station',
-                                        'hide_empty' => false,
+                                        'hide_empty' => true,
                                     ));
                                     if (!empty($subways)) :
                                         foreach ($subways as $subway) : ?>
@@ -153,7 +153,7 @@
                                 <div class="handorgel__content__inner">
                                     <?php $compatibles = get_terms(array(
                                         'taxonomy' => 'estate_compatible',
-                                        'hide_empty' => false,
+                                        'hide_empty' => true,
                                     ));
                                     if (!empty($compatibles)) :
                                         foreach ($compatibles as $compatible) : ?>
@@ -176,7 +176,7 @@
                                 <div class="handorgel__content__inner">
                                     <?php $types_ad = get_terms(array(
                                         'taxonomy' => 'types_ad',
-                                        'hide_empty' => false,
+                                        'hide_empty' => true,
                                     ));
                                     if (!empty($types_ad)) :
                                         foreach ($types_ad as $type_ad) : ?>
@@ -477,7 +477,7 @@
                         <?php
                         $categories = get_terms(array(
                             'taxonomy' => 'estate_category',
-                            'hide_empty' => false,
+                            'hide_empty' => true,
                         ));
                         if (!empty($categories)) :
                             foreach ($categories as $category) : ?>
@@ -496,7 +496,7 @@
                         <?php
                         $types = get_terms(array(
                             'taxonomy' => 'estate_type',
-                            'hide_empty' => false,
+                            'hide_empty' => true,
                         ));
                         if (!empty($types)) :
                             foreach ($types as $type) : ?>
@@ -515,7 +515,7 @@
                         <?php
                         $districts = get_terms(array(
                             'taxonomy' => 'estate_district',
-                            'hide_empty' => false,
+                            'hide_empty' => true,
                         ));
                         if (!empty($districts)) :
                             foreach ($districts as $district) : ?>
@@ -534,7 +534,7 @@
                         <?php
                         $subways = get_terms(array(
                             'taxonomy' => 'subway_station',
-                            'hide_empty' => false,
+                            'hide_empty' => true,
                         ));
                         if (!empty($subways)) :
                             foreach ($subways as $subway) : ?>
@@ -553,7 +553,7 @@
                         <?php
                         $compatibles = get_terms(array(
                             'taxonomy' => 'estate_compatible',
-                            'hide_empty' => false,
+                            'hide_empty' => true,
                         ));
                         if (!empty($compatibles)) :
                             foreach ($compatibles as $compatible) : ?>
@@ -572,7 +572,7 @@
                         <?php
                         $types_ad = get_terms(array(
                             'taxonomy' => 'types_ad',
-                            'hide_empty' => false,
+                            'hide_empty' => true,
                         ));
                         if (!empty($types_ad)) :
                             foreach ($types_ad as $type_ad) : ?>
@@ -813,7 +813,7 @@
                     $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Get the current page number
                     $estate_query = new WP_Query(array(
                         'post_type' => 'estate',
-                        'posts_per_page' => 24,
+                        'posts_per_page' => 4,
                         'paged' => $paged
                     ));
                     if ($estate_query->have_posts()) :
@@ -827,7 +827,7 @@
                                     <?php if (has_post_thumbnail()) :
                                         the_post_thumbnail('medium');
                                     else : ?>
-                                        <img src="<?php echo get_field('logo', 'options')['url']; ?>" alt="image description">
+                                        <img src="<?php echo get_field('logo', 'options')['url']; ?>" alt="<?php echo get_field('logo', 'options')['alt']; ?>" title="<?php echo get_field('logo', 'options')['title']; ?>">
                                     <?php endif; ?>
                                     <?php if (get_field('unique_property') && $unique_property = get_field('text_unique_property', 'option-estate')) : ?>
                                         <span class="tag"><?php echo $unique_property; ?></span>
@@ -839,7 +839,7 @@
                                     if ($address) : ?>
                                         <h6 class="card__address"><?php echo $address; ?></h6>
                                     <?php endif; ?>
-                                    <ul class="card__prices">
+                                    <!--                                    <ul class="card__prices">
                                         <li class="card__price">
                                             <?php if ($rent) : ?>
                                                 <span class="title"><?php echo $rent; ?>:</span>
@@ -860,7 +860,7 @@
                                                 <span class="info"><?php echo $no_sale; ?></span>
                                             <?php } ?>
                                         </li>
-                                    </ul>
+                                    </ul>-->
                                 </div>
                                 <?php if (get_field('archive_button', 'options')) :
                                     $button = get_field('archive_button', 'options'); ?>

@@ -41,6 +41,7 @@ $term_id = $current_term->term_id;
                             $address = get_field('address', $child_term);
                             $term_link = get_term_link($child_term);
                             $button_build_estate = get_field('button_build_estate', 'option-estate');
+                            $tag_info = get_field('tag_info', 'option-estate');
                             $post_count = $child_term->count;
                             ?>
 
@@ -52,6 +53,9 @@ $term_id = $current_term->term_id;
                                             <span class="tag">
                                                 <span class="icon icon-build"></span>
                                                 <span class="count"><?php echo $post_count;?></span>
+                                                <?php if($tag_info):?>
+                                                    <span class="tag-info"><?php echo $tag_info;?></span>
+                                                <?php endif;?>
                                             </span>
                                         <?php endif;?>
                                     </div>
@@ -85,21 +89,50 @@ $term_id = $current_term->term_id;
         $description = $didnt_find_banner['description'];
         $button = $didnt_find_banner['button'];
         $image = $didnt_find_banner['image'];
-        $background_image = $didnt_find_banner['background_image']; ?>
+        $background_image = $didnt_find_banner['background_image'];
+        $form_shortcode = $didnt_find_banner['form_shortcode'];
+        $popup_img = $didnt_find_banner['popup_img']; ?>
         <section style="background-image: url('<?php echo $background_image["url"]; ?>')" class="didnt-find-banner" id="didnt-find-banner">
             <div class="container container_small">
                 <div class="didnt-find-banner__wrapper">
                     <img class="didnt-find-banner__img" src="<?php echo $image["url"]; ?>" alt="<?php echo $image["alt"]; ?>">
                     <div class="didnt-find-banner__content">
-                        <h2 class="didnt-find-banner__title"><?php echo $title; ?></h2>
-                        <p class="didnt-find-banner__text"><?php echo $description; ?></p>
+                        <?php if($title):?>
+                            <h2 class="didnt-find-banner__title"><?php echo $title; ?></h2>
+                        <?php endif;?>
+                        <?php if($description):?>
+                            <p class="didnt-find-banner__text"><?php echo $description; ?></p>
+                        <?php endif;?>
                         <?php if($button):?>
-                            <a href="<?php echo $button['url'];?>" class="btn btn_big btn_light didnt-find-banner__btn" <?php if($button['target']=='_blank'):?>target="_blank"<?php endif;?>><?php echo $button['title'];?></a>
+                            <a href="<?php echo $button['url'];?>" class="btn btn_big btn_light didnt-find-banner__btn" <?php if($button['target']=='_blank'):?>target="_blank"<?php endif;?> alt="<?php echo $button['title'];?>"><?php echo $button['title'];?></a>
                         <?php endif;?>
                     </div>
                 </div>
             </div>
         </section>
+        <div class="popup didnt-find-banner__popup">
+            <div class="close popup__close"></div>
+            <div class="container container_small">
+                <div class="popup__wrapper">
+                    <?php if($popup_img):?>
+                        <img src="<?php echo $popup_img['url'];?>" alt="<?php echo $popup_img['alt'];?>" title="<?php echo $popup_img['title'];?>" class="didnt-find-banner__popup-img">
+                    <?php endif;?>
+                    <div class="popup__content">
+                        <?php if($title):?>
+                            <h2 class="didnt-find-banner__popup-title"><?php echo $title;?></h2>
+                        <?php endif;?>
+                        <?php if($description):?>
+                            <div class="didnt-find-banner__popup-text">
+                                <?php echo $description;?>
+                            </div>
+                        <?php endif;?>
+                        <?php if($form_shortcode): ?>
+                            <div class="didnt-find-banner__popup-form"><?php echo do_shortcode($form_shortcode); ?></div>
+                        <?php endif ; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     <?php endif;?>
 </main>
 <?php

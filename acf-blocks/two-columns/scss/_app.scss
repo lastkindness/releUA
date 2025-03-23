@@ -4,12 +4,24 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @include media("<=desktop") {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
     }
     &__col {
         width: 50%;
+        @include media("<=desktop") {
+            width: 100%;
+            padding: 0;
+        }
     }
     &__content {
         padding-right: 20px;
+        @include media("<=desktop") {
+            padding: 0;
+        }
     }
     &__images {
         padding-left: 20px;
@@ -17,6 +29,9 @@
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
         grid-gap: 20px;
+        @include media("<=desktop") {
+            padding: 0;
+        }
     }
     &__img {
         &:nth-child(1) {

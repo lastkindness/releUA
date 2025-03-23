@@ -61,7 +61,7 @@ $queried_object = get_queried_object();
                                     <div class="handorgel__content__inner">
                                         <?php $categories = get_terms(array(
                                             'taxonomy' => 'estate_category',
-                                            'hide_empty' => false,
+                                            'hide_empty' => true,
                                         ));
                                         if (!empty($categories)) :
                                             foreach ($categories as $category) : ?>
@@ -88,7 +88,7 @@ $queried_object = get_queried_object();
                                     <div class="handorgel__content__inner">
                                         <?php $types = get_terms(array(
                                             'taxonomy' => 'estate_type',
-                                            'hide_empty' => false,
+                                            'hide_empty' => true,
                                         ));
                                         if (!empty($types)) :
                                             foreach ($types as $type) : ?>
@@ -116,7 +116,7 @@ $queried_object = get_queried_object();
                                     <div class="handorgel__content__inner">
                                         <?php $districts = get_terms(array(
                                             'taxonomy' => 'estate_district',
-                                            'hide_empty' => false,
+                                            'hide_empty' => true,
                                         ));
                                         if (!empty($districts)) :
                                             foreach ($districts as $district) : ?>
@@ -144,7 +144,7 @@ $queried_object = get_queried_object();
                                     <div class="handorgel__content__inner">
                                         <?php $subways = get_terms(array(
                                             'taxonomy' => 'subway_station',
-                                            'hide_empty' => false,
+                                            'hide_empty' => true,
                                         ));
                                         if (!empty($subways)) :
                                             foreach ($subways as $subway) : ?>
@@ -172,7 +172,7 @@ $queried_object = get_queried_object();
                                     <div class="handorgel__content__inner">
                                         <?php $compatibles = get_terms(array(
                                             'taxonomy' => 'estate_compatible',
-                                            'hide_empty' => false,
+                                            'hide_empty' => true,
                                         ));
                                         if (!empty($compatibles)) :
                                             foreach ($compatibles as $compatible) : ?>
@@ -200,7 +200,7 @@ $queried_object = get_queried_object();
                                     <div class="handorgel__content__inner">
                                         <?php $types_ad = get_terms(array(
                                             'taxonomy' => 'types_ad',
-                                            'hide_empty' => false,
+                                            'hide_empty' => true,
                                         ));
                                         if (!empty($types_ad)) :
                                             foreach ($types_ad as $type_ad) : ?>
@@ -385,16 +385,14 @@ $queried_object = get_queried_object();
                             <?php
                             $categories = get_terms(array(
                                 'taxonomy' => 'estate_category',
-                                'hide_empty' => false,
+                                'hide_empty' => true,
                             ));
                             if (!empty($categories)) :
                                 foreach ($categories as $category) : ?>
                                     <label>
-                                        <?php
-                                        // Check if the current category is the queried taxonomy
-                                        $checked = is_tax('estate_category', $category->slug) ? 'checked' : '';
+                                        <?php $checked = is_tax('estate_category', $category->slug) ? 'checked' : '';
                                         ?>
-                                        <input class="estate-category-filter" type="checkbox" name="estate_category[]" value="<?php echo $category->slug; ?>" <?php echo $checked; ?>>
+                                        <input <?php if(!$checked):echo "disabled"; endif;?> class="estate-category-filter" type="checkbox" name="estate_category[]" value="<?php echo $category->slug; ?>" <?php echo $checked; ?>>
                                         <?php echo $category->name; ?>
                                     </label>
                                 <?php endforeach;
@@ -408,13 +406,12 @@ $queried_object = get_queried_object();
                             <?php
                             $types = get_terms(array(
                                 'taxonomy' => 'estate_type',
-                                'hide_empty' => false,
+                                'hide_empty' => true,
                             ));
                             if (!empty($types)) :
                                 foreach ($types as $type) : ?>
                                     <label>
                                         <?php
-                                        // Check if the current type is the queried taxonomy
                                         $checked = is_tax('estate_type', $type->slug) ? 'checked' : '';
                                         ?>
                                         <input class="estate-type-filter" type="checkbox" name="estate_type[]" value="<?php echo $type->term_id; ?>" <?php echo $checked; ?>>
@@ -431,7 +428,7 @@ $queried_object = get_queried_object();
                             <?php
                             $districts = get_terms(array(
                                 'taxonomy' => 'estate_district',
-                                'hide_empty' => false,
+                                'hide_empty' => true,
                             ));
                             if (!empty($districts)) :
                                 foreach ($districts as $district) : ?>
@@ -454,7 +451,7 @@ $queried_object = get_queried_object();
                             <?php
                             $subways = get_terms(array(
                                 'taxonomy' => 'subway_station',
-                                'hide_empty' => false,
+                                'hide_empty' => true,
                             ));
                             if (!empty($subways)) :
                                 foreach ($subways as $subway) : ?>
@@ -477,7 +474,7 @@ $queried_object = get_queried_object();
                             <?php
                             $compatibles = get_terms(array(
                                 'taxonomy' => 'estate_compatible',
-                                'hide_empty' => false,
+                                'hide_empty' => true,
                             ));
                             if (!empty($compatibles)) :
                                 foreach ($compatibles as $compatible) : ?>
@@ -500,7 +497,7 @@ $queried_object = get_queried_object();
                             <?php
                             $types_ad = get_terms(array(
                                 'taxonomy' => 'types_ad',
-                                'hide_empty' => false,
+                                'hide_empty' => true,
                             ));
                             if (!empty($types_ad)) :
                                 foreach ($types_ad as $type_ad) : ?>
@@ -663,7 +660,7 @@ $queried_object = get_queried_object();
                             $taxonomy_slug = $current_taxonomy->taxonomy;
                             $estate_query = new WP_Query(array(
                                 'post_type' => 'estate',
-                                'posts_per_page' => 24,
+                                'posts_per_page' => 4,
                                 'paged' => $paged,
                                 'tax_query' => array(
                                     array(
@@ -676,7 +673,7 @@ $queried_object = get_queried_object();
                         } else {
                             $estate_query = new WP_Query(array(
                                 'post_type' => 'estate',
-                                'posts_per_page' => 24,
+                                'posts_per_page' => 4,
                                 'paged' => $paged,
                             ));
                         }
@@ -684,7 +681,7 @@ $queried_object = get_queried_object();
                     if ($estate_query->have_posts()) : ?>
                         <div id="estate-results" class="cards-grid__wrapper">
                             <?php while ($estate_query->have_posts()) : $estate_query->the_post(); ?>
-                                <a href="<?php the_permalink();?>" class="card">
+                                <a href="<?php the_permalink();?>" class="card" alt="Estate Post Link" title="Estate Post Link">
                                     <?php
                                     $unique_property = get_field('unique_property', get_the_ID());
                                     $text_unique_property = get_field('text_unique_property', 'option-estate');
@@ -697,7 +694,7 @@ $queried_object = get_queried_object();
                                         <?php if (has_post_thumbnail()) :
                                             the_post_thumbnail('medium');
                                         else : ?>
-                                            <img src="<?php echo get_field('logo','options')['url']; ?>" alt="image description">
+                                            <img src="<?php echo get_field('logo','options')['url']; ?>" alt="<?php echo get_field('logo','options')['alt']; ?>" title="<?php echo get_field('logo','options')['title']; ?>">
                                         <?php endif; ?>
                                     </div>
                                     <div class="card__body">
@@ -713,26 +710,40 @@ $queried_object = get_queried_object();
                                             <h6 class="card__address"><?php echo $address; ?></h6>
                                         <?php endif; ?>
                                         <ul class="card__prices">
-                                            <li class="card__price">
-                                                <?php if($rent):?>
-                                                    <span class="title"><?php echo $rent;?>:</span>
-                                                <?php endif;?>
-                                                <?php  if (has_term('rent', 'estate_category')||has_term('rent-en', 'estate_category')||has_term('rent-ru', 'estate_category')) {?>
-                                                    <span class="info"><?php echo $rental_price;?>uah./м²</span>
-                                                <?php } else { ?>
-                                                    <span class="info"><?php echo $no_rent;?></span>
-                                                <?php } ?>
-                                            </li>
-                                            <li class="card__price">
-                                                <?php if($sale):?>
-                                                    <span class="title"><?php echo $sale;?>:</span>
-                                                <?php endif;?>
-                                                <?php  if (has_term('sale', 'estate_category')||has_term('sale-en', 'estate_category')||has_term('sale-ru', 'estate_category')) {?>
-                                                    <span class="info">$<?php echo $sale_price;?> м²</span>
-                                                <?php } else { ?>
-                                                    <span class="info"><?php echo $no_sale;?></span>
-                                                <?php } ?>
-                                            </li>
+                                            <?php $categories = get_terms(array(
+                                                'taxonomy' => 'estate_category',
+                                                'hide_empty' => true,
+                                            ));
+                                            if (!empty($categories)) :
+                                                foreach ($categories as $category) : $checked = is_tax('estate_category', $category->slug) ? 'checked' : '';
+                                                    if(($category->slug=="rent"&&$checked)||($category->slug=="rent-en"&&$checked)||($category->slug=="rent-ru"&&$checked)) {
+                                                        $rent_term = has_term('rent', 'estate_category')||has_term('rent-en', 'estate_category')||has_term('rent-ru', 'estate_category');
+                                                    ?>
+                                                        <li class="card__price price-rent">
+                                                            <?php if($rent):?>
+                                                                <span class="title"><?php echo $rent;?>:</span>
+                                                            <?php endif;?>
+                                                            <?php  if ($rent_term) {?>
+                                                                <span class="info"><?php echo $rental_price;?>uah./м²</span>
+                                                            <?php } else { ?>
+                                                                <span class="info"><?php echo $no_rent;?></span>
+                                                            <?php } ?>
+                                                        </li>
+                                                    <?php } else if(($category->slug=="sale"&&$checked)||($category->slug=="sale-en"&&$checked)||($category->slug=="sale-ru"&&$checked)) {
+                                                        $sale_term = has_term('sale', 'estate_category')||has_term('sale-en', 'estate_category')||has_term('sale-ru', 'estate_category');
+                                                    ?>
+                                                        <li class="card__price price-sale">
+                                                            <?php if($sale):?>
+                                                                <span class="title"><?php echo $sale;?>:</span>
+                                                            <?php endif;?>
+                                                            <?php  if ($sale_term) {?>
+                                                                <span class="info">$<?php echo $sale_price;?> м²</span>
+                                                            <?php } else { ?>
+                                                                <span class="info"><?php echo $no_sale;?></span>
+                                                            <?php } ?>
+                                                        </li>
+                                                    <?php } ?>
+                                                <?php endforeach; endif; ?>
                                         </ul>
                                     </div>
                                     <?php if(get_field('archive_button','options')):
@@ -769,21 +780,50 @@ $queried_object = get_queried_object();
         $description = $didnt_find_banner['description'];
         $button = $didnt_find_banner['button'];
         $image = $didnt_find_banner['image'];
-        $background_image = $didnt_find_banner['background_image']; ?>
+        $background_image = $didnt_find_banner['background_image'];
+        $form_shortcode = $didnt_find_banner['form_shortcode'];
+        $popup_img = $didnt_find_banner['popup_img']; ?>
         <section style="background-image: url('<?php echo $background_image["url"]; ?>')" class="didnt-find-banner" id="didnt-find-banner">
             <div class="container container_small">
                 <div class="didnt-find-banner__wrapper">
-                    <img class="didnt-find-banner__img" src="<?php echo $image["url"]; ?>" alt="<?php echo $image["alt"]; ?>">
+                    <img class="didnt-find-banner__img" src="<?php echo $image["url"]; ?>" alt="<?php echo $image["alt"]; ?>" title="<?php echo $image["title"]; ?>">
                     <div class="didnt-find-banner__content">
-                        <h2 class="didnt-find-banner__title"><?php echo $title; ?></h2>
-                        <p class="didnt-find-banner__text"><?php echo $description; ?></p>
+                        <?php if($title):?>
+                            <h2 class="didnt-find-banner__title"><?php echo $title; ?></h2>
+                        <?php endif;?>
+                        <?php if($description):?>
+                            <p class="didnt-find-banner__text"><?php echo $description; ?></p>
+                        <?php endif;?>
                         <?php if($button):?>
-                            <a href="<?php echo $button['url'];?>" class="btn btn_big btn_light didnt-find-banner__btn" <?php if($button['target']=='_blank'):?>target="_blank"<?php endif;?>><?php echo $button['title'];?></a>
+                            <a href="<?php echo $button['url'];?>" class="btn btn_big btn_light didnt-find-banner__btn" <?php if($button['target']=='_blank'):?>target="_blank"<?php endif;?> alt="<?php echo $button['title'];?>" title="<?php echo $button['title'];?>"><?php echo $button['title'];?></a>
                         <?php endif;?>
                     </div>
                 </div>
             </div>
         </section>
+        <div class="popup didnt-find-banner__popup">
+            <div class="close popup__close"></div>
+            <div class="container container_small">
+                <div class="popup__wrapper">
+                    <?php if($popup_img):?>
+                        <img src="<?php echo $popup_img['url'];?>" alt="<?php echo $popup_img['alt'];?>" title="<?php echo $popup_img['title'];?>" class="didnt-find-banner__popup-img">
+                    <?php endif;?>
+                    <div class="popup__content">
+                        <?php if($title):?>
+                            <h2 class="didnt-find-banner__popup-title"><?php echo $title;?></h2>
+                        <?php endif;?>
+                        <?php if($description):?>
+                            <div class="didnt-find-banner__popup-text">
+                                <?php echo $description;?>
+                            </div>
+                        <?php endif;?>
+                        <?php if($form_shortcode): ?>
+                            <div class="didnt-find-banner__popup-form"><?php echo do_shortcode($form_shortcode); ?></div>
+                        <?php endif ; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     <?php endif;?>
 </main>
 <?php get_footer(); ?>

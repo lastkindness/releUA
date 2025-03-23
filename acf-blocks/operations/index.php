@@ -32,7 +32,7 @@
                             <?php if (has_post_thumbnail()) :
                                 the_post_thumbnail('medium');
                             else : ?>
-                                <img src="<?php echo get_field('logo','options')['url']; ?>" alt="image description">
+                                <img src="<?php echo get_field('logo','options')['url']; ?>" alt="logo" title="logo">
                             <?php endif; ?>
                         </div>
                         <?php $content = wp_trim_words(get_the_content(), 20, '...');

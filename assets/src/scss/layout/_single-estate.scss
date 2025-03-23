@@ -5,9 +5,31 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-gap: 30px;
+            @include media("<=desktop") {
+                grid-template-columns: 1fr;
+            }
         }
     }
     &__gallery {
         grid-column: 1/3;
+    }
+    &__form {
+        h2 {
+            @include media("<=desktop") {
+                font-size: 24px;
+            }
+        }
+        p {
+            @include media("<=desktop") {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+main.single-estate {
+    padding: 120px 0 0;
+    @include media("<=desktop") {
+        padding: 40px 0 0;
     }
 }

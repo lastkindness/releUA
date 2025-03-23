@@ -2,6 +2,12 @@
     position: relative;
     color: $pure_white;
     padding: 80px 0;
+    @include media("<=desktop") {
+        text-align: center;
+        margin-top: 50px;
+        padding: 45px 0 165px;
+        text-align: center;
+    }
     h1,
     h2,
     h3,
@@ -15,6 +21,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @include media("<=desktop") {
+            justify-content: center;
+        }
     }
     &__img {
         position: absolute;
@@ -22,10 +31,40 @@
         bottom: 0%;
         width: 60%;
         z-index: 1;
+        height: auto;
+        @include media("<=widescreen-lg") {
+            right: -15%;
+            width: 75%;
+        }
+        @include media("<=widescreen") {
+            right: -30%;
+            width: 85%;
+        }
+        @include media("<=desktop") {
+            width: 60%;
+            right: -3%;
+        }
+        @include media("<=tablet") {
+            width: 85%;
+        }
+        @include media("<=phone") {
+            width: 100%;
+        }
     }
     &__content {
         max-width: 600px;
         position: relative;
         z-index: 2;
+    }
+    &__title {
+        @include media("<=desktop") {
+            font-size: 25px;
+            text-align: center;
+        }
+    }
+    &__description {
+        @include media("<=desktop") {
+            font-size: 14px;
+        }
     }
 }

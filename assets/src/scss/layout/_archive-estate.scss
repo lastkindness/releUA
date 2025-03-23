@@ -1,0 +1,21 @@
+.archive-estate {
+}
+
+main.archive-estate {
+    padding: 120px 0 0;
+    @include media("<=desktop") {
+        padding: 40px 0 0;
+    }
+}
+
+.term-rent {
+    .price-sale {
+        display: none;
+    }
+}
+
+.term-sale {
+    .price-rent {
+        display: none;
+    }
+}

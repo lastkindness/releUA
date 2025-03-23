@@ -1,5 +1,5 @@
 <section <?php if($id = get_sub_field('id')): echo 'id="' . $id . '"'; endif;?> class="slider-img">
-    <div class="container">
+    <div class="container container_small">
         <?php if($slider_title=get_sub_field('slider_title')):?>
             <h2><?php echo $slider_title;?></h2>
         <?php endif;?>

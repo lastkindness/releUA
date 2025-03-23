@@ -32,17 +32,16 @@ function userAgent() {
 
 function linksClick() {
     $("a").on('click', function(event) {
-        if (location.pathname === '/') {
-            if (this.hash !== "") {
-                event.preventDefault();
-                var hash = this.hash;
-                window.scrollTo({
-                    top: $(hash).offset().top - 100,
-                    behavior: 'smooth'
-                }), 800, function(){
-                    window.location.hash = hash;
-                };
-            }
+        if (this.hash !== "") {
+            event.preventDefault();
+            var hash = this.hash;
+            var targetOffset = $(hash).offset().top - 100;
+            window.scrollTo({
+                top: targetOffset,
+                behavior: 'smooth'
+            });
         }
     });
 }
+
+

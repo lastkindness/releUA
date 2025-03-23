@@ -8,6 +8,9 @@
         font-size: 24px;
         font-weight: 400;
         margin-bottom: 30px;
+        @include media("<=desktop") {
+            margin-bottom: 10px;
+        }
     }
     &__items {
         @extend %listreset;
@@ -19,12 +22,18 @@
         justify-content: flex-start;
         margin-bottom: 10px;
         flex-wrap: wrap;
+        @include media("<=desktop") {
+            font-size: 16px;
+        }
         a,
         span,
         i {
             font-size: 24px;
             font-weight: 400;
             text-decoration: none;
+            @include media("<=desktop") {
+                font-size: 16px;
+            }
         }
         .text {
             margin-left: 10px;
@@ -72,6 +81,11 @@
         grid-gap: 30px;
         align-items: center;
         justify-content: space-between;
+        margin: 50px 0 0;
+        @include media("<=desktop") {
+            grid-template-columns: 1fr;
+            margin: 10px 0 0;
+        }
     }
     &__info {
 
@@ -85,6 +99,9 @@
         }
         &-title {
             font-size: 28px;
+            @include media("<=desktop") {
+                font-size: 24px;
+            }
         }
         .contact-form {
             &__components {

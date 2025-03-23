@@ -21,13 +21,14 @@ if ($term && $term->parent) {
     $form_text = get_field('form_text', 'option-estate');
     $form_text_object = get_field('form_text_object', 'option-estate');
     $button_read_more = get_field('button_read_more', 'option-estate');
-?>
+    $tag_info = get_field('tag_info', 'option-estate');
+    ?>
 
     <main class="single-built-object">
         <section <?php if($hero_image):?> style="background-image: url('<?php echo $hero_image['url'];?>')" <?php endif;?> class="hero single-built-object__hero" id="hero">
             <div class="container container_small">
                 <div class="hero__wrapper">
-                    <?php if($hero_image):?>
+                    <?php if($class_construction):?>
                         <div class="hero__tag"><?php echo $class_construction;?></div>
                     <?php endif;?>
                     <h1 class="hero__title"><?php single_term_title();?></h1>
@@ -56,7 +57,7 @@ if ($term && $term->parent) {
                         </h6>
                     <?php endif;?>
                     <?php if($text_button_hero):?>
-                        <a href="#" class="btn btn_big btn_light hero__btn"><?php echo $text_button_hero;?></a>
+                        <a alt="<?php echo $text_button_hero;?>" title="<?php echo $text_button_hero;?>" href="#properties-this-building" class="btn btn_big btn_light hero__btn"><?php echo $text_button_hero;?></a>
                     <?php endif;?>
                 </div>
             </div>
@@ -136,7 +137,7 @@ if ($term && $term->parent) {
                     if ($posts_query->have_posts()) :
                         while ($posts_query->have_posts()) : $posts_query->the_post();
                             ?>
-                            <a href="<?php the_permalink(); ?>" class="card">
+                            <a alt="estate post link" title="estate post link" href="<?php the_permalink(); ?>" class="card">
                                 <?php
                                 $unique_property = get_field('unique_property', get_the_ID());
                                 $text_unique_property = get_field('text_unique_property', 'option-estate');
@@ -155,7 +156,7 @@ if ($term && $term->parent) {
                                     <?php if (has_post_thumbnail()) :
                                         the_post_thumbnail('medium');
                                     else : ?>
-                                        <img src="<?php echo get_field('logo', 'options')['url']; ?>" alt="image description">
+                                        <img src="<?php echo get_field('logo', 'options')['url']; ?>" alt="image description" title="image description">
                                     <?php endif; ?>
                                 </div>
                                 <div class="card__body">
@@ -163,7 +164,7 @@ if ($term && $term->parent) {
                                     <?php $address = get_field('address'); if ($address) : ?>
                                         <h6 class="card__address"><?php echo $address; ?></h6>
                                     <?php endif; ?>
-                                    <ul class="card__prices">
+                                    <!--                                    <ul class="card__prices">
                                         <li class="card__price">
                                             <?php if($rent):?>
                                                 <span class="title"><?php echo $rent;?>:</span>
@@ -184,7 +185,7 @@ if ($term && $term->parent) {
                                                 <span class="info"><?php echo $no_sale;?></span>
                                             <?php } ?>
                                         </li>
-                                    </ul>
+                                    </ul>-->
                                 </div>
                                 <?php if (get_field('archive_button', 'options')) :
                                     $button = get_field('archive_button', 'options');
@@ -198,7 +199,17 @@ if ($term && $term->parent) {
                         endwhile;
                         wp_reset_postdata();
                     else :
-                        echo '<h4 class="card__title">No posts found</h4>';
+                        $current_language = apply_filters('wpml_current_language', NULL);
+                        switch ($current_language) {
+                            case 'en':
+                                echo '<h4 class="card__title">No properties found</h4>';
+                                break;
+                            case 'ru':
+                                echo '<h4 class="card__title">Ни один объект недвижимости не найден</h4>';
+                                break;
+                            default:
+                                echo '<h4 class="card__title">Жоден об\'єкт нерухомості не знайдено</h4>';
+                        };
                     endif;
                     ?>
                 </div>
@@ -234,19 +245,22 @@ if ($term && $term->parent) {
                                 ));
                                 if (!empty($child_terms) && !is_wp_error($child_terms)) {
                                     foreach ($child_terms as $child_term) { $post_count = $child_term->count; ?>
-                                        <a href="<?php echo get_term_link($child_term); ?>" class="card swiper-slide">
+                                        <a alt="estate built object link" title="estate built object link" href="<?php echo get_term_link($child_term); ?>" class="card swiper-slide">
                                             <div class="card__img">
                                                 <?php $image = get_field('image', 'estate_objects_' . $child_term->term_id)['url'];
                                                 if ($image) : ?>
-                                                    <img src="<?php echo($image); ?>" alt="image description">
+                                                    <img src="<?php echo($image); ?>" alt="image description" title="image description">
                                                 <?php else : ?>
-                                                    <img src="<?php echo(get_field('logo', 'options')['url']); ?>" alt="image description">
+                                                    <img src="<?php echo(get_field('logo', 'options')['url']); ?>" alt="<?php echo(get_field('logo', 'options')['alt']); ?>" title="<?php echo(get_field('logo', 'options')['title']); ?>">
                                                 <?php endif; ?>
                                                 <?php if($post_count):?>
                                                     <span class="tag">
-                                                <span class="icon icon-build"></span>
-                                                <span class="count"><?php echo $post_count;?></span>
-                                            </span>
+                                                        <span class="icon icon-build"></span>
+                                                        <span class="count"><?php echo $post_count;?></span>
+                                                        <?php if($tag_info):?>
+                                                            <span class="tag-info"><?php echo $tag_info;?></span>
+                                                        <?php endif;?>
+                                                    </span>
                                                 <?php endif;?>
                                             </div>
                                             <div class="card__body">
@@ -268,7 +282,17 @@ if ($term && $term->parent) {
                                 }
                             }
                         } else {
-                            echo '<h4 class="card__title">No posts found</h4>';
+                            $current_language = apply_filters('wpml_current_language', NULL);
+                            switch ($current_language) {
+                                case 'en':
+                                    echo '<h4 class="card__title">No properties found</h4>';
+                                    break;
+                                case 'ru':
+                                    echo '<h4 class="card__title">Ни один объект недвижимости не найден</h4>';
+                                    break;
+                                default:
+                                    echo '<h4 class="card__title">Жоден об\'єкт нерухомості не знайдено</h4>';
+                            };
                         }
                         ?>
                     </div>
@@ -309,7 +333,7 @@ if ($term && $term->parent) {
                                         <p class="more-real-estate__description"><?php echo $description;?></p>
                                     <?php endif;?>
                                     <?php if($button):?>
-                                        <a href="<?php echo $button['url'];?>" class="more-real-estate__btn btn btn_big btn_light"><?php echo $button['title'];?></a>
+                                        <a alt="<?php echo $button['title'];?>" title="<?php echo $button['title'];?>" href="<?php echo $button['url'];?>" class="more-real-estate__btn btn btn_big btn_light"><?php echo $button['title'];?></a>
                                     <?php endif;?>
                                 </div>
                                 <?php if($image):?>
@@ -324,17 +348,18 @@ if ($term && $term->parent) {
 <?php } else {
     $child_term_ids = get_term_children($term->term_id, 'estate_objects');
     $term_title = single_term_title('', false);
-    $didnt_find_banner = get_field('didnt_find', 'option-estate');?>
+    $didnt_find_banner = get_field('didnt_find', 'option-estate');
+    $tag_info = get_field('tag_info', 'option-estate');?>
     <main class="catalogue-built-objects">
-<?php if (!empty($child_term_ids)) {
-        if($term_title):?>
-            <section id="title-section" class="catalogue-built-objects__title-section title-section">
-                <div class="container container_small">
-                    <h1 class="h4 title"><?php echo $term_title; ?></h1>
-                </div>
-            </section>
-        <?php endif;?>
-        <section id="cards-grid" class="catalogue-built-objects__cards-grid cards-grid cards-grid_big cards-grid_decorate">
+        <?php if (!empty($child_term_ids)) {
+            if($term_title):?>
+                <section id="title-section" class="catalogue-built-objects__title-section title-section">
+                    <div class="container container_small">
+                        <h1 class="h4 title"><?php echo $term_title; ?></h1>
+                    </div>
+                </section>
+            <?php endif;?>
+            <section id="cards-grid" class="catalogue-built-objects__cards-grid cards-grid cards-grid_big cards-grid_decorate">
             <div class="container container_small">
                 <div class="cards-grid__wrapper">
                     <?php foreach ($child_term_ids as $child_term_id) {
@@ -346,10 +371,10 @@ if ($term && $term->parent) {
                         $unique_property = get_field('text_unique_property', $child_term);
                         $button_build_estate = get_field('button_build_estate', 'option-estate');
                         ?>
-                        <a href="<?php echo $term_link; ?>" class="card">
+                        <a alt="estate post link" href="<?php echo $term_link; ?>" class="card">
                             <?php if($hero_image):?>
                                 <div class="card__img">
-                                    <img class="img" src="<?php echo $hero_image['url']; ?>" alt="<?php echo $hero_image['alt']; ?>">
+                                    <img class="img" src="<?php echo $hero_image['url']; ?>" alt="<?php echo $hero_image['alt']; ?>" title="<?php echo $hero_image['title']; ?>">
                                     <?php if($unique_property):?>
                                         <span class="tag"><?php echo $unique_property;?></span>
                                     <?php endif;?>
@@ -357,6 +382,9 @@ if ($term && $term->parent) {
                                         <span class="tag">
                                             <span class="icon icon-build"></span>
                                             <span class="count"><?php echo $post_count;?></span>
+                                            <?php if($tag_info):?>
+                                                <span class="tag-info"><?php echo $tag_info;?></span>
+                                            <?php endif;?>
                                         </span>
                                     <?php endif;?>
                                 </div>
@@ -370,7 +398,7 @@ if ($term && $term->parent) {
                     <?php }?>
                 </div>
             </div>
-        </section><?php }
+            </section><?php }
         $current_term = get_queried_object();
         if ($current_term instanceof WP_Term) {
             $term_id = $current_term->term_id;
@@ -382,27 +410,56 @@ if ($term && $term->parent) {
                         </div>
                     </div>
                 </section>
-        <?php endif; }
+            <?php endif; }
         if($didnt_find_banner):
             $title = $didnt_find_banner['title'];
             $description = $didnt_find_banner['description'];
             $button = $didnt_find_banner['button'];
             $image = $didnt_find_banner['image'];
-            $background_image = $didnt_find_banner['background_image']; ?>
+            $background_image = $didnt_find_banner['background_image'];
+            $form_shortcode = $didnt_find_banner['form_shortcode'];
+            $popup_img = $didnt_find_banner['popup_img']; ?>
             <section style="background-image: url('<?php echo $background_image["url"]; ?>')" class="catalogue-built-objects__didnt-find-banner didnt-find-banner" id="didnt-find-banner">
                 <div class="container container_small">
                     <div class="didnt-find-banner__wrapper">
-                        <img class="didnt-find-banner__img" src="<?php echo $image["url"]; ?>" alt="<?php echo $image["alt"]; ?>">
+                        <img class="didnt-find-banner__img" src="<?php echo $image["url"]; ?>" alt="<?php echo $image["alt"]; ?>" title="<?php echo $image["title"]; ?>">
                         <div class="didnt-find-banner__content">
-                            <h2 class="didnt-find-banner__title"><?php echo $title; ?></h2>
-                            <p class="didnt-find-banner__text"><?php echo $description; ?></p>
+                            <?php if($title):?>
+                                <h2 class="didnt-find-banner__title"><?php echo $title; ?></h2>
+                            <?php endif;?>
+                            <?php if($description):?>
+                                <p class="didnt-find-banner__text"><?php echo $description; ?></p>
+                            <?php endif;?>
                             <?php if($button):?>
-                                <a href="<?php echo $button['url'];?>" class="btn btn_big btn_light didnt-find-banner__btn" <?php if($button['target']=='_blank'):?>target="_blank"<?php endif;?>><?php echo $button['title'];?></a>
+                                <a href="<?php echo $button['url'];?>" class="btn btn_big btn_light didnt-find-banner__btn" <?php if($button['target']=='_blank'):?>target="_blank"<?php endif;?> alt="<?php echo $button['title'];?>" title="<?php echo $button['title'];?>"><?php echo $button['title'];?></a>
                             <?php endif;?>
                         </div>
                     </div>
                 </div>
             </section>
+            <div class="popup didnt-find-banner__popup">
+                <div class="close popup__close"></div>
+                <div class="container container_small">
+                    <div class="popup__wrapper">
+                        <?php if($popup_img):?>
+                            <img src="<?php echo $popup_img['url'];?>" alt="<?php echo $popup_img['alt'];?>" title="<?php echo $popup_img['title'];?>" class="didnt-find-banner__popup-img">
+                        <?php endif;?>
+                        <div class="popup__content">
+                            <?php if($title):?>
+                                <h2 class="didnt-find-banner__popup-title"><?php echo $title;?></h2>
+                            <?php endif;?>
+                            <?php if($description):?>
+                                <div class="didnt-find-banner__popup-text">
+                                    <?php echo $description;?>
+                                </div>
+                            <?php endif;?>
+                            <?php if($form_shortcode): ?>
+                                <div class="didnt-find-banner__popup-form"><?php echo do_shortcode($form_shortcode); ?></div>
+                            <?php endif ; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <?php endif;?>
     </main>
 <?php }

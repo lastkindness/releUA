@@ -14,7 +14,7 @@ get_header();?>
                     <p class="error-page__text"><?php echo $text;?></p>
                 <?php endif;?>
                 <?php if($button=get_field('button','option-error')):?>
-                    <a href="<?php echo $button["url"];?>" class="btn btn_big error-page__btn"><?php echo $button["title"];?></a>
+                    <a href="<?php echo $button["url"];?>" title="<?php echo $button["title"];?>" alt="<?php echo $button["title"];?>" class="btn btn_big error-page__btn"><?php echo $button["title"];?></a>
                 <?php endif;?>
             </div>
             <?php if($image=get_field('image','option-error')):?>

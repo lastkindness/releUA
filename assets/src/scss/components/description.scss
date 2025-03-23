@@ -4,4 +4,23 @@
         flex-direction: column;
         align-items: center;
     }
+    &__wrapper {
+        margin-bottom: 20px;
+        p {
+            display: none;
+            &:nth-child(1),
+            &:nth-child(2),
+            &:nth-child(3) {
+                display: block;
+            }
+        }
+        &.open {
+            p {
+                display: block;
+            }
+        }
+    }
+    &__btn {
+        display: none;
+    }
 }

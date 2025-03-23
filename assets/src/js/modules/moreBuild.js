@@ -9,6 +9,7 @@ function moreBuild () {
                 loop: true,
                 slidesPerView: 2,
                 centeredSlidesBounds: true,
+                spaceBetween: 10,
                 navigation: {
                     nextEl: ".swiper-button-next",
                     prevEl: ".swiper-button-prev",

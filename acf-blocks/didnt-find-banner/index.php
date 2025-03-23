@@ -20,3 +20,26 @@
         </div>
     </div>
 </section>
+<div class="popup didnt-find-banner__popup">
+    <div class="close popup__close"></div>
+    <div class="container container_small">
+        <div class="popup__wrapper">
+            <?php if($popup_img=get_sub_field('popup_img')):?>
+                <img src="<?php echo $popup_img['url'];?>" alt="<?php echo $popup_img['alt'];?>" title="<?php echo $popup_img['title'];?>" class="didnt-find-banner__popup-img">
+            <?php endif;?>
+            <div class="popup__content">
+                <?php if($title=get_sub_field('title')):?>
+                    <h2 class="didnt-find-banner__popup-title"><?php echo $title;?></h2>
+                <?php endif;?>
+                <?php if($text=get_sub_field('text')):?>
+                    <div class="didnt-find-banner__popup-text">
+                        <?php echo $text;?>
+                    </div>
+                <?php endif;?>
+                <?php if($form_shortcode=get_sub_field('form_shortcode')): ?>
+                    <div class="didnt-find-banner__popup-form"><?php echo do_shortcode($form_shortcode); ?></div>
+                <?php endif ; ?>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,6 +2,7 @@ jQuery(function () {
     metaFilter('room-area');
     metaFilter('sale-price');
     metaFilter('rental-price');
+    metaFilter('populate_area_range');
 });
 
 function metaFilter(fieldPrefix) {
@@ -44,7 +45,6 @@ function metaFilter(fieldPrefix) {
 
             var startWidth = ((min - parseFloat(minRange.min)) / total) * 100 + '%';
             var endWidth = ((parseFloat(maxRange.max) - max) / total) * 100 + '%';
-
             startOuter.style.width = startWidth;
             endOuter.style.width = endWidth;
 

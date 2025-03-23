@@ -2,11 +2,19 @@
     padding-top: 75px;
     padding-bottom: 180px;
     background-color: $bg;
+    @include media("<=desktop") {
+        padding-top: 55px;
+        padding-bottom: 80px;
+    }
     &__wrapper {
         display: grid;
         align-items: stretch;
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 40px 50px;
+        @include media("<=desktop") {
+            grid-template-columns: 1fr;
+            grid-gap: 20px;
+        }
     }
     &__col {
         background-color: transparent;
@@ -22,6 +30,9 @@
     }
     &__subtitle {
         text-align: center;
+        @include media("<=desktop") {
+            font-size: 24px;
+        }
     }
     &__img {
         margin: 0 auto 16px;
@@ -29,6 +40,10 @@
         max-height: 80px;
         object-fit: contain;
         object-position: center;
+        @include media("<=desktop") {
+            max-width: 90px;
+            max-height: 90px;
+        }
     }
     &__box {
         opacity: 1;
@@ -46,22 +61,42 @@
             opacity: 0.8;
             transition: 0.3s all;
         }
+        &-description {
+            p {
+                @include media("<=desktop") {
+                    font-size: 14px;
+                }
+            }
+        }
     }
     &_cards {
         padding: 50px 0;
         background-color: $pure_white;
+        @include media("<=desktop") {
+            padding: 20px 0;
+        }
         .advantages {
             &__title {
                 text-align: left;
                 font-size: 36px;
                 margin-bottom: 50px;
+                @include media("<=desktop") {
+                    font-size: 24px;
+                    margin-bottom: 20px;
+                }
             }
             &__subtitle {
                 font-size: 22px;
                 text-align: left;
+                @include media("<=desktop") {
+                    font-size: 18px;
+                }
             }
             &__wrapper {
                 grid-template-columns: 1fr 1fr;
+                @include media("<=desktop") {
+                    grid-template-columns: 1fr;
+                }
             }
             &__col {
                 box-shadow: 0px 0px 30px rgba(0,0,0,0.1);

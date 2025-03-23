@@ -15,6 +15,11 @@ import loadMorePosts from './modules/loadMorePosts';
 import mapBox from './modules/mapBox';
 import moreBuild from './modules/moreBuild';
 import openMobileFilters from './modules/openMobileFilters';
+import descriptionWrappers from './modules/descriptionWrappers';
+import langSwitcher from './modules/langSwitcher';
+import popup from './modules/popup';
+import webpLinkConverlor from './modules/webpLinkConverlor';
+import contactForm7Reset from './modules/contactForm7Reset';
 //import preViewUploadsPhotoInsert from './modules/preViewUploadsPhotoInsert';
 
 $(document).ready(() => {

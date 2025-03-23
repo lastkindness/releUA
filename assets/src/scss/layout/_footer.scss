@@ -1,12 +1,12 @@
 .footer {
     flex-shrink: 0;
     background-color: $dark;
-    color: $light;
+    color: $white;
     ul {
         @extend %listreset;
     }
     a {
-        color: $light;
+        color: $white;
         text-decoration: none;
         font-weight: 500;
         font-size: 14px;
@@ -76,7 +76,7 @@
     &__сopyright {
         width: 100%;
         text-align: center;
-        color: $light;
+        color: $white;
         line-height: 1em;
         font-size: 14px;
         @include media("<=widescreen") {
@@ -88,6 +88,10 @@
         }
         .сopyright {
             margin: 0;
+            @include media("<=desktop") {
+                font-size: 14px;
+                font-size: 14px;
+            }
         }
     }
     &__navbar {

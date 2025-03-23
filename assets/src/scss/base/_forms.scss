@@ -39,6 +39,12 @@ textarea {
         font-weight: 300;
         font-size: 16px;
         color: $placeholder-color;
+        @include media("<=desktop") {
+            font-size: 14px;
+        }
+    }
+    @include media("<=desktop") {
+        font-size: 14px;
     }
 }
 
@@ -134,6 +140,7 @@ input[type="range"] {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border: none;
     &:first-child {
         z-index: 3;
     }
@@ -170,6 +177,9 @@ form {
         width: 100%;
         border-radius: 12px;
         border: 1px solid $light;
+        @include media("<=desktop") {
+            font-size: 14px;
+        }
     }
 }
 

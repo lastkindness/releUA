@@ -34,8 +34,11 @@
                 </div>
             <?php endwhile;?>
         </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
+        <?php $hero_items = get_sub_field('hero_items');
+            if(count($hero_items)>1):?>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        <?php endif;?>
     </div>
 </section>

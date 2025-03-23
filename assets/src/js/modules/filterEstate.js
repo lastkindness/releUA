@@ -111,7 +111,6 @@ function filterEstate () {
             var maxPostsPerPage = Number($('#max-post-per-page').val());
             var postsFoundFilters = Number($('#found-post-filters').val());
             $('#found-filters-posts').html(postsFoundFilters);
-            console.log(numberOfPosts, maxPosts, maxPostsPerPage, postsFoundFilters);
             if (numberOfPosts > 0 && postsFoundFilters<maxPosts) {
                 $('#reset-filters-btn').show();
                 $('#found-filters-block').show();

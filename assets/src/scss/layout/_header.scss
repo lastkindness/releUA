@@ -17,10 +17,18 @@
         align-items: center;
     }
     &__lang {
+        padding: 0 0 0 40px;
+        @include media("<=widescreen") {
+            padding: 0;
+        }
         .wpml-ls-legacy-dropdown {
             width: 30px;
+            background: transparent !important;
             @include media("<=desktop") {
                 width: auto;
+            }
+            &:hover {
+                background: transparent !important;
             }
             a {
                 border: none;
@@ -56,6 +64,10 @@
             }
             .wpml-ls-item {
                 padding: 5px 0;
+                background: transparent !important;
+                &:hover {
+                    background: transparent !important;
+                }
                 @include media("<=desktop") {
                     display: flex;
                     align-items: center;
@@ -71,6 +83,13 @@
                 a {
                     @include media("<=desktop") {
                         padding: 0 10px !important;
+                    }
+                }
+            }
+            .wpml-ls-current-language {
+                &:hover {
+                    &>a {
+                        background: transparent !important;
                     }
                 }
             }
@@ -115,6 +134,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 0 0 0 40px;
+        @include media("<=widescreen") {
+            padding: 0;
+        }
         &:before {
             content: "";
             display: none;

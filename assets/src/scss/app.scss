@@ -49,6 +49,9 @@ $breakpoints: (
 @import "components/description";
 @import "components/gallery";
 @import "components/singe-advantages";
+@import "components/popup";
+@import "components/see-more-posts";
+@import "components/title-section";
 
 @import "layout/common";
 @import "layout/header";
@@ -59,3 +62,6 @@ $breakpoints: (
 @import "layout/page-template-template-flexible-content";
 @import "layout/contacts";
 @import "layout/single-estate";
+@import "layout/archive-built-objects";
+@import "layout/archive-estate";
+@import "layout/catalogue-built-objects";

@@ -16,6 +16,9 @@
         background-position: 50% 50%;
         background-repeat: no-repeat;
         padding: 80px 0 240px;
+        @include media("<=desktop") {
+            padding: 50px 0 200px;
+        }
     }
     .swiper-button-prev,
     .swiper-button-next {
@@ -51,6 +54,16 @@
     }
     &__text {
         width: 100%;
+        p {
+            @include media("<=desktop") {
+                font-size: 14px;
+            }
+        }
+    }
+    &__title {
+        @include media("<=desktop") {
+            font-size: 24px;
+        }
     }
     &__content {
         max-width: 600px;
@@ -68,6 +81,23 @@
         bottom: -30%;
         width: 53%;
         z-index: 1;
+        height: auto;
+        @include media("<=widescreen-lg") {
+            width: 63%;
+        }
+        @include media("<=widescreen") {
+            width: 73%;
+        }
+        @include media("<=tablet") {
+            width: 80%;
+            bottom: -10%;
+        }
+    }
+    &__text {
+        strong,
+        a {
+            color: $highlighting;
+        }
     }
     &__subtitle {
         color: $highlighting;
@@ -86,17 +116,31 @@
             justify-content: center;
             line-height: 0;
             font-size: 0;
+            @include media("<=desktop") {
+                width: 49px;
+                height: 49px;
+                border-radius: 10px;
+            }
             img {
                 width: 34px;
                 height: 34px;
                 line-height: 0;
                 font-size: 0;
+                @include media("<=desktop") {
+                    width: 28px;
+                    height: 28px;
+                }
             }
         }
         .text {
             padding-left: 15px;
             display: inline-block;
             width: calc(100% - 56px);
+            @include media("<=desktop") {
+                font-size: 14px;
+                width: calc(100% - 49px);
+                padding-left: 5px;
+            }
         }
     }
 }

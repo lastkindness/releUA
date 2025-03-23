@@ -4,6 +4,9 @@
         align-items: center;
         justify-content: flex-start;
         margin: 0 0 20px;
+        @include media("<=desktop") {
+            flex-wrap: wrap;
+        }
     }
     &__details {
         @extend %listreset;
@@ -17,10 +20,17 @@
         justify-content: space-between;
         width: auto;
         margin: 0 20px 0 0;
+        @include media("<=desktop") {
+            width: auto;
+            margin: 0 0 20px;
+        }
         .info {
             padding: 0 40px;
             font-weight: 500;
             font-size: 20px;
+            @include media("<=desktop") {
+                padding: 0 20px 0 10px;
+            }
         }
         .tooltip {
             position: relative;
@@ -93,6 +103,9 @@
                 grid-template-columns: 1fr 1fr 1fr 1fr;
                 grid-template-rows: 275px 275px;
                 grid-gap: 20px;
+                @include media("<=desktop") {
+                    grid-template-columns: 1fr 1fr;
+                }
             }
             .col {
                 margin: 0;
@@ -116,6 +129,13 @@
                     height: 100%;
                     object-fit: cover;
                 }
+            }
+        }
+    }
+    &__description {
+        p {
+            @include media("<=desktop") {
+                font-size: 14px;
             }
         }
     }

@@ -48,7 +48,7 @@
             justify-content: flex-start;
             height: 100%;
             @include media("<=desktop") {
-                padding: 50px 0 150px;
+                padding: 50px 30px 150px;
             }
         }
         &__tag {
@@ -56,10 +56,24 @@
             font-weight: 600;
             border-radius: 30px;
             padding: 5px 18px;
+            margin: 0 0 10px;
         }
         &__item {
             font-size: 24px;
             font-weight: 400;
+            display: grid;
+            grid-template-columns: 26px 1fr;
+            grid-gap: 10px;
+            @include media("<=desktop") {
+                font-size: 18px;
+            }
+            .icon {
+                width: 26px;
+                height: 26px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
         &__btn {
             margin: 20px 0 0;
@@ -67,6 +81,9 @@
     }
     &__form {
         margin: 95px 0 75px;
+        @include media("<=desktop") {
+            margin: 45px 0 35px;
+        }
         .contact-form {
             &__wrapper {
                 border-radius: 22px;
@@ -79,7 +96,7 @@
                 grid-gap: 40px;
                 @include media("<=desktop") {
                     padding: 20px;
-                    grid-gap: 30px;
+                    grid-gap: 20px;
                     grid-template-columns: 1fr;
                 }
             }
@@ -90,15 +107,22 @@
                 font-size: 20px;
                 font-weight: 400;
                 text-align: left;
+                @include media("<=desktop") {
+                    font-size: 16px;
+                }
             }
         }
     }
     &__other-built-objects {
         position: relative;
         margin: 120px 0;
+        @include media("<=desktop") {
+            margin: 50px 0;
+        }
         .cards-grid {
             &__wrapper {
                 display: flex;
+                grid-gap: unset;
             }
             &__title {
                 display: flex;
@@ -116,6 +140,9 @@
         .swiper-button-prev {
             position: static;
             margin: 0;
+        }
+        .swiper-container {
+            overflow: hidden;
         }
     }
 }
