@@ -95,6 +95,11 @@
                 }
             }
         }
+        &_form {
+            @include media("<=desktop") {
+                width: 100%;
+            }
+        }
     }
     &__gallery {
         &.gallery {

@@ -6,7 +6,7 @@
         grid-gap: 10px;
         @include media("<=desktop") {
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: 100px 100px 130px 130px;
+            grid-template-rows: 100px 100px auto auto;
         }
     }
     .col {

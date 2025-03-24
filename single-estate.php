@@ -135,7 +135,7 @@ if ( have_posts() ) : ?>
                                     <?php } ?>
                                 </div>
                                 <?php if($submit_button):?>
-                                    <a alt="<?php echo $submit_button;?>" title="<?php echo $submit_button;?>" href="#form" class="btn btn-order"><?php echo $submit_button;?></a>
+                                    <a alt="<?php echo $submit_button;?>" title="<?php echo $submit_button;?>" href="#form" class="article-section__button_form btn btn-order"><?php echo $submit_button;?></a>
                                 <?php endif;?>
                             </div>
                             <div class="article-section__description">
